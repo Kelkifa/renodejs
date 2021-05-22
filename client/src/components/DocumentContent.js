@@ -2,7 +2,7 @@ import { useLocation } from "react-router-dom";
 
 import './DocumentContent.scss';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 
 
@@ -13,30 +13,21 @@ function DocumentContent(props) {
     /** State */
     const [isLoaded, setLoaded] = useState(false);
     const [data, setData] = useState(null);
+    useEffect(() => {
+        if (!query.type)
+            fetch(`/api/document?type=${query.type}&id=${query.id}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data != null)
+                        setLoaded(true);
+                    setData(data);
+                });
+    }, []);
 
-    if (query.type != null && query.id != null) {
-        fetch(`/api/document?type=${query.type}&id=${query.id}`)
-            .then(response => response.json())
-            .then(data => {
-                if (data != null)
-                    setLoaded(true);
-                setData(data);
-            });
-    }
-    else if (query.type != null) {
-        fetch(`/api/document/`)
-            .then(response => response.json())
-            .then(data => {
-                setLoaded(true);
-                setData(data);
-            });
-    }
 
     if (isLoaded) {
-        console.log(data);
         return <div>
             co du lieu
-
         </div>
 
     }
