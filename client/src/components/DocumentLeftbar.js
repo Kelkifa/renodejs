@@ -5,7 +5,18 @@ class DocumentLeftbar extends React.Component {
     render() {
         return (
             <div id="DocLeftbar" className="DocLeftbar">
-                as
+                <div className="DocLeftbar__item">
+                    Content 1
+                </div>
+                <div className="DocLeftbar__item">
+                    Content 2
+                </div>
+                <div className="DocLeftbar__item">
+                    Content 3
+                </div>
+                <div className="DocLeftbar__item">
+                    Content 4
+                </div>
             </div>
         )
     }
