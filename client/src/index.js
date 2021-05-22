@@ -22,7 +22,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Router>
       <Navbar></Navbar>
-      <div className="fluid">
+      <div>
         <Switch>
           <Route path="/document" component={Document} />
           <Route path="/anime" component={Anime} />
