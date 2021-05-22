@@ -1,0 +1,23 @@
+$navbar_l_r_padding: 50px;
+#navbar{ 
+    height:60px;
+    width:100%;
+    display:flex;
+    align-items: center;
+    background-color:#181718;
+    color: white;
+    justify-content: space-between;
+    .left{
+        padding-left:$navbar_l_r_padding;
+    }
+    .right{
+        display:flex;
+        align-items:center;
+        padding-right: $navbar_l_r_padding;
+    }
+    h1, h2{
+        padding:0px;
+        margin:0px;
+    }
+}
+

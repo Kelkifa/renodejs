@@ -1,0 +1,78 @@
+.fluid{
+    padding-left:15px;
+    padding-right:15px;
+    padding-top:15px;
+}
+button:hover{
+    cursor: pointer;
+}
+.btn--nav{ 
+    height: 100%;
+    margin:0px 15px;
+    color:white; 
+    background-color:transparent;
+    border:hidden;
+}
+.btn--login{
+    border: 2px solid white;
+    padding: 7px 20px;
+}
+.btn--card{
+    background-color:rgb(36, 152, 230);
+    color:white;
+    font-size: 15px;
+    border-radius:0.3rem;
+    border:hidden;
+    box-shadow:  1px 1px 2px black;
+}
+.btn--card:hover{
+    background-color:rgb(32, 121, 218);
+}
+
+.scroll--custom{
+    ::-webkit-scrollbar {
+        width: 7px;
+      }
+      
+      /* Track */           //khung
+      ::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px grey; 
+        border-radius: 10px;
+      }
+       
+      /* Handle */
+      ::-webkit-scrollbar-thumb {
+        // background: #60a4ec; 
+        background: rgb(187, 187, 187);
+        border-radius: 10px;
+      }
+      
+      /* Handle on hover */
+      ::-webkit-scrollbar-thumb:hover {
+        background: rgb(123, 122, 122); 
+      }
+}
+.scroll--blue{
+    ::-webkit-scrollbar-thumb {
+        background: #60a4ec; 
+      }
+      
+      /* Handle on hover */
+      ::-webkit-scrollbar-thumb:hover {
+        background: #458fdf; 
+      }
+}
+
+.mr-r-10{
+  margin-right:10px;
+}
+.mr-r-20{
+  margin-right:20px;
+}
+
+.mr-b-10{
+  margin-bottom:10px;
+}
+.mr-b-20{
+  margin-bottom:20px;
+}
