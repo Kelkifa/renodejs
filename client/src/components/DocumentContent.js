@@ -14,7 +14,7 @@ function DocumentContent(props) {
     const [isLoaded, setLoaded] = useState(false);
     const [data, setData] = useState(null);
     useEffect(() => {
-        if (!query.type)
+        if (query.type)
             fetch(`/api/document?type=${query.type}&id=${query.id}`)
                 .then(response => response.json())
                 .then(data => {
