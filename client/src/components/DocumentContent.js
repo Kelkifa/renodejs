@@ -24,7 +24,7 @@ function DocumentContent(props) {
             });
     }
     else if (query.type != null) {
-        fetch(`/api/document?type=${query.type}`)
+        fetch(`/api/document/`)
             .then(response => response.json())
             .then(data => {
                 setLoaded(true);
@@ -33,6 +33,7 @@ function DocumentContent(props) {
     }
 
     if (isLoaded) {
+        console.log(data);
         return <div>
             co du lieu
 
