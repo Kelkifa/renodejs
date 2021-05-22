@@ -10,7 +10,7 @@ class DocumentContent extends React.Component {
         }
     }
     componentDidMount() {
-        fetch('/api')
+        fetch('/api/document')
             .then(response => response.json())
             .then(data => {
                 this.setState({
