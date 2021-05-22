@@ -8,9 +8,11 @@
 }
 
 .DocNavb__item{
-    padding: 0px 15px;
     font-family: 'Source Sans Pro', sans-serif;
     font-weight:bold;
+}
+.DocNavb__item + .DocNavb__item{
+    padding-left: 25px;
 }
 .DocNavb__item:hover{
     cursor: pointer;
