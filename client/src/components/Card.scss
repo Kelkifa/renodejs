@@ -12,20 +12,22 @@
     flex-direction:column;
 }
 .card__img{
-    flex:68;
+    height:68%;
 }
 $pd-rl: 7px;
 .card__text{
-    flex:23;
+    height:23%;
     margin:0px;
     overflow: auto;
     padding:0px $pd-rl;
 }
 .card__btn{
-    margin: 7px 7px;
-    flex:9;
+    box-sizing: border-box;
+    margin: 7px;
+    padding:0px;
+    height:9%;
     border:none;
-    background-color:#2498e6;
+    background:#2498e6;
     color:white;
     border-radius:0.3rem;
     font-size: 15px;
