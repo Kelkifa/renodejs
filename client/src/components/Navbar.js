@@ -1,54 +1,36 @@
 import React from 'react';
 import './Navbar.scss';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import NavButton from './NavButton.js';
 
 class Navbar extends React.Component {
-    clickHandler() {
-        console.log(1);
-        // document.location = link;
+    clickHandler(link) {
+        document.location = link;
     }
     render() {
         return (
-            <Router>
-                <div id="navbar">
-                    <div className="left" >
-                        <NavButton
-                            btnClass="btn--nav"
-                            name="Home"
-                            link="/home"
-                            elm="h1" />
-                    </div>
-                    <div className="right">
-                        <NavButton
-                            btnClass="btn--nav"
-                            name="Test"
-                            link="/test"
-                            elm="h2" />
-                        <NavButton
-                            btnClass="btn--nav"
-                            name="Words"
-                            link="/home"
-                            elm="h2" />
-                        <NavButton
-                            btnClass="btn--nav"
-                            name="Documents"
-                            link="/document"
-                            elm="h2" />
-                        <NavButton
-                            btnClass="btn--nav"
-                            name="Animes"
-                            link="/anime"
-                            elm="h2" />
-                        <NavButton
-                            btnClass="btn--nav btn--login"
-                            name="Sign in"
-                            link="/login"
-                            elm="h2" />
-                    </div>
-                </div >
-            </Router>
+            <div id="Navbar" className="Navbar">
+                <div className="Navbar__list">
+                    <h1 className="Navbar__list__h1" onClick={() => { this.clickHandler("/home") }}>
+                        Home
+                    </h1>
+                </div>
+                <div className="Navbar__list">
+                    <h2 className="Navbar__list__h2" onClick={() => { this.clickHandler("/test") }}>
+                        Test
+                    </h2>
+                    <h2 className="Navbar__list__h2" onClick={() => { this.clickHandler("/anime") }}>
+                        Animes
+                    </h2>
+                    <h2 className="Navbar__list__h2" onClick={() => { this.clickHandler("/document") }}>
+                        Documents
+                    </h2>
+                    <h2 className="Navbar__list__h2" onClick={() => { this.clickHandler("/word") }}>
+                        Words
+                    </h2>
+                    <h2 className="Navbar__list__h2 Navbar__list__h2--outline" onClick={() => { this.clickHandler("/login") }}>
+                        Sign in
+                    </h2>
+                </div>
+            </div>
         )
     }
 }
