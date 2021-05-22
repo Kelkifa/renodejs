@@ -2,6 +2,9 @@ const port = process.env.PORT || 8080;
 const express = require('express');
 const app = express();
 const path = require('path');
+
+/** Midleware  */
+app.use(express.urlencoded({ extended: true }));
 /** Models */
 //connect db
 const db = require('./server/app/cores/connectDb');

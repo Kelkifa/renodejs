@@ -1,33 +1,76 @@
-import './DocumentContent.scss';
-const React = require('react');
+import { useLocation } from "react-router-dom";
 
-class DocumentContent extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            isLoaded: false,
-            data: []
-        }
-    }
-    componentDidMount() {
-        fetch('/api/document')
+import './DocumentContent.scss';
+
+import React, { useState } from 'react';
+
+
+
+function DocumentContent(props) {
+    const getQuery = new URLSearchParams(useLocation().search);
+    const query = { type: getQuery.get("type"), id: getQuery.get("id") }
+
+    /** State */
+    const [isLoaded, setLoaded] = useState(false);
+    const [data, setData] = useState(null);
+
+    if (query.type != null && query.id != null) {
+        fetch(`/api/document?type=${query.type}&id=${query.id}`)
             .then(response => response.json())
             .then(data => {
-                this.setState({
-                    isLoaded: true,
-                    data: data
-                })
-                console.log(data)
-            })
+                if (data != null)
+                    setLoaded(true);
+                setData(data);
+            });
+    }
+    else if (query.type != null) {
+        fetch(`/api/document?type=${query.type}`)
+            .then(response => response.json())
+            .then(data => {
+                setLoaded(true);
+                setData(data);
+            });
     }
 
-    render() {
-        return (
-            <div id="DocCnt" className="DocCnt">
+    if (isLoaded) {
+        return <div>
+            co du lieu
 
-            </div>
-        )
+        </div>
+
     }
+    return (
+        <div> loading ...</div>
+    )
 }
+// class DocumentContent extends React.Component {
+//     constructor(props) {
+//         super(props);
+//         this.state = {
+//             isLoaded: false,
+//             data: [],
+//             query: useQuery()
+//         }
+//     }
+//     componentDidMount() {
+//         fetch('/api/document')
+//             .then(response => response.json())
+//             .then(data => {
+//                 this.setState({
+//                     isLoaded: true,
+//                     data: data
+//                 })
+//                 console.log(data)
+//             })
+//     }
+
+//     render() {
+//         return (
+//             <div id="DocCnt" className="DocCnt">
+
+//             </div>
+//         )
+//     }
+// }
 
 export default DocumentContent;
