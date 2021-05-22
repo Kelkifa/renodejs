@@ -17,6 +17,7 @@ class DocumentContent extends React.Component {
                     isLoaded: true,
                     data: data
                 })
+                console.log(data)
             })
     }
 

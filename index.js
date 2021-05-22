@@ -29,14 +29,16 @@ const corsOptions = {
 app.use(cors());
 app.use(cors(corsOptions));
 
-
-app.get('/api/', (req, res) => {
-    anime.find()
-        .then(data => {
-            // res.header("Access-Control-Allow-Origin", "*");
-            res.json(data);
-        })
-});
+/** router */
+const router = require('./server/app/routes');
+router(app);
+// app.get('/api/', (req, res) => {
+//     anime.find()
+//         .then(data => {
+//             // res.header("Access-Control-Allow-Origin", "*");
+//             res.json(data);
+//         })
+// });
 
 // --> Add this
 if (process.env.NODE_ENV === 'production') {

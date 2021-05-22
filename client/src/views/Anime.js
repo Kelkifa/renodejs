@@ -9,7 +9,7 @@ class Anime extends React.Component {
         };
     }
     componentDidMount() {
-        fetch('/api')
+        fetch('/api/anime')
             .then(response => response.json())
             .then(data => {
                 this.setState({ items: data, isLoaded: true })
