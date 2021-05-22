@@ -1,7 +1,6 @@
 import React from 'react';
 import './Navbar.scss';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 import NavButton from './NavButton.js';
 
 class Navbar extends React.Component {

@@ -1,9 +1,6 @@
 import React from 'react';
 
 class NavButton extends React.Component {
-    constructor(props) {
-        super(props);
-    }
     clickHandler() {
         document.location = this.props.link;
     }

@@ -4,17 +4,12 @@ import './Card.scss';
 class Card extends React.Component {
     render() {
         return (
-            <div className={"card " + this.props.addClass}>
-                <img src={this.props.imgLink} />
-                <div className="cnt-card scroll--custom scroll--blue">
-                    <p>{this.props.children}</p>
-                    <div className="card-btn-container">
-                        <button className="btn--card">Go Somewhere</button>
-                    </div>
-                </div>
+            <div className={"card scroll--custom scroll--blue " + this.props.addClass}>
+                <img className="card__img" src={this.props.imgLink} alt="not found" />
+                <p className="card__text">{this.props.children}</p>
+                <button className="card__btn">Go Somewhere</button>
             </div>
         )
     }
 }
-
 export default Card;
