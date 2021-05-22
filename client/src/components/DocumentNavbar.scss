@@ -1,3 +1,17 @@
 .DocNavb{
     display:flex;
+    background:#282a35;
+    color:white;
+    align-items:center;
+    padding: 10px 30px;
+    justify-content:flex-start;
+}
+
+.DocNavb__item{
+    padding: 0px 15px;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight:bold;
+}
+.DocNavb__item:hover{
+    cursor: pointer;
 }

@@ -4,7 +4,9 @@ import DocumentNavbar from '../components/DocumentNavbar.js';
 class Document extends React.Component {
     render() {
         return (
-            <DocumentNavbar></DocumentNavbar>
+            <div className="mr-t-10">
+                <DocumentNavbar></DocumentNavbar>
+            </div>
         )
     }
 }
