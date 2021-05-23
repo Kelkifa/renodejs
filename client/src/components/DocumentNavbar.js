@@ -11,6 +11,7 @@ class DocumentNavbar extends React.Component {
                 <div className="DocNavb__item">Javascript</div>
                 <div className="DocNavb__item">CSS</div>
                 <div className="DocNavb__item">PHP</div>
+                <div className="DocNavb__item">IOT</div>
             </div>
         )
     }
