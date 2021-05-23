@@ -1,18 +1,14 @@
 import '../components/DocumentLeftbar.scss';
 import React, { useState, useEffect } from 'react';
-import { useLocation } from "react-router-dom";
 
 function DocumentLeftbar(props) {
-    //Get query
-    const getQuery = new URLSearchParams(useLocation().search);
-    const query = { type: getQuery.get("type"), id: getQuery.get("id") }
     //State
     const [isLoaded, setLoaded] = useState(false);
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        if (query.type) {
-            fetch(`/api/document?type=${query.type}`)
+        if (props.query.type) {
+            fetch(`/api/document?type=${props.query.type}`)
                 .then(response => response.json())
                 .then(value => {
                     if (value !== '') {
@@ -21,7 +17,7 @@ function DocumentLeftbar(props) {
                     }
                 })
         }
-    }, [])
+    }, [props.query.type])
 
     if(isLoaded && data){
         var content = data.map(value=>{
@@ -35,7 +31,7 @@ function DocumentLeftbar(props) {
         return (
             <div id="DocLeftbar" className="DocLeftbar">
                 <div className="DocLeftbar__item">
-                        {query.type}
+                        {props.query.type}
                     </div>
                 {content}
             </div>
