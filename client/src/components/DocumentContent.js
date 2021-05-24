@@ -1,7 +1,7 @@
 import { useLocation } from "react-router-dom";
 
 import './DocumentContent.scss';
-
+import DocumentDetail from './DocumentDetail.js';
 import React, { useState, useEffect } from 'react';
 
 
@@ -9,7 +9,6 @@ import React, { useState, useEffect } from 'react';
 function DocumentContent(props) {
     const getQuery = new URLSearchParams(useLocation().search);
     const query = { type: getQuery.get("type"), id: getQuery.get("id") }
-
     /** State */
     const [isLoaded, setLoaded] = useState(false);
     const [data, setData] = useState(null);
@@ -26,9 +25,7 @@ function DocumentContent(props) {
 
 
     if (isLoaded) {
-        return <div>
-            co du lieu
-        </div>
+        return <DocumentDetail>{data}</DocumentDetail>
 
     }
     return (
