@@ -19,20 +19,22 @@ function DocumentLeftbar(props) {
         }
     }, [props.query.type])
 
-    if(isLoaded && data){
-        var content = data.map(value=>{
+    if (isLoaded && data) {
+        var content = data.map(value => {
             return (
                 <div key={value._id} className="DocLeftbar__item">
                     {value.parent_part.title}
                 </div>
             )
         });
-    
+
         return (
             <div id="DocLeftbar" className="DocLeftbar">
                 <div className="DocLeftbar__item">
+                    <h2 className="DocLeftbar__item__title">
                         {props.query.type}
-                    </div>
+                    </h2>
+                </div>
                 {content}
             </div>
         )

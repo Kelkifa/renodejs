@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
 
 import './DocumentContent.scss';
 import DocumentDetail from './DocumentDetail.js';
@@ -7,21 +7,20 @@ import React, { useState, useEffect } from 'react';
 
 
 function DocumentContent(props) {
-    const getQuery = new URLSearchParams(useLocation().search);
-    const query = { type: getQuery.get("type"), id: getQuery.get("id") }
     /** State */
     const [isLoaded, setLoaded] = useState(false);
     const [data, setData] = useState(null);
     useEffect(() => {
-        if (query.type)
-            fetch(`/api/document?type=${query.type}&id=${query.id}`)
+        if (props.query.type)
+            fetch(`/api/document?type=${props.query.type}&id=${props.query.id}`)
                 .then(response => response.json())
                 .then(data => {
-                    if (data != null)
+                    if (data != null) {
                         setLoaded(true);
-                    setData(data);
+                        setData(data);
+                    }
                 });
-    }, []);
+    }, [props.query.type, props.query.id]);
 
 
     if (isLoaded) {

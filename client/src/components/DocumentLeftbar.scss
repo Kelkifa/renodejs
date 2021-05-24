@@ -1,4 +1,5 @@
 .DocLeftbar{
+    font-family: "Segoe UI",Arial,sans-serif;
     background:#e7e9eb;
     width:222px;
     float:left;
@@ -10,4 +11,9 @@
 }
 .DocLeftbar__item + .DocLeftbar__item{
     border-top:1px solid #c6cbcf;
+}
+
+.DocLeftbar__item__title{
+    margin: 5px 0;
+    font-weight:400;
 }
