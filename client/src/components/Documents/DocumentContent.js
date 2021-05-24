@@ -1,33 +1,41 @@
 import React, { useState, useEffect } from 'react';
 import DocumentLeftbar from './DocumentLeftbar.js';
+import DocumentDetail from './DocumentDetail.js';
 
 
 function DocumentContent(props) {
-    var [isLoaded, setLoaded] = useState(false);
-    var [data, setData] = useState('');
-
+    const [isLoaded, setIsLoaded] = useState(false);
+    const [data, setData] = useState(null);
+    // const [chilData, setChilData] = useState(null)
     useEffect(() => {
-        if (props.query.type)
-            fetch(`/api/document?type=${props.query.type}&id=${props.query.id}/`)
-                .then((response => response.json()))
+        if (props.query.type) {
+            fetch(`/api/document?type=${props.query.type}`)
+                .then(response => response.json())
                 .then(doc => {
-                    setLoaded = true;
-                    setData = doc;
-                })
+                    setIsLoaded(true);
+                    setData(doc);
+                });
+        }
     }, [props.query.type, props.query.id])
-    if (!isLoaded) {
+
+    if (!isLoaded && props.query.type) {
         return (
             <div>Loading ...</div>
         )
     }
     return (
         <div className="doc__content">
-            <div className="doc__content__leftbar">
-                <DocumentLeftbar>{data}</DocumentLeftbar>
-            </div>
-            <div className="doc__content__detail">
-
-            </div>
+            {props.query.type ?
+                <>
+                    <div className="doc__content__leftbar">
+                        <DocumentLeftbar data={data} type={props.query.type} />
+                    </div>
+                    <div className="doc__content__detail">
+                        <DocumentDetail cp={props.query.id} />
+                    </div>
+                </>
+                : "Nothing"
+            }
         </div>
     )
 }

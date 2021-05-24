@@ -20,6 +20,11 @@
     cursor: pointer;
 }
 
+//content
+
+.doc__content{
+    display: flex;
+}
 
 // Leftbar
 .doc__content__leftbar{
@@ -27,9 +32,9 @@
     background-color: #e7e9eb;
     font-family: "Segoe UI",Arial,sans-serif;
 }
-.doc__content__leftbar__item{
+// .doc__content__leftbar__item{
 
-}
+// }
 
 .doc__content__leftbar__item{
     padding:5px 0px;
@@ -41,4 +46,11 @@
 .doc__content__leftbar__item--title{
     margin: 0px;
     font-weight:400;
+}
+
+//detail
+
+.doc__content__detail{
+    width:calc(100% - 222px);
+    background-color: yellow;
 }
