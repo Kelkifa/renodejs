@@ -1,7 +1,8 @@
 import React from 'react';
+import '../components/Documents/Document.scss';
 import DocumentNavbar from '../components/Documents/DocumentNavbar.js';
-import DocumentLeftbar from '../components/Documents/DocumentLeftbar.js';
 import DocumentContent from '../components/Documents/DocumentContent.js';
+
 import { useLocation } from "react-router-dom";
 
 function Document(props) {
@@ -9,12 +10,9 @@ function Document(props) {
     const query = { type: getQuery.get("type"), id: getQuery.get("id") };
 
     return (
-        <div id="Document" className="mr-t-10">
-            <DocumentNavbar></DocumentNavbar>
-            <div className="Doc-Container">
-                <DocumentLeftbar query={query}></DocumentLeftbar>
-                <DocumentContent query={query}></DocumentContent>
-            </div>
+        <div className="doc mr-t-10">
+            <DocumentNavbar query={query}></DocumentNavbar>
+            <DocumentContent query={query}></DocumentContent>
         </div>
     )
 }

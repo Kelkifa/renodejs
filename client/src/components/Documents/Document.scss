@@ -1,0 +1,44 @@
+// navbar
+
+.doc__navbar{
+    display:flex;
+    background:#282a35;
+    color:white;
+    align-items:center;
+    padding: 10px 30px;
+    justify-content:flex-start;
+}
+
+.doc__navbar__item{
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight:bold;
+}
+.doc__navbar__item + .doc__navbar__item{
+    padding-left: 25px;
+}
+.doc__navbar__item:hover{
+    cursor: pointer;
+}
+
+
+// Leftbar
+.doc__content__leftbar{
+    width:222px;
+    background-color: #e7e9eb;
+    font-family: "Segoe UI",Arial,sans-serif;
+}
+.doc__content__leftbar__item{
+
+}
+
+.doc__content__leftbar__item{
+    padding:5px 0px;
+    padding-left:16px;
+}
+.doc__content__leftbar__item + .doc__content__leftbar__item{
+    border-top:1px solid #c6cbcf;
+}
+.doc__content__leftbar__item--title{
+    margin: 0px;
+    font-weight:400;
+}

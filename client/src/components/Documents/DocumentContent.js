@@ -1,41 +1,34 @@
-// import { useLocation } from "react-router-dom";
-
-
-import './DocumentContent.scss';
-import DocumentDetail from './DocumentDetail.js';
-import DocumentCreateForm from './DocumentCreateForm.js';
 import React, { useState, useEffect } from 'react';
-
+import DocumentLeftbar from './DocumentLeftbar.js';
 
 
 function DocumentContent(props) {
-    /** State */
-    const [isLoaded, setLoaded] = useState(false);
-    const [data, setData] = useState(null);
+    var [isLoaded, setLoaded] = useState(false);
+    var [data, setData] = useState('');
+
     useEffect(() => {
         if (props.query.type)
-            fetch(`/api/document?type=${props.query.type}&id=${props.query.id}`)
-                .then(response => response.json())
-                .then(data => {
-                    if (data != '') {
-                        setLoaded(true);
-                        setData(data);
-                    }
-                });
-    }, [props.query.type, props.query.id]);
-
-
-    if (isLoaded) {
-        if (props.query.id) {
-            return <DocumentDetail>{data}</DocumentDetail>
-        }
+            fetch(`/api/document?type=${props.query.type}&id=${props.query.id}/`)
+                .then((response => response.json()))
+                .then(doc => {
+                    setLoaded = true;
+                    setData = doc;
+                })
+    }, [props.query.type, props.query.id])
+    if (!isLoaded) {
         return (
-            <DocumentCreateForm></DocumentCreateForm>
+            <div>Loading ...</div>
         )
     }
-
     return (
-        <div>Loading ...</div>
+        <div className="doc__content">
+            <div className="doc__content__leftbar">
+                <DocumentLeftbar>{data}</DocumentLeftbar>
+            </div>
+            <div className="doc__content__detail">
+
+            </div>
+        </div>
     )
 }
 
