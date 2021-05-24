@@ -12,10 +12,11 @@
     display:flex;
     align-items:center;
     margin:0px 30px;
+    cursor: pointer;
 }
-.Navbar__list:hover{
-    cursor:pointer;
-}
+// .Navbar__list:hover{
+//     cursor:pointer;
+// }
 .Navbar__list__h1{
     font-size:27px;
 }
@@ -26,4 +27,8 @@
 .Navbar__list__h2--outline{
     border: 2px solid white; 
     padding :5px 15px;
+}
+.Navbar__list__h2--outline:hover{
+    color:black;
+    background-color: white;
 }

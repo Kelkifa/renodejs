@@ -1,7 +1,9 @@
 // import { useLocation } from "react-router-dom";
 
+
 import './DocumentContent.scss';
 import DocumentDetail from './DocumentDetail.js';
+import DocumentCreateForm from './DocumentCreateForm.js';
 import React, { useState, useEffect } from 'react';
 
 
@@ -15,7 +17,7 @@ function DocumentContent(props) {
             fetch(`/api/document?type=${props.query.type}&id=${props.query.id}`)
                 .then(response => response.json())
                 .then(data => {
-                    if (data != null) {
+                    if (data != '') {
                         setLoaded(true);
                         setData(data);
                     }
@@ -24,41 +26,17 @@ function DocumentContent(props) {
 
 
     if (isLoaded) {
-        return <DocumentDetail>{data}</DocumentDetail>
-
+        if (props.query.id) {
+            return <DocumentDetail>{data}</DocumentDetail>
+        }
+        return (
+            <DocumentCreateForm></DocumentCreateForm>
+        )
     }
+
     return (
         <div>Loading ...</div>
     )
 }
-// class DocumentContent extends React.Component {
-//     constructor(props) {
-//         super(props);
-//         this.state = {
-//             isLoaded: false,
-//             data: [],
-//             query: useQuery()
-//         }
-//     }
-//     componentDidMount() {
-//         fetch('/api/document')
-//             .then(response => response.json())
-//             .then(data => {
-//                 this.setState({
-//                     isLoaded: true,
-//                     data: data
-//                 })
-//                 console.log(data)
-//             })
-//     }
-
-//     render() {
-//         return (
-//             <div id="DocCnt" className="DocCnt">
-
-//             </div>
-//         )
-//     }
-// }
 
 export default DocumentContent;

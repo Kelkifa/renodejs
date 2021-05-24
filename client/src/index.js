@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Navbar from './components/Navbar';
+import Navbar from './components/Navbars/Navbar';
 import reportWebVitals from './reportWebVitals';
 import './components/customScss/index.scss';
 
