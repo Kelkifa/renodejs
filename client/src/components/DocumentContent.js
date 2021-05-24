@@ -29,7 +29,7 @@ function DocumentContent(props) {
 
     }
     return (
-        <div> loading ...</div>
+        <div>Loading ...</div>
     )
 }
 // class DocumentContent extends React.Component {
