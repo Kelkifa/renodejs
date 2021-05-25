@@ -16,10 +16,10 @@ const anime = require('./server/app/models/anime');
 // --> Add this
 // ** MIDDLEWARE ** //
 const cors = require('cors');
-const whitelist = ['http://localhost:3000', 'http://localhost:8080', 'https://renodejs.herokuapp.com']
+const whitelist = ['http://localhost:3000', 'http://localhost:8080/', 'https://renodejs.herokuapp.com']
 const corsOptions = {
     origin: function (origin, callback) {
-        console.log("** Origin of request " + origin)
+        console.log("** Origin of request " + origin);
         if (whitelist.indexOf(origin) !== -1 || !origin) {
             console.log("Origin acceptable")
             callback(null, true)
