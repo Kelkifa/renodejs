@@ -20,7 +20,7 @@ function DocumentFormInput(props) {
             content = (
                 <div ps={props.ps} className="doc__form__content__item" onClick={clickHandler}>
                     <label className="item__label">Children Part Content</label>
-                    <input hidden name={`sort[${props.CpCount}][]`} type="text" value={0} />
+                    <input hidden name={`sort[${props.CpCount}][]`} type="text" defaultValue={0} />
                     <textarea className="doc__form__input" name={`children_part_content[${props.CpCount}][]`} rows="5" type="text" />
                     <div className="doc__toolbar doc__toolbar--hide" ref={docToolbar}>
                         <Toolbar ps={props.ps}
@@ -33,7 +33,7 @@ function DocumentFormInput(props) {
             content = (
                 <div ps={props.ps} className="doc__form__content__item" onClick={clickHandler}>
                     <label className="item__label">Image Link</label>
-                    <input hidden name={`sort[${props.CpCount}][]`} type="text" value={1} />
+                    <input hidden name={`sort[${props.CpCount}][]`} type="text" defaultValue={1} />
                     <input className="doc__form__input" name={`children_part_content[${props.CpCount}][]`} autoComplete="off" type="text" placeholder="Enter Image Link" />
                     <div className="doc__toolbar" ref={docToolbar} >
                         <Toolbar ps={props.ps}
