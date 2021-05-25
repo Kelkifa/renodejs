@@ -52,5 +52,65 @@
 
 .doc__content__detail{
     width:calc(100% - 222px);
-    background-color: yellow;
+    padding: 20px 30px;
+}
+
+//form
+.doc__form{
+    display:flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+.doc__form__head , .doc__form__content{
+    margin-bottom: 20px;
+    border-radius: 0.3rem;
+    position: relative;
+}
+.doc__form__content{
+    padding: 20px 20px 35px 20px;
+    border:1px solid black;
+}
+.item__label{
+    display:block;
+    margin-bottom: 5px;
+}
+.doc__form__input{
+    width:100%; 
+    box-sizing: border-box;
+    border: 2px solid rgba(96, 130, 226, 0.5);
+    outline-color:rgb(32, 121, 218);
+    border-radius: 0.3rem;
+    padding:0px 10px;
+}
+input.doc__form__input{
+    height:30px;
+}
+textarea.doc__form__input{
+    padding:10px;
+}
+.doc__form__content__item{
+    position: relative;
+}
+.doc__form__content__item + .doc__form__content__item{
+    margin-top:10px;
+}
+
+.doc__form__btn-container{
+    display: flex;
+    justify-content: flex-end;
+}
+.doc__form__btn-container--right{
+    justify-content: flex-end;
+}
+
+//toolbar
+.doc__toolbar{
+    width:100%;
+    display: flex;
+    justify-content: flex-end;
+    position:absolute;
+}
+
+.doc__toolbar--hide{
+ display:none;
 }

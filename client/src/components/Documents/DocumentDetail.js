@@ -1,6 +1,9 @@
+import DocumentCreateForm from './DocumentCreateForm.js';
 import React, { useState, useEffect } from 'react';
 
+
 function DocumentDetail(props) {
+    const [CpCount, setCpCount] = useState(0);
     const [isLoaded, setIsLoaded] = useState(false);
     const [data, setData] = useState(null);
 
@@ -15,9 +18,12 @@ function DocumentDetail(props) {
         }
     }, [props.cp])
 
+    // render
     if (!props.cp) {
         return (
-            <div>Nothing</div>
+            <div>
+                <DocumentCreateForm CpCount={CpCount}></DocumentCreateForm>
+            </div>
         )
     }
     if (!isLoaded) {
@@ -27,9 +33,7 @@ function DocumentDetail(props) {
     }
 
     return (
-        <>
-            <div>Hello</div>
-        </>
+        <div>Hello</div>
     )
 }
 
