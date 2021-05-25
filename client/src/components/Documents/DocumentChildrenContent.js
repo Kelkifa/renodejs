@@ -3,8 +3,8 @@ import DocumentFormInput from './DocumentFormInput.js';
 
 function DocumentChildrenContent(props) {
     /** State */
-    const [keys, setKeys] = useState([0, 1])
-    const [itemArr, setItemArr] = useState([0, 0]);  //0: textarea, 1: image
+    const [keys, setKeys] = useState([0])
+    const [itemArr, setItemArr] = useState([0]);  //0: textarea, 1: image
     /** Children Content thứ mấy */
     const CpCount = props.CpCount;
 

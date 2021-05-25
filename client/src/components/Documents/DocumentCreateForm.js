@@ -8,7 +8,7 @@ function DocumentCreateForm(props) {
         <form action="POST" className="doc__form">
             <div className="doc__form__head">
                 <label className="item__label">Parent Part Title</label>
-                <input name="parent_part_title" className="doc__form__input" type="text" placeholder="Enter Parent Part Title" />
+                <input name="parent_part_title" className="doc__form__input" type="text" placeholder="Enter Parent Part Title" autoComplete="off" />
             </div>
             <DocumentChildrenContent CpCount={CpCount} />
             {/* <DocumentChildrenContent CpCount={CpCount} /> */}
