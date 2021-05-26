@@ -31,7 +31,7 @@ function DocumentContent(props) {
                         <DocumentLeftbar data={data} type={props.query.type} />
                     </div>
                     <div className="doc__content__detail">
-                        <DocumentDetail cp={props.query.id} />
+                        <DocumentDetail cp={props.query.id} type={props.query.type} />
                     </div>
                 </>
                 : "Nothing"

@@ -22,7 +22,7 @@ function DocumentDetail(props) {
     if (!props.cp) {
         return (
             <div>
-                <DocumentCreateForm CpCount={CpCount}></DocumentCreateForm>
+                <DocumentCreateForm type={props.type} CpCount={CpCount}></DocumentCreateForm>
             </div>
         )
     }

@@ -29,7 +29,7 @@ function DocumentCreateForm(props) {
             <DocumentChildrenContent key={value} CpCount={index} parentPartIconHandler={parentPartIconHandler} />
         );
     });
-
+    console.log(props.type);
     return (
         <form method="POST" action="/api/document/create" className="doc__form">
             <div className="doc__form__head">
@@ -38,7 +38,7 @@ function DocumentCreateForm(props) {
             </div>
             {childrenParts}
             <div className="doc__form__btn-container doc__form__btn-container--right">
-                <button type="submit" className="btn btn--secondary">Submit</button>
+                <button name="type" value={props.type} type="submit" className="btn btn--secondary">Submit</button>
             </div>
         </form>
     )

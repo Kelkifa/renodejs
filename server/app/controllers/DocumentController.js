@@ -1,4 +1,5 @@
 const documentModel = require('../models/document');
+const storeDocument = require('../cores/storeDocument');
 
 class DocumentController {
     //[GET] /api/document
@@ -18,8 +19,10 @@ class DocumentController {
     }
     //[POST] /api/document/create
     create(req, res, next) {
-        console.log(req.body);
-        res.send('document create');
+        var obj = storeDocument(req.body);
+        var data = new documentModel(obj);
+        data.save();
+        res.json(req.body);
     }
 }
 
