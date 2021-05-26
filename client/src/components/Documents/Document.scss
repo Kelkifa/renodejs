@@ -32,14 +32,11 @@
     background-color: #e7e9eb;
     font-family: "Segoe UI",Arial,sans-serif;
 }
-// .doc__content__leftbar__item{
-
-// }
-
 .doc__content__leftbar__item{
     padding:5px 0px;
     padding-left:16px;
     cursor: pointer;
+    position:relative;
 }
 .doc__content__leftbar__item + .doc__content__leftbar__item{
     border-top:1px solid #c6cbcf;
@@ -49,6 +46,11 @@
     font-weight:400;
 }
 
+.doc__content__leftbar__item__toolbar{
+    position: absolute;
+    top: 0px;
+    right: -25px;
+}
 //detail
 
 .doc__content__detail{
@@ -119,7 +121,7 @@ textarea.doc__form__input{
     position:absolute;
 }
 
-.doc__toolbar--hide{
+.hide{
  display:none;
 }
 

@@ -3,7 +3,7 @@ const React = require('react');
 
 class DocumentNavbar extends React.Component {
     handleClick(link) {
-        document.location = `?type=${link}`;
+        document.location = `/document?type=${link}`;
     }
     render() {
         return (

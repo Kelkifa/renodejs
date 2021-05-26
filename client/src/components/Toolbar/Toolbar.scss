@@ -15,3 +15,11 @@
 .toolbar--two{
     width: 65px;
 }
+
+.toolbar--column{
+    width: 25px;
+    height:45px;
+    flex-direction: column;
+    align-items: center;
+    align-content: space-between;
+}

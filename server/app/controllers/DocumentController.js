@@ -23,6 +23,14 @@ class DocumentController {
             res.json("not thing");
         }
     }
+    //[GET] /api/document/:id/update
+    getUpdate(req, res, next) {
+        const id = req.params.id;
+        documentModel.findOne({ _id: id })
+            .then(data => {
+                res.json(data);
+            })
+    }
     //[POST] /api/document/create
     create(req, res, next) {
         var obj = storeDocument(req.body);

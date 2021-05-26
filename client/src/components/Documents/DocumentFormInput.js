@@ -9,7 +9,7 @@ function DocumentFormInput(props) {
 
     /** Event Handler */
     function clickHandler() {
-        $(docToolbar.current).toggleClass('doc__toolbar--hide');
+        $(docToolbar.current).toggleClass('hide');
     }
 
     /** Render */
@@ -22,7 +22,7 @@ function DocumentFormInput(props) {
                     <label className="item__label">Children Part Content</label>
                     <input hidden name={`sort[${props.CpCount}][]`} type="text" defaultValue={0} />
                     <textarea className="doc__form__input" name={`children_part_content[${props.CpCount}][]`} rows="5" type="text" />
-                    <div className="doc__toolbar doc__toolbar--hide" ref={docToolbar}>
+                    <div className="doc__toolbar hide" ref={docToolbar}>
                         <Toolbar ps={props.ps}
                             clickHandler={props.clickIconHandler} />
                     </div>
@@ -47,7 +47,7 @@ function DocumentFormInput(props) {
                 <div ps={0} className="doc__form__content__item" onClick={clickHandler}>
                     <label className="item__label">Children Part Title</label>
                     <input className="doc__form__input" name="children_part_title[]" type="text" placeholder="Enter Children Part Title" />
-                    <div className="doc__toolbar doc__toolbar--hide" ref={docToolbar}>
+                    <div className="doc__toolbar hide" ref={docToolbar}>
                         <Toolbar ps={0}
                             clickHandler={props.clickIconHandler}
                             childrenTitle={1}

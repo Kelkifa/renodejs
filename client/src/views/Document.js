@@ -2,6 +2,12 @@ import React from 'react';
 import '../components/Documents/Document.scss';
 import DocumentNavbar from '../components/Documents/DocumentNavbar.js';
 import DocumentContent from '../components/Documents/DocumentContent.js';
+import DocumentUpdate from '../components/Documents/DocumentUpdate.js';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route
+} from "react-router-dom";
 
 import { useLocation } from "react-router-dom";
 
@@ -10,10 +16,20 @@ function Document(props) {
     const query = { type: getQuery.get("type"), id: getQuery.get("id") };
 
     return (
-        <div className="doc mr-t-10">
-            <DocumentNavbar query={query}></DocumentNavbar>
-            <DocumentContent query={query}></DocumentContent>
-        </div>
+        <Router>
+            <div className="doc mr-t-10">
+                <DocumentNavbar query={query}></DocumentNavbar>
+                <Switch>
+                    <Route path="/document/update">
+                        <DocumentUpdate query={query} />
+                    </Route>
+                    <Route path="/document">
+                        <DocumentContent query={query}></DocumentContent>
+                    </Route>
+                </Switch>
+            </div>
+
+        </Router>
     )
 }
 
