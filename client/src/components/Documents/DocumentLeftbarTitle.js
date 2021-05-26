@@ -6,8 +6,7 @@ function DocumentLeftbarTitle(props) {
     /** Ref */
     const iconContainer = useRef();
     /** props */
-    const id = props.id;
-    const type = props.type;
+    const { id, type } = props;
 
     /** Event Handler */
     function clickHandler() {
@@ -20,7 +19,13 @@ function DocumentLeftbarTitle(props) {
         $(iconContainer.current).addClass('hide');
     }
     function iconClickHandler(clickInfo) {
-        document.location = `/document?type=${type}&update=${id}`
+        console.log(clickInfo);
+        if (clickInfo === 'update')
+            document.location = `/document?type=${type}&update=${id}`;
+        return;
+        if (clickInfo === 'delete') {
+            return;
+        }
     }
 
     /** Render */
@@ -32,6 +37,7 @@ function DocumentLeftbarTitle(props) {
                 {props.title}
             </div>
             <div className="doc__content__leftbar__item__toolbar hide" ref={iconContainer}>
+                <form action=""></form>
                 <ToolbarDU clickHandler={iconClickHandler} />
             </div>
         </div>
