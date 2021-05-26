@@ -62,7 +62,7 @@ function DocumentChildrenContent(props) {
                 {cntItem}
             </div>
             <div className="doc__form__chilPart__toolbar">
-                <Toolbar childrenPart={1} type="pp" ps={props.CpCount}
+                <Toolbar type="pp" ps={props.CpCount}
                     clickHandler={props.parentPartIconHandler}
                 />
             </div>

@@ -9,15 +9,20 @@ import { IoMdRemoveCircleOutline } from 'react-icons/io';
 function Toolbar(props) {
 
     var type = 'cp';
+    var addClass = "";
     if (props.type === 'pp') {
         type = 'pp';
+        addClass = "toolbar--two";
+    }
+    if (props.childrenTitle) {
+        addClass = "toolbar--two";
     }
     return (
-        <div className="toolbar">
+        <div className={`toolbar ${addClass}`}>
             <div className="toolbar__item" onClick={() => { props.clickHandler('addText', props.ps, type) }}>
                 <FaRegPlusSquare size="20px" color="rgb(32, 121, 218)" />
             </div>
-            {props.childrenPart ?
+            {props.type === "pp" ?
                 "" :
                 <div className="toolbar__item" onClick={() => { props.clickHandler('addImage', props.ps, type) }}>
                     <BsCardImage size="20px" color="rgb(32,121, 218)"></BsCardImage>
