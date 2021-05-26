@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DocumentFormInput from './DocumentFormInput.js';
 import Toolbar from '../Toolbar/Toolbar.js';
 
@@ -7,8 +7,19 @@ function DocumentChildrenContent(props) {
     const [keys, setKeys] = useState([0])
     const [itemArr, setItemArr] = useState([0]);  //0: textarea, 1: image
     /** Children Content thứ mấy */
-    const { CpCount } = props;
-
+    const { CpIndex, data } = props;
+    /** Effect */
+    useEffect(() => {
+        if (data) {
+            var arr = data.children_parts[CpIndex].sort;
+            var keyArr = arr.map((value, index) => {
+                return index;
+            })
+            setKeys([...keyArr]);
+            setItemArr([...arr]);
+        }
+    }, [data])
+    /** Event Handler */
     function clickIconHandler(info, ps, type) {
         if (type === "cp") {
             const copyItemArr = [...itemArr];
@@ -35,16 +46,16 @@ function DocumentChildrenContent(props) {
         }
     }
 
-
     /** Render */
     var cntItem = itemArr.map((value, index) => {
         if ([0, 1].includes(value)) { //textarea and text(link)
             return (
                 <DocumentFormInput key={keys[index]}
                     ps={index + 1}
-                    CpCount={CpCount}
+                    CpCount={CpIndex}
                     clickIconHandler={clickIconHandler}
                     type={value ? "image" : "textarea"}
+                    data={data ? data.children_parts[CpIndex].content[index] : ""}
                 />
             )
         }
@@ -58,11 +69,12 @@ function DocumentChildrenContent(props) {
             <div className="doc__form__content" >
                 <DocumentFormInput type="title"
                     clickIconHandler={clickIconHandler}
+                    data={data ? data.children_parts[CpIndex].title : ""}
                 />
                 {cntItem}
             </div>
             <div className="doc__form__chilPart__toolbar">
-                <Toolbar type="pp" ps={props.CpCount}
+                <Toolbar type="pp" ps={CpIndex}
                     clickHandler={props.parentPartIconHandler}
                 />
             </div>

@@ -32,6 +32,15 @@ class DocumentController {
         data.save();
         res.redirect('back');
     }
+    //[PUT] /api/document/:id/update
+    update(req, res, next) {
+        const { id } = req.params;
+        var obj = storeDocument(req.body);
+        documentModel.updateOne({ _id: id }, obj)
+            .then(() => {
+                res.redirect('back');
+            })
+    }
 }
 
 module.exports = new DocumentController;

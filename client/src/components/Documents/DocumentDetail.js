@@ -1,5 +1,4 @@
 import DocumentForm from './DocumentForm.js';
-import DocumentUpdateForm from './DocumentUpdateForm.js';
 import React, { useState, useEffect } from 'react';
 
 
@@ -77,7 +76,7 @@ function DocumentDetail(props) {
         console.log(data);
         return (
             <>
-                <DocumentForm type={type} />
+                <DocumentForm type={type} data={data.document} />
             </>
         )
     }
