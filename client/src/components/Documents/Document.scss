@@ -39,6 +39,7 @@
 .doc__content__leftbar__item{
     padding:5px 0px;
     padding-left:16px;
+    cursor: pointer;
 }
 .doc__content__leftbar__item + .doc__content__leftbar__item{
     border-top:1px solid #c6cbcf;
@@ -61,14 +62,21 @@
     flex-direction: column;
     justify-content: flex-end;
 }
-.doc__form__head , .doc__form__content{
+.doc__form__head{
     margin-bottom: 20px;
+}
+.doc__form__head , .doc__form__content{
     border-radius: 0.3rem;
     position: relative;
 }
 .doc__form__content{
     padding: 20px 20px 35px 20px;
     border:1px solid black;
+}
+.doc__form__chilPart__toolbar{
+    display:flex;
+    justify-content: flex-end;
+    margin-bottom: 30px;
 }
 .item__label{
     display:block;
@@ -114,3 +122,4 @@ textarea.doc__form__input{
 .doc__toolbar--hide{
  display:none;
 }
+

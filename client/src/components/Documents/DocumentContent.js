@@ -23,6 +23,7 @@ function DocumentContent(props) {
             <div>Loading ...</div>
         )
     }
+    console.log()
     return (
         <div className="doc__content">
             {props.query.type ?
@@ -31,7 +32,7 @@ function DocumentContent(props) {
                         <DocumentLeftbar data={data} type={props.query.type} />
                     </div>
                     <div className="doc__content__detail">
-                        <DocumentDetail cp={props.query.id} />
+                        <DocumentDetail id={props.query.id} type={props.query.type} />
                     </div>
                 </>
                 : "Nothing"

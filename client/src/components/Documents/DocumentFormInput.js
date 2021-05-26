@@ -24,7 +24,7 @@ function DocumentFormInput(props) {
                     <textarea className="doc__form__input" name={`children_part_content[${props.CpCount}][]`} rows="5" type="text" />
                     <div className="doc__toolbar doc__toolbar--hide" ref={docToolbar}>
                         <Toolbar ps={props.ps}
-                            clickHander={props.clickIconHandler} />
+                            clickHandler={props.clickIconHandler} />
                     </div>
                 </div>
             );
@@ -37,7 +37,7 @@ function DocumentFormInput(props) {
                     <input className="doc__form__input" name={`children_part_content[${props.CpCount}][]`} autoComplete="off" type="text" placeholder="Enter Image Link" />
                     <div className="doc__toolbar" ref={docToolbar} >
                         <Toolbar ps={props.ps}
-                            clickHander={props.clickIconHandler} />
+                            clickHandler={props.clickIconHandler} />
                     </div>
                 </div>
             );
@@ -49,7 +49,7 @@ function DocumentFormInput(props) {
                     <input className="doc__form__input" name="children_part_title[]" type="text" placeholder="Enter Children Part Title" />
                     <div className="doc__toolbar doc__toolbar--hide" ref={docToolbar}>
                         <Toolbar ps={0}
-                            clickHander={props.clickIconHandler}
+                            clickHandler={props.clickIconHandler}
                             childrenTitle={1}
                         />
                     </div>

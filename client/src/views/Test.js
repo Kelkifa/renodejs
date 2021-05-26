@@ -1,5 +1,5 @@
 import '../components/customScss/test.scss';
-import React, { useState } from 'react';
+import React from 'react';
 //icon
 // import { FaRegPlusSquare } from 'react-icons/fa';
 // import { BsCardImage } from 'react-icons/bs';
