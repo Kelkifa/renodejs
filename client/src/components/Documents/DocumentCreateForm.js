@@ -7,20 +7,15 @@ function DocumentCreateForm(props) {
 
     /** Event Handler */
     function parentPartIconHandler(info, ps, type) {
+        var copyCpCount = [...CpCount]
         if (info === 'sub') {
-            var copyCpCount = [...CpCount]
             copyCpCount.splice(ps, 1);
             setCpCount(copyCpCount);
             return;
         }
         //info = addText
-
-        var copyCpCount = [...CpCount]
         copyCpCount.splice(ps + 1, 0, Math.max(...CpCount) + 1);
         setCpCount(copyCpCount);
-        console.log(CpCount);
-        return;
-
     }
 
     /** Render */

@@ -1,4 +1,6 @@
 import React from 'react';
+import DocumentLeftbarTitle from './DocumentLeftbarTitle.js';
+
 
 function DocumentLeftbar(props) {
     return (
@@ -6,7 +8,7 @@ function DocumentLeftbar(props) {
             <h2 className="doc__content__leftbar__item doc__content__leftbar__item--title">{props.type}</h2>
             {props.data ? props.data.map(doc => {
                 return (
-                    <div key={doc._id} className="doc__content__leftbar__item">{doc.parent_part.title}</div>
+                    <DocumentLeftbarTitle key={doc._id} title={doc.parent_part.title} id={doc._id} type={props.type} />
                 )
             }) : ""}
         </>

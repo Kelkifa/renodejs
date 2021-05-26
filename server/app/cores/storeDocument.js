@@ -9,7 +9,7 @@ function childrenPartHandler(query) {
     return query.children_part_title.map((value, index) => {
         return {
             index: index + 1,
-            titlle: value,
+            title: value,
             content: query.children_part_content[index],
             sort: query.sort[index],
         };
