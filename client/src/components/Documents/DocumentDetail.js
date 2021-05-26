@@ -1,21 +1,35 @@
 import DocumentCreateForm from './DocumentCreateForm.js';
+import DocumentUpdate from './DocumentUpdate.js';
 import React, { useState, useEffect } from 'react';
 
 
 function DocumentDetail(props) {
+    /** State */
     const [isLoaded, setIsLoaded] = useState(false);
     const [data, setData] = useState(null);
 
+    /** Props */
+    const { id, type, update } = props;
+    console.log(update);
+    /** Effect API */
     useEffect(() => {
-        if (props.id) {
-            fetch(`/api/document?id=${props.id}&type=${props.type}`)
+        if (id) {
+            fetch(`/api/document?id=${id}`)
                 .then(res => res.json())
                 .then(doc => {
                     setIsLoaded(true);
                     setData(doc);
                 })
         }
-    }, [props.id, props.type])
+        if (update) {
+            fetch(`/api/document?update=${update}`)
+                .then(res => res.json())
+                .then(doc => {
+                    setIsLoaded(true);
+                    setData(doc);
+                })
+        }
+    }, [id, update])
 
     /** Render */
     function processContent(chilPart) {
@@ -42,23 +56,32 @@ function DocumentDetail(props) {
         })
     }
 
-    if (!props.id) {
-        return (
-            <div>
-                <DocumentCreateForm type={props.type}></DocumentCreateForm>
-            </div>
-        )
-    }
     if (!isLoaded) {
         return (
-            <div>Loading ...</div>
+            <>Loading ...</>
         );
     }
     if (!data) {
         return (
-            <div>data is null</div>
+            <>data is null</>
         )
     }
+    if (update) {
+        console.log(data);
+        return (
+            <>
+                <DocumentUpdate />
+            </>
+        )
+    }
+    if (!id) {
+        return (
+            <>
+                <DocumentCreateForm type={type}></DocumentCreateForm>
+            </>
+        )
+    }
+
     const document = data.document;
     return (
         <>

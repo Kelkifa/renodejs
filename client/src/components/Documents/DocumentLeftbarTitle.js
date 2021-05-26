@@ -6,12 +6,12 @@ function DocumentLeftbarTitle(props) {
     /** Ref */
     const iconContainer = useRef();
     /** props */
-    // const type = props.type;
     const id = props.id;
+    const type = props.type;
 
     /** Event Handler */
     function clickHandler() {
-        document.location = `?type=${props.type}&id=${props.id}`;
+        document.location = `?type=${type}&id=${id}`;
     }
     function mouseOverHandler() {
         $(iconContainer.current).removeClass('hide');
@@ -20,7 +20,7 @@ function DocumentLeftbarTitle(props) {
         $(iconContainer.current).addClass('hide');
     }
     function iconClickHandler(clickInfo) {
-        document.location = `/document/update?id=${id}`
+        document.location = `/document?type=${type}&update=${id}`
     }
 
     /** Render */

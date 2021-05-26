@@ -4,35 +4,38 @@ import DocumentDetail from './DocumentDetail.js';
 
 
 function DocumentContent(props) {
+    /** State */
     const [isLoaded, setIsLoaded] = useState(false);
     const [data, setData] = useState(null);
-    // const [chilData, setChilData] = useState(null)
+
+    /** Props */
+    const { id, type, update } = props.query;
+
     useEffect(() => {
-        if (props.query.type) {
-            fetch(`/api/document?type=${props.query.type}`)
+        if (type) {
+            fetch(`/api/document?type=${type}`)
                 .then(response => response.json())
                 .then(doc => {
                     setIsLoaded(true);
                     setData(doc);
                 });
         }
-    }, [props.query.type, props.query.id])
+    }, [type, id])
 
-    if (!isLoaded && props.query.type) {
+    if (!isLoaded && type) {
         return (
             <div>Loading ...</div>
         )
     }
-    console.log()
     return (
         <div className="doc__content">
-            {props.query.type ?
+            {type ?
                 <>
                     <div className="doc__content__leftbar">
-                        <DocumentLeftbar data={data} type={props.query.type} />
+                        <DocumentLeftbar data={data} type={type} />
                     </div>
                     <div className="doc__content__detail">
-                        <DocumentDetail id={props.query.id} type={props.query.type} />
+                        <DocumentDetail id={id} type={type} update={update} />
                     </div>
                 </>
                 : "Nothing"

@@ -2,7 +2,6 @@ import React from 'react';
 import '../components/Documents/Document.scss';
 import DocumentNavbar from '../components/Documents/DocumentNavbar.js';
 import DocumentContent from '../components/Documents/DocumentContent.js';
-import DocumentUpdate from '../components/Documents/DocumentUpdate.js';
 import {
     BrowserRouter as Router,
     Switch,
@@ -13,16 +12,13 @@ import { useLocation } from "react-router-dom";
 
 function Document(props) {
     const getQuery = new URLSearchParams(useLocation().search);
-    const query = { type: getQuery.get("type"), id: getQuery.get("id") };
+    const query = { type: getQuery.get("type"), id: getQuery.get("id"), update: getQuery.get("update") };
 
     return (
         <Router>
             <div className="doc mr-t-10">
                 <DocumentNavbar query={query}></DocumentNavbar>
                 <Switch>
-                    <Route path="/document/update">
-                        <DocumentUpdate query={query} />
-                    </Route>
                     <Route path="/document">
                         <DocumentContent query={query}></DocumentContent>
                     </Route>

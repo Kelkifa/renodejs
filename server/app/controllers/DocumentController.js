@@ -4,17 +4,20 @@ const storeDocument = require('../cores/storeDocument');
 class DocumentController {
     //[GET] /api/document
     index(req, res, next) {
-        if (req.query.id) {
-            documentModel.find({ type: req.query.type })
+        const { id, type, update } = req.query;
+        console.log(req.query);
+        if (id || update) {
+            var cache = id ? id : update;
+            documentModel.find({ type })
                 .then(documents => {
-                    documentModel.findOne({ _id: req.query.id })
+                    documentModel.findOne({ _id: cache })
                         .then(document => {
                             res.json({ document, documents });
                         })
                 })
         }
-        else if (req.query.type) {
-            documentModel.find({ type: req.query.type })
+        else if (type) {
+            documentModel.find({ type })
                 .then(documents => {
                     res.json(documents);
                 })
@@ -22,14 +25,6 @@ class DocumentController {
         else {
             res.json("not thing");
         }
-    }
-    //[GET] /api/document/:id/update
-    getUpdate(req, res, next) {
-        const id = req.params.id;
-        documentModel.findOne({ _id: id })
-            .then(data => {
-                res.json(data);
-            })
     }
     //[POST] /api/document/create
     create(req, res, next) {
