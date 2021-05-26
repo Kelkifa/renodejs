@@ -5,7 +5,6 @@ class DocumentController {
     //[GET] /api/document
     index(req, res, next) {
         const { id, type, update } = req.query;
-        console.log(req.query);
         if (id || update) {
             var cache = id ? id : update;
             documentModel.find({ type })

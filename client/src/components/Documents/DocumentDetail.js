@@ -1,5 +1,5 @@
-import DocumentCreateForm from './DocumentCreateForm.js';
-import DocumentUpdate from './DocumentUpdate.js';
+import DocumentForm from './DocumentForm.js';
+import DocumentUpdateForm from './DocumentUpdateForm.js';
 import React, { useState, useEffect } from 'react';
 
 
@@ -10,7 +10,7 @@ function DocumentDetail(props) {
 
     /** Props */
     const { id, type, update } = props;
-    console.log(update);
+
     /** Effect API */
     useEffect(() => {
         if (id) {
@@ -56,6 +56,13 @@ function DocumentDetail(props) {
         })
     }
 
+    if (!id && !update) {
+        return (
+            <>
+                <DocumentForm type={type} ></DocumentForm>
+            </>
+        )
+    }
     if (!isLoaded) {
         return (
             <>Loading ...</>
@@ -70,17 +77,11 @@ function DocumentDetail(props) {
         console.log(data);
         return (
             <>
-                <DocumentUpdate />
+                <DocumentForm type={type} />
             </>
         )
     }
-    if (!id) {
-        return (
-            <>
-                <DocumentCreateForm type={type}></DocumentCreateForm>
-            </>
-        )
-    }
+
 
     const document = data.document;
     return (

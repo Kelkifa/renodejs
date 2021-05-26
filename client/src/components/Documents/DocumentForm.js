@@ -1,12 +1,15 @@
 import DocumentChildrenContent from './DocumentChildrenContent.js';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-function DocumentCreateForm(props) {
+function DocumentForm(props) {
+    /** Props */
+    const { type, data } = props;
+
     /** State */
-    const [CpCount, setCpCount] = useState([0, 1])
+    const [CpCount, setCpCount] = useState([0])
 
     /** Event Handler */
-    function parentPartIconHandler(info, ps, type) {
+    function parentPartIconHandler(info, ps) {
         var copyCpCount = [...CpCount]
         if (info === 'sub') {
             copyCpCount.splice(ps, 1);
@@ -32,10 +35,10 @@ function DocumentCreateForm(props) {
             </div>
             {childrenParts}
             <div className="doc__form__btn-container doc__form__btn-container--right">
-                <button name="type" value={props.type} type="submit" className="btn btn--secondary">Submit</button>
+                <button name="type" value={type} type="submit" className="btn btn--secondary">Submit</button>
             </div>
         </form>
     )
 }
 
-export default DocumentCreateForm;
+export default DocumentForm;
