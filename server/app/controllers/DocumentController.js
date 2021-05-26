@@ -28,7 +28,7 @@ class DocumentController {
         var obj = storeDocument(req.body);
         var data = new documentModel(obj);
         data.save();
-        res.json(req.body);
+        res.redirect('back');
     }
 }
 
