@@ -73,7 +73,6 @@ function DocumentDetail(props) {
         )
     }
     if (update) {
-        console.log(data);
         return (
             <>
                 <DocumentForm type={type} data={data.document} />

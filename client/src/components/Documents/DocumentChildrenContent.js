@@ -4,6 +4,7 @@ import Toolbar from '../Toolbar/Toolbar.js';
 
 function DocumentChildrenContent(props) {
     /** State */
+    const [addedPs, setAddedPs] = useState([]);
     const [keys, setKeys] = useState([0])
     const [itemArr, setItemArr] = useState([0]);  //0: textarea, 1: image
     /** Children Content thứ mấy */
@@ -11,28 +12,36 @@ function DocumentChildrenContent(props) {
     /** Effect */
     useEffect(() => {
         if (data) {
-            var arr = data.children_parts[CpIndex].sort;
-            var keyArr = arr.map((value, index) => {
-                return index;
-            })
-            setKeys([...keyArr]);
-            setItemArr([...arr]);
+            if (data.children_parts[CpIndex]) {
+                var arr = data.children_parts[CpIndex].sort;
+                var keyArr = arr.map((value, index) => {
+                    return index;
+                })
+                setKeys([...keyArr]);
+                setItemArr([...arr]);
+            }
         }
-    }, [data, CpIndex])
+    }, [data, CpIndex]);
     /** Event Handler */
     function clickIconHandler(info, ps, type) {
         if (type === "cp") {
             const copyItemArr = [...itemArr];
             const copyKeys = [...keys];
+            const copyAddedPs = [...addedPs];
+
             if (info === 'addText') {       //textarea
                 copyItemArr.splice(ps, 0, 0);
                 copyKeys.splice(ps, 0, Math.max(...keys) + 1);
+                copyAddedPs.push(ps);
+                setAddedPs(copyAddedPs);
                 setItemArr(copyItemArr);
                 setKeys(copyKeys);
             }
             else if (info === 'addImage') {
                 copyItemArr.splice(ps, 0, 1);    //image
                 copyKeys.splice(ps, 0, Math.max(...keys) + 1);
+                copyAddedPs.push(ps);
+                setAddedPs(copyAddedPs);
                 setItemArr(copyItemArr);
                 setKeys(copyKeys);
             }
@@ -47,6 +56,12 @@ function DocumentChildrenContent(props) {
     }
 
     /** Render */
+    var dataFlag = false;
+    if (data) {
+        if (data.children_parts[CpIndex]) {
+            dataFlag = true;
+        }
+    }
     var cntItem = itemArr.map((value, index) => {
         if ([0, 1].includes(value)) { //textarea and text(link)
             return (
@@ -55,7 +70,7 @@ function DocumentChildrenContent(props) {
                     CpCount={CpIndex}
                     clickIconHandler={clickIconHandler}
                     type={value ? "image" : "textarea"}
-                    data={data ? data.children_parts[CpIndex].content[index] : ""}
+                    data={dataFlag && !addedPs.includes(index) ? data.children_parts[CpIndex].content[index] : ""}
                 />
             )
         }
@@ -69,7 +84,7 @@ function DocumentChildrenContent(props) {
             <div className="doc__form__content" >
                 <DocumentFormInput type="title"
                     clickIconHandler={clickIconHandler}
-                    data={data ? data.children_parts[CpIndex].title : ""}
+                    data={dataFlag ? data.children_parts[CpIndex].title : ""}
                 />
                 {cntItem}
             </div>
