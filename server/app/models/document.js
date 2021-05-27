@@ -24,7 +24,6 @@ const documents = new Schema(
         timestamps: true
     }
 );
-documents.plugin(mongoose_delete);
 documents.plugin(mongoose_delete, { overrideMethods: 'all' });
 
 module.exports = mongoose.model('documents', documents);

@@ -9,6 +9,7 @@ app.use(methodOverride('_method'));
 
 /** Midleware  */
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 /** Models */
 //connect db
 const db = require('./server/app/cores/connectDb');
