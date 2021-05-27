@@ -1,0 +1,13 @@
+
+GET http://localhost:8080/api/document?type=NodeJS&id=60a8e7e56962c17fdbe0bf18
+
+###
+
+POST http://localhost:8080/api/user/register
+Content-Type: application/json
+{
+    "username":"huan",
+    "password":"Kelkifa123"
+}
+
+###

@@ -46,7 +46,7 @@ class DocumentController {
         const { id } = req.params;
         documentModel.delete({ _id: id })
             .then(() => {
-                res.redirect('back');
+                res.redirect('/document');
             })
             .catch(err => {
                 res.status(404).json({ success: fasle, message: err.message });
