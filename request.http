@@ -5,6 +5,7 @@ GET http://localhost:8080/api/document?type=NodeJS&id=60a8e7e56962c17fdbe0bf18
 
 POST http://localhost:8080/api/user/register
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGFmNmI1ZDc2MzYwYjNkYjRjZjM2YjUiLCJpYXQiOjE2MjIxMjIwNzB9.oU2iCCUARTEDhRAGWIX2pYtcC1TePdz2aBlOsdsXoWc
 
 {
     "fullname":"Pham Long Huan",
@@ -20,4 +21,9 @@ Content-Type: application/json
     "username":"huan",
     "password":"Kelkifa123"
 }
+
+###
+
+GET http://localhost:8080/api/anime
+Authorization: Bearer yJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGFmNmI1ZDc2MzYwYjNkYjRjZjM2YjUiLCJpYXQiOjE2MjIxMjIzOTR9.6CwN_uYRky6BKtmTFj6pVUfI7lN_urzyas7jPnZ12pE
 

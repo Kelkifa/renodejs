@@ -1,7 +1,7 @@
 const userModel = require('../models/users');
 const argon2 = require('argon2');
 const jwt = require('jsonwebtoken');
-const secretToken = 'asidsaudiuwe9qe#@&#*^#!iqoeuqpwo2132';
+const secrectKey = 'asidsaudiuwe9qe#@&#*^#!iqoeuqpwo2132';
 class UserController {
     /** [POST]//api/user/register  
      * desc: Register
@@ -30,7 +30,7 @@ class UserController {
             await newUser.save();
 
             /** Return token */
-            const accessToken = jwt.sign({ userId: newUser._id }, secretToken)
+            const accessToken = jwt.sign({ userId: newUser._id }, secrectKey)
             res.json({ success: true, message: "User is created successfully", accessToken });
         }
         catch (error) {
@@ -68,7 +68,7 @@ class UserController {
 
             /** Can Login  */
             // Return token
-            const accessToken = jwt.sign({ userId: user._id }, secretToken)
+            const accessToken = jwt.sign({ userId: user._id }, secrectKey)
             res.json({ success: true, message: "Login successfully", accessToken });
 
         } catch (error) {
