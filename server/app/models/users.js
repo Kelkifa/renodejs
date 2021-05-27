@@ -6,8 +6,9 @@ const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 const users = new Schema(
     {
-        username: { type: String },
-        password: { type: String },
+        fullname: { type: String },
+        username: { type: String, required: true, unique: true },
+        password: { type: String, required: true },
         admin: { type: Boolean, default: false }
     },
     {
