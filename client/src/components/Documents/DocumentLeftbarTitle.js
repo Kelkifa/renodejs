@@ -5,6 +5,7 @@ import $ from 'jquery';
 function DocumentLeftbarTitle(props) {
     /** Ref */
     const iconContainer = useRef();
+    const formDeleteRef = useRef();
     /** props */
     const { id, type } = props;
 
@@ -20,10 +21,12 @@ function DocumentLeftbarTitle(props) {
     }
     function iconClickHandler(clickInfo) {
         console.log(clickInfo);
-        if (clickInfo === 'update')
+        if (clickInfo === 'update') {
             document.location = `/document?type=${type}&update=${id}`;
-        return;
+            return;
+        }
         if (clickInfo === 'delete') {
+            $(formDeleteRef.current).submit();
             return;
         }
     }
@@ -37,7 +40,7 @@ function DocumentLeftbarTitle(props) {
                 {props.title}
             </div>
             <div className="doc__content__leftbar__item__toolbar hide" ref={iconContainer}>
-                <form action=""></form>
+                <form method="POST" action={`/api/document/${id}/delete?_method=DELETE`} ref={formDeleteRef}></form>
                 <ToolbarDU clickHandler={iconClickHandler} />
             </div>
         </div>

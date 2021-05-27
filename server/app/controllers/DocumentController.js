@@ -41,6 +41,18 @@ class DocumentController {
                 res.redirect('back');
             })
     }
+    //[DELETE] /api/document/:id/delete
+    delete(req, res, next) {
+        const { id } = req.params;
+        documentModel.delete({ _id: id })
+            .then(() => {
+                res.redirect('back');
+            })
+            .catch(err => {
+                res.status(404).json({ success: fasle, message: err.message });
+            })
+    }
+
 }
 
 module.exports = new DocumentController;

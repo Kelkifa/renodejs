@@ -18,7 +18,7 @@ function DocumentChildrenContent(props) {
             setKeys([...keyArr]);
             setItemArr([...arr]);
         }
-    }, [data])
+    }, [data, CpIndex])
     /** Event Handler */
     function clickIconHandler(info, ps, type) {
         if (type === "cp") {
