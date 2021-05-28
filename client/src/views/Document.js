@@ -7,7 +7,7 @@ function Document(props) {
     /** Get Query */
     const getQuery = new URLSearchParams(useLocation().search);
     const query = { type: getQuery.get("type"), id: getQuery.get("id"), update: getQuery.get("update") };
-
+    console.log(query);
     /** Render */
     return (
         <div>
