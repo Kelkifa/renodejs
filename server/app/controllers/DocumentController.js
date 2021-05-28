@@ -1,21 +1,45 @@
 const documentModel = require('../models/document');
 const storeDocument = require('../cores/storeDocument');
+const getDocumentType = require('../cores/getDocumentType');
 
 class DocumentController {
     /** GET /api/document */
     async index(req, res, next) {
-        const { id, type, update } = req.query;
-        if (!id && !type && !update) {
-            try {
-                var documents = await documentModel.find({}).select('type -_id');
-                var documentCopy = documents.map(value => value.type);
-                documents = Array.from(new Set(documentCopy));
-                return res.json({ success: true, documents });
-            } catch (err) {
-                console.log(err)
-                return res.status(400).json({ success: false, message: "Internal server error" });
+        const { id, type } = req.query;
+        try {
+            var types = await documentModel.find({}).select('type -_id');
+            types = getDocumentType(types);
+            if (!type && !id) {
+                return res.json({ success: true, types })
             }
+            else if (type && id) {
+                try {
+                    var [document, titles] = await Promise.all([
+                        documentModel.findOne({ _id: id }),
+                        documentModel.find({ type }).select('parent_part')
+                    ]);
+                    return res.json({ success: true, types, document, titles });
+
+                } catch (error) {
+                    console.log(error);
+                    return res.status(400).json({ success: false, message: "Internal Server" });
+                }
+            }
+            else if (type) {
+                try {
+                    var titles = await documentModel.find({ type }).select('parent_part');
+                    return res.json({ success: true, titles, types });
+                } catch (error) {
+                    console.log(error);
+                    return res.status(400).json({ success: false, message: "Internal Server" });
+                }
+            }
+        } catch (err) {
+            console.log(err)
+            return res.status(400).json({ success: false, message: "Internal Server error" });
         }
+
+
         return res.status(400).json({ success: false, message: "Bad request" })
     }
 
@@ -30,7 +54,7 @@ class DocumentController {
 
     // //[GET] /api/document
     // index(req, res, next) {
-    //     const { id, type, update } = req.query;
+    //     const { id, type } = req.query;
     //     if (id || update) {
     //         var cache = id ? id : update;
     //         documentModel.find({ type })

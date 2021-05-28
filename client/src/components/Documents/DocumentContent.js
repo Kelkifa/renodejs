@@ -10,7 +10,7 @@ function DocumentContent(props) {
 
     /** Props */
     const { id, type, update } = props.query;
-
+    /** Effect */
     useEffect(() => {
         if (type) {
             fetch(`/api/document?type=${type}`)
