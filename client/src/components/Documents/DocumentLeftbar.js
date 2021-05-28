@@ -4,16 +4,17 @@ import { Link } from 'react-router-dom';
 
 function DocumentLeftbar(props) {
     /** Props */
-    const { type } = props;
+    // const { type } = props;
+    const { titles, type } = props;
     /** Render */
     return (
         <>
             <Link to={`/document?type=${type}`} style={{ textDecoration: "none", color: "black" }}>
                 <h2 className="doc__content__leftbar__item doc__content__leftbar__item--title">{type}</h2>
             </Link>
-            {props.data ? props.data.map(doc => {
+            {titles ? titles.map(title => {
                 return (
-                    <DocumentLeftbarTitle key={doc._id} title={doc.parent_part.title} id={doc._id} type={type} />
+                    <DocumentLeftbarTitle key={title._id} title={title.parent_part.title} id={title._id} type={type} />
                 )
             }) : ""}
         </>

@@ -1,41 +1,54 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import DocumentLeftbar from './DocumentLeftbar.js';
 import DocumentDetail from './DocumentDetail.js';
 
 
 function DocumentContent(props) {
-    /** State */
-    const [isLoaded, setIsLoaded] = useState(false);
-    const [data, setData] = useState(null);
-
     /** Props */
-    const { id, type, update } = props.query;
+    const { document, titles, type, updateFlag } = props;
     /** Effect */
-    useEffect(() => {
-        if (type) {
-            fetch(`/api/document?type=${type}`)
-                .then(response => response.json())
-                .then(doc => {
-                    setIsLoaded(true);
-                    setData(doc);
-                });
-        }
-    }, [type, id])
+    // useEffect(() => {
+    //     if (type) {
+    //         fetch(`/api/document?type=${type}`)
+    //             .then(response => response.json())
+    //             .then(doc => {
+    //                 setIsLoaded(true);
+    //                 setData(doc);
+    //             });
+    //     }
+    // }, [type, id])
 
-    if (!isLoaded && type) {
-        return (
-            <div>Loading ...</div>
-        )
-    }
+    // if (!isLoaded && type) {
+    //     return (
+    //         <div>Loading ...</div>
+    //     )
+    // }
+    // return (
+    //     <div className="doc__content">
+    //         {type ?
+    //             <>
+    //                 <div className="doc__content__leftbar">
+    //                     <DocumentLeftbar data={data} type={type} />
+    //                 </div>
+    //                 <div className="doc__content__detail">
+    //                     <DocumentDetail id={id} type={type} update={update} />
+    //                 </div>
+    //             </>
+    //             : "Nothing"
+    //         }
+    //     </div>
+    // )
+
+    /** Render */
     return (
         <div className="doc__content">
             {type ?
                 <>
                     <div className="doc__content__leftbar">
-                        <DocumentLeftbar data={data} type={type} />
+                        <DocumentLeftbar titles={titles} type={type} />
                     </div>
                     <div className="doc__content__detail">
-                        <DocumentDetail id={id} type={type} update={update} />
+                        <DocumentDetail document={document} type={type} updateFlag={updateFlag} />
                     </div>
                 </>
                 : "Nothing"

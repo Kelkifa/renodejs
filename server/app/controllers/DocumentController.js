@@ -5,17 +5,17 @@ const getDocumentType = require('../cores/getDocumentType');
 class DocumentController {
     /** GET /api/document */
     async index(req, res, next) {
-        const { id, type } = req.query;
+        const { id, type, update } = req.query;
         try {
             var types = await documentModel.find({}).select('type -_id');
             types = getDocumentType(types);
             if (!type && !id) {
                 return res.json({ success: true, types })
             }
-            else if (type && id) {
+            else if (type && (id || update)) {
                 try {
                     var [document, titles] = await Promise.all([
-                        documentModel.findOne({ _id: id }),
+                        documentModel.findOne({ _id: id || update }),
                         documentModel.find({ type }).select('parent_part')
                     ]);
                     return res.json({ success: true, types, document, titles });
