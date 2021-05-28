@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import ToolbarDU from '../Toolbar/ToolbarDU.js';
 import $ from 'jquery';
+import { Link } from 'react-router-dom';
 
 function DocumentLeftbarTitle(props) {
     /** Ref */
@@ -33,17 +34,19 @@ function DocumentLeftbarTitle(props) {
 
     /** Render */
     return (
-        <div className="doc__content__leftbar__item"
-            onMouseOver={mouseOverHandler}
-            onMouseOut={mouseOutHandler}>
-            <div onClick={clickHandler}>
-                {props.title}
+        <Link to={`/document?type=${type}&id=${id}`} style={{ textDecoration: "none", color: "black" }} >
+            <div className="doc__content__leftbar__item"
+                onMouseOver={mouseOverHandler}
+                onMouseOut={mouseOutHandler}>
+                <div>
+                    {props.title}
+                </div>
+                <div className="doc__content__leftbar__item__toolbar hide" ref={iconContainer}>
+                    <form method="POST" action={`/api/document/${id}/delete?_method=DELETE`} ref={formDeleteRef}></form>
+                    <ToolbarDU clickHandler={iconClickHandler} />
+                </div>
             </div>
-            <div className="doc__content__leftbar__item__toolbar hide" ref={iconContainer}>
-                <form method="POST" action={`/api/document/${id}/delete?_method=DELETE`} ref={formDeleteRef}></form>
-                <ToolbarDU clickHandler={iconClickHandler} />
-            </div>
-        </div>
+        </Link>
     );
 }
 

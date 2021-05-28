@@ -1,6 +1,7 @@
 // navbar
 
 .doc__navbar{
+    margin-top: 10px;
     display:flex;
     background:#282a35;
     color:white;
@@ -12,6 +13,7 @@
 .doc__navbar__item{
     font-family: 'Source Sans Pro', sans-serif;
     font-weight:bold;
+    color:white;
 }
 .doc__navbar__item + .doc__navbar__item{
     padding-left: 25px;

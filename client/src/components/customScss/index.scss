@@ -6,7 +6,6 @@
   height:100vh;
 }
 .views-form{
-  background-color:red;
   height: calc(100% - 70px);
   margin:auto;
   display: flex;
@@ -78,12 +77,16 @@ button:hover{
 .input-form{
   background-color:transparent;
   border-bottom: 1px solid rgb(231, 226, 226, .3);
-  color:white;
+  color:rgb(219, 215, 215);
   height: 40px;
   font-size: 20px;
   font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
-
+.input-form:-webkit-autofill {
+  -webkit-text-fill-color: rgb(228, 222, 222);
+  transition: background-color 5000s ease-in-out 0s;
+}
+  
 
 .scroll--custom{
     ::-webkit-scrollbar {

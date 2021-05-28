@@ -1,5 +1,6 @@
-import React from 'react';
 import './Navbar.scss';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 class Navbar extends React.Component {
     clickHandler(link) {
@@ -9,26 +10,25 @@ class Navbar extends React.Component {
         return (
             <div id="Navbar" className="Navbar">
                 <div className="Navbar__list">
-                    <h1 className="Navbar__list__h1" onClick={() => { this.clickHandler("/home") }}>
-                        Home
-                    </h1>
+                    <Link to="/home" style={{ textDecoration: "none" }}>
+                        <h1 className="Navbar__list__h1">Home</h1>
+                    </Link>
                 </div>
                 <div className="Navbar__list">
-                    <h2 className="Navbar__list__h2" onClick={() => { this.clickHandler("/test") }}>
-                        Test
-                    </h2>
-                    <h2 className="Navbar__list__h2" onClick={() => { this.clickHandler("/anime") }}>
-                        Animes
-                    </h2>
-                    <h2 className="Navbar__list__h2" onClick={() => { this.clickHandler("/document") }}>
-                        Documents
-                    </h2>
-                    <h2 className="Navbar__list__h2" onClick={() => { this.clickHandler("/word") }}>
-                        Words
-                    </h2>
-                    <h2 className="Navbar__list__h2 Navbar__list__h2--outline" onClick={() => { this.clickHandler("/login") }}>
-                        Sign in
-                    </h2>
+                    <Link to="/Test" style={{ textDecoration: "none" }}>
+                        <h2 className="Navbar__list__h2">Test</h2>
+                    </Link>
+                    <Link to="/anime" style={{ textDecoration: "none" }}>
+                        <h2 className="Navbar__list__h2">Animes</h2>
+                    </Link>
+                    <Link to="/document" style={{ textDecoration: "none" }}>
+                        <h2 className="Navbar__list__h2">Documents</h2>
+                    </Link>
+                    <Link to="/word" style={{ textDecoration: "none" }}><h2 className="Navbar__list__h2">Words</h2>
+                    </Link>
+                    <Link to="/login" style={{ textDecoration: "none" }}>
+                        <h2 className="Navbar__list__h2 Navbar__list__h2--outline">Sign in</h2>
+                    </Link>
                 </div>
             </div>
         )

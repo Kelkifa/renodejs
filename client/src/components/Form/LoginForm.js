@@ -1,5 +1,6 @@
 import './Form.scss';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function LoginForm(props) {
     return (
@@ -20,7 +21,9 @@ function LoginForm(props) {
                 </button>
                 <div className="form__right__notify w-full">
                     <span className="form__right__notify__item--span">Need a account?  </span>
-                    <a className="form__right__notify__item--a" href="/register">Register</a>
+                    <Link to="/register" style={{ textDecorationColor: "white" }}>
+                        <span className="form__right__notify__item--a">Register</span>
+                    </Link>
                 </div>
             </div>
         </form>
