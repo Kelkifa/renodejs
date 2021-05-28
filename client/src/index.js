@@ -15,26 +15,30 @@ import {
 import Home from './views/Home.js';
 import Anime from './views/Anime.js';
 import Document from './views/Document.js';
+import Login from './views/Login.js';
+import Register from './views/Register.js';
 import Test from './views/Test.js';
 
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
-      <Navbar></Navbar>
-      <div>
+    <div className="body">
+      <Router>
+        <Navbar></Navbar>
         <Switch>
           <Route path="/document" component={Document} />
           <Route path="/anime" component={Anime} />
           <Route path="/test" component={Test} />
           <Route path="/home" component={Home} />
+          <Route path="/login" component={Login} />
+          <Route path="/Register" component={Register} />
           <Route path="/" component={Home} />
           <Route>
             <h1>Not match</h1>
           </Route>
         </Switch>
-      </div>
-    </Router>
+      </Router>
+    </div>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -1,7 +1,7 @@
 const animeRouter = require('./anime');
 const documentRouter = require('./document');
 const userRouter = require('./user');
-const accessToken = require('../middlewares/access');
+// const accessToken = require('../middlewares/access');
 
 function router(app) {
     app.use('/api/anime', animeRouter);
