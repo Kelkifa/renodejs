@@ -1,15 +1,13 @@
-import '../components/customScss/test.scss';
+import '../components/customScss/tests.scss';
 import React from 'react';
-//icon
-// import { FaRegPlusSquare } from 'react-icons/fa';
-// import { BsCardImage } from 'react-icons/bs';
-// import { IoMdRemoveCircleOutline } from 'react-icons/io';
+import LoginForm from '../components/Form/LoginForm.js';
+import RegisterForm from '../components/Form/RegisterForm.js';
 
 function Test() {
-    var a = [1, 5, 4, 8, 4, 7, 2];
-    console.log(Math.max(...a));
     return (
-        <div>Test hello</div>
+        <div className="test">
+            asd
+        </div>
     )
 }
 
