@@ -1,16 +1,37 @@
 import DocumentForm from './DocumentForm.js';
 import React, { useState, useEffect } from 'react';
+import { useLocation } from "react-router-dom";
 
 
 function DocumentDetail(props) {
+    /** Get Query */
+    const getQuery = new URLSearchParams(useLocation().search);
+    const [id, update] = [getQuery.get("id"), getQuery.get("update")]
     /** State */
-    // const [isLoaded, setIsLoaded] = useState(false);
-    // const [data, setData] = useState(null);
+    const [isLoaded, setIsLoaded] = useState(false);
+    const [data, setData] = useState(null);
 
-    /** Props */
-    const { document, type, updateFlag } = props;
-
-
+    // /** Props */
+    // const { document, type, updateFlag } = props;
+    /** Effect */
+    useEffect(() => {
+        if (id) {
+            fetch(`/api/document?id=${id}`)
+                .then(response => response.json())
+                .then(response => {
+                    setIsLoaded(true);
+                    setData({ ...response });
+                });
+        }
+        else if (update) {
+            fetch(`/api/document?update=${id}`)
+                .then(response => response.json())
+                .then(response => {
+                    setIsLoaded(true);
+                    setData({ ...response });
+                });
+        }
+    }, [id])
     /** Render */
     function processContent(chilPart) {
         return chilPart.content.map((content, y) => {
@@ -36,10 +57,10 @@ function DocumentDetail(props) {
         })
     }
 
-    if (updateFlag) {
+    if (update) {
         return (
             <>
-                <DocumentForm type={type} ></DocumentForm>
+                {/* <DocumentForm type={type} ></DocumentForm> */}
             </>
         )
     }

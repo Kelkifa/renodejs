@@ -1,43 +1,13 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import DocumentLeftbar from './DocumentLeftbar.js';
 import DocumentDetail from './DocumentDetail.js';
+import { useLocation } from "react-router-dom";
 
 
 function DocumentContent(props) {
-    /** Props */
-    const { document, titles, type, updateFlag } = props;
-    /** Effect */
-    // useEffect(() => {
-    //     if (type) {
-    //         fetch(`/api/document?type=${type}`)
-    //             .then(response => response.json())
-    //             .then(doc => {
-    //                 setIsLoaded(true);
-    //                 setData(doc);
-    //             });
-    //     }
-    // }, [type, id])
-
-    // if (!isLoaded && type) {
-    //     return (
-    //         <div>Loading ...</div>
-    //     )
-    // }
-    // return (
-    //     <div className="doc__content">
-    //         {type ?
-    //             <>
-    //                 <div className="doc__content__leftbar">
-    //                     <DocumentLeftbar data={data} type={type} />
-    //                 </div>
-    //                 <div className="doc__content__detail">
-    //                     <DocumentDetail id={id} type={type} update={update} />
-    //                 </div>
-    //             </>
-    //             : "Nothing"
-    //         }
-    //     </div>
-    // )
+    // /** Get Query */
+    const getQuery = new URLSearchParams(useLocation().search);
+    const [type, id, update] = [getQuery.get("type"), getQuery.get("id"), getQuery.get("update")];
 
     /** Render */
     return (
@@ -45,10 +15,10 @@ function DocumentContent(props) {
             {type ?
                 <>
                     <div className="doc__content__leftbar">
-                        <DocumentLeftbar titles={titles} type={type} />
+                        <DocumentLeftbar type={type} />
                     </div>
                     <div className="doc__content__detail">
-                        <DocumentDetail document={document} type={type} updateFlag={updateFlag} />
+                        {/* <DocumentDetail document={document} type={type} updateFlag={updateFlag} /> */}
                     </div>
                 </>
                 : "Nothing"
