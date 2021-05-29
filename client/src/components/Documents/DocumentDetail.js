@@ -51,8 +51,6 @@ function DocumentDetail(props) {
             )
         })
     }
-    console.log(id, update);
-    console.log(data);
     if (!id && !update) {  //form create 
         console.log("document create")
         return (
@@ -63,7 +61,7 @@ function DocumentDetail(props) {
         console.log("document update")
         return (
             <>
-                <DocumentForm document={data.document} ></DocumentForm>
+                <DocumentForm document={data.document} updateFlag={1} />
             </>
         )
     }

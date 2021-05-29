@@ -35,10 +35,14 @@ function DocumentForm(props) {
     /** Render */
     const childrenParts = CpCount.map((value, index) => {
         return (
-            <DocumentChildrenContent key={value} CpIndex={index} data={document} parentPartIconHandler={parentPartIconHandler} />
+            <DocumentChildrenContent key={value}
+                CpIndex={index}
+                data={document}
+                updateFlag={updateFlag}
+                parentPartIconHandler={parentPartIconHandler} />
         );
     });
-
+    console.log(document);
     const action = updateFlag ? `/api/document/${document._id}/update?_method=PUT` : "/api/document/create";
     return (
         <form method="POST" action={action} className="doc__form">

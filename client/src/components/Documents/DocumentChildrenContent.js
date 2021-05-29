@@ -8,10 +8,11 @@ function DocumentChildrenContent(props) {
     const [keys, setKeys] = useState([0])
     const [itemArr, setItemArr] = useState([0]);  //0: textarea, 1: image
     /** Children Content thứ mấy */
-    const { CpIndex, data } = props;
+    const { CpIndex, data, updateFlag } = props;
+    console.log(updateFlag);
     /** Effect */
     useEffect(() => {
-        if (data) {
+        if (updateFlag) {
             if (data.children_parts[CpIndex]) {
                 var arr = data.children_parts[CpIndex].sort;
                 var keyArr = arr.map((value, index) => {
@@ -57,11 +58,11 @@ function DocumentChildrenContent(props) {
 
     /** Render */
     var dataFlag = false;
-    if (data) {
-        if (data.children_parts[CpIndex]) {
-            dataFlag = true;
-        }
-    }
+    // if (data) {
+    //     if (data.children_parts[CpIndex]) {
+    //         dataFlag = true;
+    //     }
+    // }
     var cntItem = itemArr.map((value, index) => {
         if ([0, 1].includes(value)) { //textarea and text(link)
             return (
@@ -70,7 +71,7 @@ function DocumentChildrenContent(props) {
                     CpCount={CpIndex}
                     clickIconHandler={clickIconHandler}
                     type={value ? "image" : "textarea"}
-                    data={dataFlag && !addedPs.includes(index) ? data.children_parts[CpIndex].content[index] : ""}
+                    data={updateFlag && !addedPs.includes(index) ? data.children_parts[CpIndex].content[index] : ""}
                 />
             )
         }
@@ -84,7 +85,7 @@ function DocumentChildrenContent(props) {
             <div className="doc__form__content" >
                 <DocumentFormInput type="title"
                     clickIconHandler={clickIconHandler}
-                    data={dataFlag ? data.children_parts[CpIndex].title : ""}
+                    data={updateFlag ? data.children_parts[CpIndex].title : ""}
                 />
                 {cntItem}
             </div>
