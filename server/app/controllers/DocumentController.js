@@ -26,6 +26,15 @@ class DocumentController {
                 return res.status(400).json({ success: false, message: "Internal Server" });
             }
         }
+        if (update || id) {
+            try {
+                var document = await documentModel.findOne({ _id: update || id });
+                return res.json({ success: true, document });
+            } catch (error) {
+                console.log(error);
+                return res.status(400).json({ success: false, message: "Internal Server" });
+            }
+        }
 
         return res.status(400).json({ success: false, message: "Bad request" })
     }

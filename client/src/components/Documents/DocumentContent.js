@@ -9,6 +9,7 @@ function DocumentContent(props) {
     const getQuery = new URLSearchParams(useLocation().search);
     const [type, id, update] = [getQuery.get("type"), getQuery.get("id"), getQuery.get("update")];
 
+
     /** Render */
     return (
         <div className="doc__content">
@@ -18,7 +19,7 @@ function DocumentContent(props) {
                         <DocumentLeftbar type={type} />
                     </div>
                     <div className="doc__content__detail">
-                        {/* <DocumentDetail document={document} type={type} updateFlag={updateFlag} /> */}
+                        <DocumentDetail id={id} update={update} />
                     </div>
                 </>
                 : "Nothing"

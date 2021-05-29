@@ -1,21 +1,24 @@
 import DocumentForm from './DocumentForm.js';
 import React, { useState, useEffect } from 'react';
-import { useLocation } from "react-router-dom";
 
 
 function DocumentDetail(props) {
-    /** Get Query */
-    const getQuery = new URLSearchParams(useLocation().search);
-    const [id, update] = [getQuery.get("id"), getQuery.get("update")]
+    // /** Props */
+    const { id, update } = props;
     /** State */
     const [isLoaded, setIsLoaded] = useState(false);
-    const [data, setData] = useState(null);
-
-    // /** Props */
-    // const { document, type, updateFlag } = props;
+    const [data, setData] = useState({});
     /** Effect */
     useEffect(() => {
-        if (id) {
+        if (update) {
+            fetch(`/api/document?update=${update}`)
+                .then(response => response.json())
+                .then(response => {
+                    setIsLoaded(true);
+                    setData({ ...response });
+                });
+        }
+        else if (id) {
             fetch(`/api/document?id=${id}`)
                 .then(response => response.json())
                 .then(response => {
@@ -23,15 +26,7 @@ function DocumentDetail(props) {
                     setData({ ...response });
                 });
         }
-        else if (update) {
-            fetch(`/api/document?update=${id}`)
-                .then(response => response.json())
-                .then(response => {
-                    setIsLoaded(true);
-                    setData({ ...response });
-                });
-        }
-    }, [id])
+    }, [id, update]);
     /** Render */
     function processContent(chilPart) {
         return chilPart.content.map((content, y) => {
@@ -56,25 +51,51 @@ function DocumentDetail(props) {
             )
         })
     }
-
-    if (update) {
+    console.log(id, update);
+    console.log(data);
+    if (!id && !update) {  //form create 
+        console.log("document create")
+        return (
+            <DocumentForm document={data.document} updateFlag={0} />
+        )
+    }
+    if (update) {   //form update
+        console.log("document update")
         return (
             <>
-                {/* <DocumentForm type={type} ></DocumentForm> */}
+                <DocumentForm document={data.document} ></DocumentForm>
             </>
         )
     }
-    if (!document) {
+    if (!data.document) {
         return (
-            <div>
+            <>
                 document is null
-            </div>
+            </>
         )
     }
+    if (!data.success) {
+        return (
+            <>
+                Server error: {data.message}
+            </>
+        )
+
+    }
     return (
-        <div>
-            hello detail
-        </div>
+        <>
+            <h2 className="doc__detail__headerI">{data.document.parent_part.title}</h2>
+            <div className="doc__detail__content">
+                {data.document.children_parts.map((chilPart, index) => {
+                    return (
+                        <div key={chilPart.index}>
+                            <h3>{chilPart.index}. {chilPart.title} </h3>
+                            {processContent(chilPart)}
+                        </div>
+                    )
+                })}
+            </div>
+        </>
     )
 
 
