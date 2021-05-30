@@ -8,7 +8,7 @@ function ToolbarDU(props) {
     /** Ref */
     const formDeleteRef = useRef();
     /** Props */
-    const { id, type } = props;
+    // const { id, type } = props;
     /** Event Handler */
     function clickHandler() {
         $(formDeleteRef).submit();
@@ -16,13 +16,12 @@ function ToolbarDU(props) {
     /** Render */
     return (
         <div className="toolbar toolbar--column">
-            <Link to={`/document?type=${type}&update=${id}`}>
+            <Link to={`#`}>
                 <div className="toolbar__item" >
                     <MdSystemUpdateAlt color="rgb(32,121, 218)" />
                 </div>
             </Link>
             <div className="toolbar__item" onClick={clickHandler}>
-                <form method="POST" action={`/api/document/${id}/delete?_method=DELETE`} ref={formDeleteRef}></form>
                 <FaTrashAlt color="rgb(32,121, 218)" />
             </div>
         </div>

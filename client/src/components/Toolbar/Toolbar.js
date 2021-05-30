@@ -4,36 +4,44 @@ import React from 'react';
 import { FaRegPlusSquare } from 'react-icons/fa';
 import { BsCardImage } from 'react-icons/bs';
 import { IoMdRemoveCircleOutline } from 'react-icons/io';
-// import $ from 'jquery';
+import PropTypes from 'prop-types';
+
+Toolbar.propTypes = {
+    onIconClick: PropTypes.func,
+    removeIcon: PropTypes.array,
+}
+Toolbar.defaultProps = {
+    onIconClick: null,
+    removeIcon: [],
+}
 
 function Toolbar(props) {
-
-    var type = 'cp';
-    var addClass = "";
-    if (props.type === 'pp') {
-        type = 'pp';
-        addClass = "toolbar--two";
+    /** Props */
+    const { onIconClick, removeIcon } = props;
+    /** Event Handler */
+    function clickHandler(clickInfo) {
+        if (onIconClick)
+            onIconClick(clickInfo);
     }
-    if (props.childrenTitle) {
-        addClass = "toolbar--two";
+    /** Render */
+    function processClasstoShowIcon(iconIndex) {
+        var str = removeIcon.includes(iconIndex) ? "hide" : ""
+        return `toolbar__item--btn ${str}`;
     }
     return (
-        <div className={`toolbar ${addClass}`}>
-            <div className="toolbar__item" onClick={() => { props.clickHandler('addText', props.ps, type) }}>
+        <div className='toolbar'>
+            <button className={removeIcon.includes(1) ? "toolbar__item--btn hide" : "toolbar__item--btn"}
+                onClick={() => { clickHandler('addT') }} >
                 <FaRegPlusSquare size="20px" color="rgb(32, 121, 218)" />
-            </div>
-            {props.type === "pp" ?
-                "" :
-                <div className="toolbar__item" onClick={() => { props.clickHandler('addImage', props.ps, type) }}>
-                    <BsCardImage size="20px" color="rgb(32,121, 218)"></BsCardImage>
-                </div>
-            }
-            {props.childrenTitle ?
-                "" :
-                <div className="toolbar__item" onClick={() => { props.clickHandler('sub', props.ps, type) }}>
-                    <IoMdRemoveCircleOutline size="20px" color="rgb(32, 121, 218)" />
-                </div>
-            }
+            </button>
+            <button className={removeIcon.includes(2) ? "toolbar__item--btn hide" : "toolbar__item--btn"}
+                onClick={() => { clickHandler('addI') }} >
+                <BsCardImage size="20px" color="rgb(32,121, 218)"></BsCardImage>
+            </button>
+            <button className={removeIcon.includes(3) ? "toolbar__item--btn hide" : "toolbar__item--btn"}
+                onClick={() => { clickHandler('sub') }} >
+                <IoMdRemoveCircleOutline size="20px" color="rgb(32, 121, 218)" />
+            </button>
         </div>
     )
 }

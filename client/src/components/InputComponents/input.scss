@@ -1,0 +1,62 @@
+
+$c-black: #282a35;
+$c-blue: #c6cbcf;
+$c-low-blue: #e7e9eb;
+$c-high-blue: rgb(32, 121, 218);
+$c-dark-blue: rgba(96, 130, 226, 0.5);
+
+
+// Doc Input
+.CUinput{
+    position: relative;
+}
+.CUinput + .CUinput{
+    margin-top:6px;
+}
+.CUinput__label{
+    display: block;
+}
+.CUinput__label + .CUinput__input{
+    margin-top:2px;
+}
+
+.CUinput__input{
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 0.3rem;
+    border: 2px solid rgba(96, 130, 226, 0.5);
+    outline-color: $c-high-blue;
+}
+.CUinput__input--input{
+    height: 30px;
+}
+.CUinput__toolbar{
+    width: 100%;
+    display: flex;
+    justify-content:flex-end;
+    position: absolute;
+    z-index: 99;
+}
+.toolbar__item--btn{
+    padding: 0;
+    margin: 0;
+    border: none;
+    background-color:transparent;
+}
+
+.hide{
+    display: none;
+}
+
+// Input Container
+.iContainer{
+}
+.iContainer__input{
+    border: 2px solid $c-dark-blue;
+    padding: 18px;
+}
+.iContainer__toolbar{
+    width: 100%;
+    display: flex;
+    justify-content:flex-end;
+}
