@@ -3,33 +3,30 @@ import React, { useState, useEffect } from 'react';
 
 
 function DocumentDetail(props) {
+    // /** Props */
+    const { id, update } = props;
     /** State */
     const [isLoaded, setIsLoaded] = useState(false);
-    const [data, setData] = useState(null);
-
-    /** Props */
-    const { id, type, update } = props;
-
-    /** Effect API */
+    const [data, setData] = useState({});
+    /** Effect */
     useEffect(() => {
-        if (id) {
-            fetch(`/api/document?id=${id}`)
-                .then(res => res.json())
-                .then(doc => {
-                    setIsLoaded(true);
-                    setData(doc);
-                })
-        }
         if (update) {
             fetch(`/api/document?update=${update}`)
-                .then(res => res.json())
-                .then(doc => {
+                .then(response => response.json())
+                .then(response => {
                     setIsLoaded(true);
-                    setData(doc);
-                })
+                    setData({ ...response });
+                });
         }
-    }, [id, update])
-
+        else if (id) {
+            fetch(`/api/document?id=${id}`)
+                .then(response => response.json())
+                .then(response => {
+                    setIsLoaded(true);
+                    setData({ ...response });
+                });
+        }
+    }, [id, update]);
     /** Render */
     function processContent(chilPart) {
         return chilPart.content.map((content, y) => {
@@ -54,39 +51,40 @@ function DocumentDetail(props) {
             )
         })
     }
-
-    if (!id && !update) {
+    if (!id && !update) {  //form create 
+        console.log("document create")
+        return (
+            <DocumentForm document={data.document} updateFlag={0} />
+        )
+    }
+    if (update) {   //form update
+        console.log("document update")
         return (
             <>
-                <DocumentForm type={type} ></DocumentForm>
+                <DocumentForm document={data.document} updateFlag={1} />
             </>
         )
     }
-    if (!isLoaded) {
-        return (
-            <>Loading ...</>
-        );
-    }
-    if (!data) {
-        return (
-            <>data is null</>
-        )
-    }
-    if (update) {
+    if (!data.document) {
         return (
             <>
-                <DocumentForm type={type} data={data.document} />
+                document is null
             </>
         )
     }
+    if (!data.success) {
+        return (
+            <>
+                Server error: {data.message}
+            </>
+        )
 
-
-    const document = data.document;
+    }
     return (
         <>
-            <h2 className="doc__detail__headerI">{document.parent_part.title}</h2>
+            <h2 className="doc__detail__headerI">{data.document.parent_part.title}</h2>
             <div className="doc__detail__content">
-                {document.children_parts.map((chilPart, index) => {
+                {data.document.children_parts.map((chilPart, index) => {
                     return (
                         <div key={chilPart.index}>
                             <h3>{chilPart.index}. {chilPart.title} </h3>
@@ -97,6 +95,55 @@ function DocumentDetail(props) {
             </div>
         </>
     )
+
+
+
+
+
+
 }
 
 export default DocumentDetail;
+
+// if (!id && !update) {
+//     return (
+//         <>
+//             <DocumentForm type={type} ></DocumentForm>
+//         </>
+//     )
+// }
+// if (!isLoaded) {
+//     return (
+//         <>Loading ...</>
+//     );
+// }
+// if (!data) {
+//     return (
+//         <>data is null</>
+//     )
+// }
+// if (update) {
+//     return (
+//         <>
+//             <DocumentForm type={type} data={data.document} />
+//         </>
+//     )
+// }
+
+
+// const document = data.document;
+// return (
+//     <>
+//         <h2 className="doc__detail__headerI">{document.parent_part.title}</h2>
+//         <div className="doc__detail__content">
+//             {document.children_parts.map((chilPart, index) => {
+//                 return (
+//                     <div key={chilPart.index}>
+//                         <h3>{chilPart.index}. {chilPart.title} </h3>
+//                         {processContent(chilPart)}
+//                     </div>
+//                 )
+//             })}
+//         </div>
+//     </>
+// )

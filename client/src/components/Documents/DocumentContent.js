@@ -1,41 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import DocumentLeftbar from './DocumentLeftbar.js';
 import DocumentDetail from './DocumentDetail.js';
+import { useLocation } from "react-router-dom";
 
 
 function DocumentContent(props) {
-    /** State */
-    const [isLoaded, setIsLoaded] = useState(false);
-    const [data, setData] = useState(null);
+    // /** Get Query */
+    const getQuery = new URLSearchParams(useLocation().search);
+    const [type, id, update] = [getQuery.get("type"), getQuery.get("id"), getQuery.get("update")];
 
-    /** Props */
-    const { id, type, update } = props.query;
 
-    useEffect(() => {
-        if (type) {
-            fetch(`/api/document?type=${type}`)
-                .then(response => response.json())
-                .then(doc => {
-                    setIsLoaded(true);
-                    setData(doc);
-                });
-        }
-    }, [type, id])
-
-    if (!isLoaded && type) {
-        return (
-            <div>Loading ...</div>
-        )
-    }
+    /** Render */
     return (
         <div className="doc__content">
             {type ?
                 <>
                     <div className="doc__content__leftbar">
-                        <DocumentLeftbar data={data} type={type} />
+                        <DocumentLeftbar type={type} />
                     </div>
                     <div className="doc__content__detail">
-                        <DocumentDetail id={id} type={type} update={update} />
+                        <DocumentDetail id={id} update={update} />
                     </div>
                 </>
                 : "Nothing"

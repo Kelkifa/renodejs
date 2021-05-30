@@ -1,0 +1,44 @@
+$card-w : 150px;
+$card-h : 175px;
+.wcards{
+    display: flex;
+    font-size: 14px;
+}
+.wcard{
+    width:160px;
+    height:185px;
+    background-color:rgb(239, 247, 255);
+    border-radius:0.3rem;
+    display: flex;
+    flex-direction:column;
+    p{
+        padding: 0px;
+        margin: 0px;
+    }
+}
+.wcard + .wcard{
+    margin-left:10px;
+}
+.wcard__img{
+    height:50%;
+}
+.wcard__content{
+    height: 38%;
+    background-color: yellow;
+}
+.wcard__btn{
+    height: 12%;
+    background-color: red;
+    display: flex;
+    justify-content: flex-end;
+    box-sizing: border-box;
+    padding: 2px;
+}
+.wbtn{
+    border: none;
+    background-color: rgb(81, 136, 240);
+    color:white;
+    border-radius: 0.3rem;
+    padding:0px 10px;
+    font-size: 12px;
+}

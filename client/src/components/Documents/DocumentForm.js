@@ -3,21 +3,21 @@ import React, { useState, useEffect } from 'react';
 
 function DocumentForm(props) {
     /** Props */
-    const { type, data } = props;
-    const dataFlag = data ? 1 : 0;
+    const { document, updateFlag } = props;
+    const type = { document }
 
     /** State */
     const [CpCount, setCpCount] = useState([0])
 
     /** Effect */
     useEffect(() => {
-        if (data) {
-            var arr = data.children_parts.map((value, index) => {
+        if (document) {
+            var arr = document.children_parts.map((value, index) => {
                 return index;
             })
             setCpCount([...arr]);
         }
-    }, [data])
+    }, [document])
 
     /** Event Handler */
     function parentPartIconHandler(info, ps) {
@@ -35,11 +35,15 @@ function DocumentForm(props) {
     /** Render */
     const childrenParts = CpCount.map((value, index) => {
         return (
-            <DocumentChildrenContent key={value} CpIndex={index} data={data} parentPartIconHandler={parentPartIconHandler} />
+            <DocumentChildrenContent key={value}
+                CpIndex={index}
+                data={document}
+                updateFlag={updateFlag}
+                parentPartIconHandler={parentPartIconHandler} />
         );
     });
-
-    const action = dataFlag ? `/api/document/${data._id}/update?_method=PUT` : "/api/document/create";
+    console.log(document);
+    const action = updateFlag ? `/api/document/${document._id}/update?_method=PUT` : "/api/document/create";
     return (
         <form method="POST" action={action} className="doc__form">
             <div className="doc__form__head">
@@ -47,7 +51,7 @@ function DocumentForm(props) {
                 <input name="parent_part_title" className="doc__form__input" type="text"
                     placeholder="Enter Parent Part Title"
                     autoComplete="off"
-                    defaultValue={dataFlag ? data.parent_part.title : ""} />
+                    defaultValue={updateFlag ? document.parent_part.title : ""} />
             </div>
             {childrenParts}
             <div className="doc__form__btn-container doc__form__btn-container--right">
