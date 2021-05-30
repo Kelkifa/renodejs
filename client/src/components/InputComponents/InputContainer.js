@@ -91,8 +91,3 @@ function InputContainer(props) {
 }
 
 export default InputContainer;
-
-{/* <DocInput label="Children Part Content"
-                onIconClick={onClickHandler}
-                position={1}
-                type="textarea" /> */}

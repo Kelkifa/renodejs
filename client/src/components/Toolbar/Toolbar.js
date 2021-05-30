@@ -24,10 +24,6 @@ function Toolbar(props) {
             onIconClick(clickInfo);
     }
     /** Render */
-    function processClasstoShowIcon(iconIndex) {
-        var str = removeIcon.includes(iconIndex) ? "hide" : ""
-        return `toolbar__item--btn ${str}`;
-    }
     return (
         <div className='toolbar'>
             <button className={removeIcon.includes(1) ? "toolbar__item--btn hide" : "toolbar__item--btn"}

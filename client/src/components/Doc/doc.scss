@@ -4,9 +4,59 @@ $c-low-blue: #e7e9eb;
 $c-high-blue: rgb(32, 121, 218);
 $c-dark-blue: rgba(96, 130, 226, 0.5);
 
+// Document
+.doc__body{
+    display: flex;
+    flex-direction: row;
+}
 
-.inputs{
-    width:600px;
-    height: 500px;
-    border: 1px solid #000;
+// .inputs{
+//     width:600px;
+//     height: 500px;
+//     border: 1px solid #000;
+// }
+
+//Leftbar
+.doc__leftbar{
+    box-sizing: border-box;
+    width: 200px;
+    background-color: $c-low-blue;
+}
+
+.doc__leftbar__item{
+    box-sizing: border-box;
+    padding: 7px 10px;
+    position: relative;
+}
+.doc__leftbar__item--title{
+    box-sizing: border-box;
+    font-size:22px;
+    padding:8px 10px;
+}
+.doc__leftbar__item + .doc__leftbar__item{
+    border-top: 1px solid #cbcdcf;
+}
+.doc__Leftbar__item__toolbar{
+    position: absolute;
+    box-sizing: border-box;
+    top:0px;
+    right:-25px;
+    padding:2px;
+    z-index:1;
+}
+
+// Navbar Doc
+.docNavbar{
+    margin-top: 5px;
+    background-color: $c-black;
+    color:white;
+    display: flex;
+    align-items: center;
+}
+.docNavbar__item{
+    color:white;
+    text-decoration: none;
+    padding:6px 10px;
+    font-weight: bold;
+    margin-left: 10px;
 }
