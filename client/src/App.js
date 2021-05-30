@@ -7,6 +7,7 @@ import Document from './views/Document.js';
 import Login from './views/Login.js';
 import Register from './views/Register.js';
 import Test from './views/Test.js';
+import Word from './views/Word.js';
 
 
 import {
@@ -26,7 +27,8 @@ function App(props) {
                     <Route path="/test" component={Test} />
                     <Route path="/home" component={Home} />
                     <Route path="/login" component={Login} />
-                    <Route path="/Register" component={Register} />
+                    <Route path="/register" component={Register} />
+                    <Route path="/word" component={Word} />
                     <Route exact path="/" component={Home} />
                     <Route>
                         <h1>Not match</h1>
