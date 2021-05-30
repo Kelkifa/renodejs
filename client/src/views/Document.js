@@ -1,6 +1,7 @@
 import '../components/Doc/doc.scss';
 import DocNavbar from '../components/Doc/DocNavbar';
 import Leftbar from '../components/Doc/Leftbar';
+import DocRightContent from '../components/Doc/DocRightContent';
 // import Leftbar from '../components/Doc/Leftbar';
 import React, { useState, useEffect } from 'react';
 import { useLocation } from "react-router-dom";
@@ -10,7 +11,6 @@ function Document(props) {
     /** Query */
     const getQuery = new URLSearchParams(useLocation().search);
     const query = { type: getQuery.get("type"), id: getQuery.get("id"), update: getQuery.get("update") };
-
     /** State */
     const [success, setSuccess] = useState(false);
     const [message, setMessage] = useState("");
@@ -45,7 +45,12 @@ function Document(props) {
         fetchDocument();
     }, [query.id, query.type, query.update]);
     /** Render */
-    // console.log(titles);
+    if (!success) return (<div>{message}</div>);
+    var flagRightContent = 0;   //0: null, 1: update, 2: show, 3: create
+    if (query.update) flagRightContent = 1;
+    if (query.type && !query.id && !query.update) flagRightContent = 2;
+    if (!query.type) flagRightContent = 3;
+
     return (
         <div>
             <DocNavbar baseLink="/document"
@@ -54,48 +59,10 @@ function Document(props) {
                 <Leftbar data={titles}
                     type={query.type}
                     baseLink={"/document"} />
-
+                <DocRightContent doc={doc} type={query.type} flagRightContent={flagRightContent} />
             </div>
         </div>
     );
 }
-
 export default Document;
 
-
-// import '../components/Documents/Document.scss';
-// import DocumentNavbar from '../components/Documents/DocumentNavbar.js';
-// import DocumentContent from '../components/Documents/DocumentContent.js';
-// import { useLocation } from "react-router-dom";
-
-// const getQuery = new URLSearchParams(useLocation().search);
-// const query = { type: getQuery.get("type"), id: getQuery.get("id"), update: getQuery.get("update") };
-
-
-
-// function Document(props) {
-//     /** State */
-//     const [data, setData] = useState([]);
-//     /** Effect */
-//     useEffect(() => {
-//         async function fetchGetData() {
-//             try {
-//                 const response = await fetch('/api/document');
-//                 const responseJSON = await response.json();
-//                 const { doc } = responseJSON;
-//                 setData(doc);
-//             } catch (error) {
-//                 console.log(`there are some error ${error}`);
-//             }
-//         }
-//         fetchGetData();
-//     }, [])
-//     /** Render */
-//     return (
-//         <div>
-//             <ul>
-//                 {data.map(value => (<li key={value._id}>{value.parent_part.title}</li>))}
-//             </ul>
-//         </div>
-//     );
-// }

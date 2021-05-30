@@ -16,8 +16,8 @@ class DocumentController {
                 try {
                     const titles = await documentModel.find({ type: type }).select('parent_part');
                     if (id || update) {
-                        const document = await documentModel.findOne({ _id: id || update });
-                        return res.json({ success: true, types, document, titles });
+                        const doc = await documentModel.findOne({ _id: id || update });
+                        return res.json({ success: true, types, doc, titles });
                     }
                     return res.json({ success: true, types, titles })
                 } catch (error) {

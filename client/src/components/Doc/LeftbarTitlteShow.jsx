@@ -30,7 +30,7 @@ function LeftbarTitlteShow(props) {
         <div className="doc__leftbar__item"
             onMouseOver={onMouseOverHandler}
             onMouseOut={onMouseOutHandler}>
-            <Link to={baseLink + `?id=${id}`} style={{ textDecoration: "none", color: "black" }}>
+            <Link to={baseLink + `&id=${id}`} style={{ textDecoration: "none", color: "black" }}>
                 <div className="doc__leftbar__item__title">
                     {data}
                 </div>

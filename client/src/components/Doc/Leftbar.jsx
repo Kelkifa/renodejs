@@ -24,7 +24,7 @@ function Leftbar(props) {
     }
     return (
         <div className="doc__leftbar">
-            <Link to={baseLink} style={{ textDecoration: "none" }}>
+            <Link to={baseLink + `?type=${type}`} style={{ textDecoration: "none" }}>
                 <div className="doc__leftbar__item doc__leftbar__item--title">
                     {type}
                 </div>
