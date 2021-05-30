@@ -25,14 +25,14 @@ function Document(props) {
                 const queryStringified = queryString.stringify(query);
                 const response = await fetch(`/api/document?${queryStringified}`);
                 const responseJSON = await response.json();
-                console.log(responseJSON);
 
                 // Write to states
+                console.log(responseJSON);
                 setSuccess(responseJSON.success);
-                setTypes(responseJSON.types)
                 if (responseJSON.success) {
-                    if (responseJSON.doc) setDoc(responseJSON.doc);
-                    if (responseJSON.titles) setTitles(responseJSON.titles);
+                    setTypes(responseJSON.types);
+                    setDoc(responseJSON.doc);
+                    setTitles(responseJSON.titles);
                 }
                 else {
                     setMessage(responseJSON.message)
@@ -45,11 +45,15 @@ function Document(props) {
         fetchDocument();
     }, [query.id, query.type, query.update]);
     /** Render */
+    // console.log(titles);
     return (
         <div>
-            <DocNavbar baseLink="/document" />
+            <DocNavbar baseLink="/document"
+                data={types} />
             <div className="doc__body">
-                <Leftbar />
+                <Leftbar data={titles}
+                    type={query.type}
+                    baseLink={"/document"} />
 
             </div>
         </div>

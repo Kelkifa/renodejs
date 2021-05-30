@@ -27,11 +27,13 @@ $c-dark-blue: rgba(96, 130, 226, 0.5);
     box-sizing: border-box;
     padding: 7px 10px;
     position: relative;
+    color:black;
 }
 .doc__leftbar__item--title{
     box-sizing: border-box;
     font-size:22px;
     padding:8px 10px;
+    border-bottom: 1px solid #cbcdcf;
 }
 .doc__leftbar__item + .doc__leftbar__item{
     border-top: 1px solid #cbcdcf;

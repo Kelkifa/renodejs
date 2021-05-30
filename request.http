@@ -27,4 +27,5 @@ GET http://localhost:8080/api/anime
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGFmNmI1ZDc2MzYwYjNkYjRjZjM2YjUiLCJpYXQiOjE2MjIxMjIzOTR9.6CwN_uYRky6BKtmTFj6pVUfI7lN_urzyas7jPnZ12pE
 
 ###
-GET http://localhost:8080/api/document
+GET http://localhost:8080/api/document?type=IOT&id=60a1d481ad1dc710148b7830
+

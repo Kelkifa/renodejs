@@ -6,28 +6,26 @@ import './Toolbar.scss';
 import PropTypes from 'prop-types';
 
 ToolbarDU.propTypes = {
-    firstIconLink: PropTypes.string,
-    secondIconLink: PropTypes.string,
+    updateLink: PropTypes.string,
 };
 
 ToolbarDU.defaultProps = {
-    firstIconLink: '#',
-    secondIconLink: '#',
+    updateLink: '#',
 }
 
 function ToolbarDU(props) {
     /** Props */
-    const { firstIconLink, secondIconLink } = props;
+    const { updateLink } = props;
 
     /** Render */
     return (
         <div className="toolbar toolbar--column">
-            <Link to={firstIconLink}>
+            <Link to={updateLink}>
                 <div className="toolbar__item" >
                     <MdSystemUpdateAlt color="rgb(32,121, 218)" />
                 </div>
             </Link>
-            <Link to={secondIconLink}>
+            <Link to={'#'}>
                 <div className="toolbar__item" >
                     <FaTrashAlt color="rgb(32,121, 218)" />
                 </div>

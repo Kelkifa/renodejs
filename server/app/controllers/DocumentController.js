@@ -6,17 +6,31 @@ class DocumentController {
     //[GET] /api/document
     async index(req, res, next) {
         const { id, type, update } = req.query;
-        if (!id && !type) {
-            try {
-                const data = await documentModel.find().select('type -_id');
-                const types = typesParseArr(data);
-                return res.json({ success: true, types });
-            } catch (error) {
-                console.log(error);
-                return res.status(500).json({ success: false, message: "Internal Server Error" });
+
+        try {
+            //Get types
+            const data = await documentModel.find().select('type -_id');
+            const types = typesParseArr(data);
+
+            if (type) {
+                try {
+                    const titles = await documentModel.find({ type: type }).select('parent_part');
+                    if (id || update) {
+                        const document = await documentModel.findOne({ _id: id || update });
+                        return res.json({ success: true, types, document, titles });
+                    }
+                    return res.json({ success: true, types, titles })
+                } catch (error) {
+                    console.log(error);
+                    return res.status(500).json({ success: false, message: "Internal Server Error" })
+                }
             }
+            return res.json({ success: true, types });
+
+        } catch (error) {
+            console.log(error);
+            return res.status(500).json({ success: false, message: "Internal Server Error" });
         }
-        res.send('ook');
     }
 
 

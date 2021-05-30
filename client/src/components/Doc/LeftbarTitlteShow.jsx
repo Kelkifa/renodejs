@@ -5,16 +5,18 @@ import { Link } from 'react-router-dom';
 
 LeftbarTitlteShow.propTypes = {
     data: PropTypes.string,
-    link: PropTypes.string,
+    id: PropTypes.string,
+    baseLink: PropTypes.string,
 };
 LeftbarTitlteShow.defaultProps = {
     data: null,
-    link: '#',
+    id: null,
+    baseLink: '#',
 }
 
 function LeftbarTitlteShow(props) {
     /** Props */
-    const { data } = props;
+    const { data, baseLink, id } = props;
     /** Ref */
     const iconContainer = useRef();
     /** Event Handler */
@@ -28,13 +30,13 @@ function LeftbarTitlteShow(props) {
         <div className="doc__leftbar__item"
             onMouseOver={onMouseOverHandler}
             onMouseOut={onMouseOutHandler}>
-            <Link to={Link} style={{ textDecoration: "none", color: "black" }}>
+            <Link to={baseLink + `?id=${id}`} style={{ textDecoration: "none", color: "black" }}>
                 <div className="doc__leftbar__item__title">
                     {data}
                 </div>
             </Link>
             <div className="doc__Leftbar__item__toolbar hide" ref={iconContainer}>
-                <ToolbarDU />
+                <ToolbarDU updateLink={baseLink + `&update=${id}`} />
             </div>
         </div>
     );

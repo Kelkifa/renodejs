@@ -7,7 +7,7 @@ DocNavbar.propTypes = {
 };
 
 DocNavbar.defaultProps = {
-    data: ['NodeJS', 'ReactJS', 'CSS', 'PHP'],
+    data: [],               //['NodeJS', 'ReactJS', 'CSS', 'PHP'],
     baseLink: "#",
 }
 function DocNavbar(props) {
@@ -16,7 +16,7 @@ function DocNavbar(props) {
     return (
         <div className="docNavbar">
             {data.map(value => (
-                <Link key={value} className="docNavbar__item" to={baseLink}>
+                <Link key={value} className="docNavbar__item" to={baseLink + `?type=${value}`}>
                     {value}
                 </Link>
             ))}

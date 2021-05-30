@@ -3,24 +3,24 @@ import LeftbarTitleShow from './LeftbarTitlteShow';
 
 LeftbarTitle.propTypes = {
     data: PropTypes.array,
-    titleLink: PropTypes.string,
+    baseLink: PropTypes.string,
 };
 
 LeftbarTitle.defaultProps = {
     data: [],
-    titleLink: '#',
+    baseLink: '#',
 }
 function LeftbarTitle(props) {
     /** Props */
-    const { data, titleLink } = props;
+    const { data, baseLink } = props;
     /** Render */
     return (
         <>
-
-            {data.map(value => (
-                <LeftbarTitleShow key={value}
-                    link={titleLink}
-                    data={value} />
+            {data.map((value, i) => (
+                <LeftbarTitleShow key={value._id}
+                    baseLink={baseLink}
+                    data={value.parent_part.title}
+                    id={value._id} />
             ))}
         </>
     );
