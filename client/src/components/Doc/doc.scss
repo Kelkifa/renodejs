@@ -46,7 +46,24 @@ $c-dark-blue: rgba(96, 130, 226, 0.5);
     padding:2px;
     z-index:1;
 }
+// Right Content
+.doc__right{
+    width: calc(100% - 200px);
+    box-sizing: border-box;
+    padding: 30px;
+}
+.doc__right__BtnContainer{
+    margin-top: 20px;
+    display: flex;
+    justify-content:flex-end;
+}
 
+.docForm{
+    width: 100%;
+}
+.docForm__title{
+    margin-bottom: 20px;
+}
 // Navbar Doc
 .docNavbar{
     margin-top: 5px;
@@ -62,3 +79,4 @@ $c-dark-blue: rgba(96, 130, 226, 0.5);
     font-weight: bold;
     margin-left: 10px;
 }
+

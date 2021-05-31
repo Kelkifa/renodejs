@@ -1,27 +1,40 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import DocInput from './DocInput';
 import Toolbar from '../Toolbar/Toolbar.js';
 
 InputContainer.propTypes = {
-    data: PropTypes.array,
+    defaultValue: PropTypes.object, //children part
     position: PropTypes.number,
     onIconParentClick: PropTypes.func,
+    updateFlag: PropTypes.bool,
 };
 
 InputContainer.defaultProps = {
-    data: [],
-    position: 0,
+    defaultValue: {},
+    position: 0,            // Input Container thứ mấy 
     onIconParentClick: null,
+    updateFlag: false,
 }
 
 function InputContainer(props) {
     /** Props */
-    const { data, position, onIconParentClick } = props;
-    /** State */
-    const [inputs, setInputs] = useState([1, 0]); //[text]
-    const [keys, setKeys] = useState([1, 2]);
+    const { defaultValue, position, onIconParentClick, updateFlag } = props;
 
+    /** State */
+    const [inputs, setInputs] = useState([1, 0]); //[input, textarea]
+    const [keys, setKeys] = useState([1, 2]);
+    const [addedInputs, setAddedInputs] = useState([]);
+
+    /** Effect */
+    useEffect(() => {
+        if (updateFlag === true && defaultValue.sort) {
+            const copyKeys = defaultValue.sort.map((value, index) => index + 2);
+            const copyInputs = [1, ...defaultValue.sort];
+            setInputs(copyInputs);
+            setKeys([1, ...copyKeys]);
+        }
+    }, [updateFlag]);
     /** Event Handler */
     function onParentIconClickHandler(clickInfo) {
         if (onIconParentClick)
@@ -30,23 +43,30 @@ function InputContainer(props) {
     function onChildrenIconClickHandler(clickInfo, ps) {
         const copyInputs = [...inputs];
         const copyKeys = [...keys];
+        const copyAddedInputs = [...addedInputs];
+
         if (clickInfo === 'addT') {
             copyInputs.splice(ps + 1, 0, 0);
             copyKeys.splice(ps + 1, 0, Math.max(...copyKeys) + 1);
+            copyAddedInputs.push(ps + 1);
         }
         else if (clickInfo === 'addI') {
             copyInputs.splice(ps + 1, 0, 1);
             copyKeys.splice(ps + 1, 0, Math.max(...copyKeys) + 1);
+            copyAddedInputs.push(ps + 1);
         }
         else if (clickInfo === 'sub') {
             copyInputs.splice(ps, 1);
             copyKeys.splice(ps, 1);
+            copyAddedInputs.splice(ps, 1)
         }
         setInputs([...copyInputs]);
         setKeys([...copyKeys]);
+        setAddedInputs(copyAddedInputs);
     }
-    /** Render */
 
+    /** Render */
+    console.log(updateFlag, position);
     return (
         <div className="iContainer" >
             <div className="iContainer__input">
@@ -57,22 +77,26 @@ function InputContainer(props) {
                                 <DocInput key={keys[i]} label="Children Part Title"
                                     onIconClick={onChildrenIconClickHandler}
                                     position={i}
-                                    removeIcon={[3]} />
+                                    removeIcon={[3]}
+                                    defaultValue={updateFlag && !addedInputs.includes(i) && defaultValue ? defaultValue.title : ""} />
                             )
                         }
-                        if (value === 0)
+                        if (value === 0) {
                             return (
                                 <DocInput key={keys[i]} label="Content"
                                     onIconClick={onChildrenIconClickHandler}
                                     position={i}
-                                    type="textarea" />
+                                    type="textarea"
+                                    defaultValue={updateFlag && !addedInputs.includes(i) && defaultValue.content ? defaultValue.content[i - 1] : ""} />
                             )
+                        }
                         if (value === 1) {
                             return (
                                 <DocInput key={keys[i]} label="Image Link"
                                     onIconClick={onChildrenIconClickHandler}
                                     position={i}
-                                    type="input" />
+                                    type="input"
+                                    defaultValue={updateFlag && !addedInputs.includes(i) && defaultValue.content ? defaultValue.content[i - 1] : ""} />
                             )
                         }
                         return ("")

@@ -25,7 +25,7 @@ function ToolbarDU(props) {
                     <MdSystemUpdateAlt color="rgb(32,121, 218)" />
                 </div>
             </Link>
-            <Link to={'#'}>
+            <Link to={updateLink}>
                 <div className="toolbar__item" >
                     <FaTrashAlt color="rgb(32,121, 218)" />
                 </div>

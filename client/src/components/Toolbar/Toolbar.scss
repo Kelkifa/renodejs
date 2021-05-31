@@ -1,6 +1,6 @@
 .toolbar{
     background-color: #dce8f5;
-    padding:3px 0px;
+    padding-top:3px;
     width:100px;
     display:flex;
     justify-content: space-evenly;
@@ -10,7 +10,9 @@
 .toolbar__item{
     display: flex;
 }
-
+.toolbar__item--btn{
+    cursor: pointer;
+}
 
 .toolbar--two{
     width: 65px;

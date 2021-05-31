@@ -24,20 +24,21 @@ function Toolbar(props) {
             onIconClick(clickInfo);
     }
     /** Render */
+    console.log(removeIcon.length);
     return (
-        <div className='toolbar'>
-            <button className={removeIcon.includes(1) ? "toolbar__item--btn hide" : "toolbar__item--btn"}
+        <div className={removeIcon.length < 3 ? 'toolbar toolbar--two' : 'toolbar'}>
+            <div className={removeIcon.includes(1) ? "toolbar__item toolbar__item--btn hide" : "toolbar__item--btn"}
                 onClick={() => { clickHandler('addT') }} >
                 <FaRegPlusSquare size="20px" color="rgb(32, 121, 218)" />
-            </button>
-            <button className={removeIcon.includes(2) ? "toolbar__item--btn hide" : "toolbar__item--btn"}
+            </div>
+            <div className={removeIcon.includes(2) ? "toolbar__item toolbar__item--btn hide" : "toolbar__item toolbar__item--btn"}
                 onClick={() => { clickHandler('addI') }} >
                 <BsCardImage size="20px" color="rgb(32,121, 218)"></BsCardImage>
-            </button>
-            <button className={removeIcon.includes(3) ? "toolbar__item--btn hide" : "toolbar__item--btn"}
+            </div>
+            <div className={removeIcon.includes(3) ? "toolbar__item toolbar__item--btn hide" : "toolbar__item toolbar__item--btn"}
                 onClick={() => { clickHandler('sub') }} >
                 <IoMdRemoveCircleOutline size="20px" color="rgb(32, 121, 218)" />
-            </button>
+            </div>
         </div>
     )
 }

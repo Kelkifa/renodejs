@@ -11,7 +11,7 @@ DocInput.propTypes = {
     name: PropTypes.string,
     defaultValue: PropTypes.string,
     position: PropTypes.number,
-    removeIcon: PropTypes.array,
+    removeIcon: PropTypes.array, //[1,2,3]
 };
 DocInput.defaultProps = {
     type: 'text',
@@ -25,6 +25,8 @@ DocInput.defaultProps = {
 function DocInput(props) {
     /** Props */
     const { onIconClick, type, label, name, defaultValue, position, removeIcon } = props;
+    // console.log("Default value: ");
+    // console.log(defaultValue)
     /** Ref */
     const iconContainer = useRef();
     /** Event Handler */
@@ -34,7 +36,6 @@ function DocInput(props) {
         }
     }
     function onMouseOverHandler() {
-        console.log()
         $(iconContainer.current).removeClass('hide');
     }
     function onMouseOutHandler() {

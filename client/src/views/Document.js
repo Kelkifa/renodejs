@@ -27,16 +27,11 @@ function Document(props) {
                 const responseJSON = await response.json();
 
                 // Write to states
-                console.log(responseJSON);
                 setSuccess(responseJSON.success);
-                if (responseJSON.success) {
-                    setTypes(responseJSON.types);
-                    setDoc(responseJSON.doc);
-                    setTitles(responseJSON.titles);
-                }
-                else {
-                    setMessage(responseJSON.message)
-                }
+                setTypes(responseJSON.types);
+                setDoc(responseJSON.doc);
+                setTitles(responseJSON.titles);
+                setMessage(responseJSON.message)
 
             } catch (error) {
                 console.log(error);
@@ -44,12 +39,16 @@ function Document(props) {
         }
         fetchDocument();
     }, [query.id, query.type, query.update]);
+    function createRightContentFlag(id, type, update) {     //0: create, 1: update, 2: show, 3: null
+        if (type && update) return 1;
+        if (type && id) return 2
+        if (type) return 0;
+        return 3;
+    }
     /** Render */
     if (!success) return (<div>{message}</div>);
-    var flagRightContent = 0;   //0: null, 1: update, 2: show, 3: create
-    if (query.update) flagRightContent = 1;
-    if (query.type && !query.id && !query.update) flagRightContent = 2;
-    if (!query.type) flagRightContent = 3;
+    const flagRightContent = createRightContentFlag(query.id, query.type, query.update);
+
 
     return (
         <div>
