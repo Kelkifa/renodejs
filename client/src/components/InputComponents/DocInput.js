@@ -6,7 +6,8 @@ import $ from 'jquery';
 
 DocInput.propTypes = {
     label: PropTypes.string.isRequired,
-    type: PropTypes.string,
+    onTextChangeHandler: PropTypes.func,
+    type: PropTypes.string,         // text or textarea
     onIconClick: PropTypes.func,
     name: PropTypes.string,
     defaultValue: PropTypes.string,
@@ -15,6 +16,7 @@ DocInput.propTypes = {
 };
 DocInput.defaultProps = {
     type: 'text',
+    onTextChangeHandler: null,
     onIconClick: null,
     name: null,
     defaultValue: null,
@@ -24,7 +26,7 @@ DocInput.defaultProps = {
 
 function DocInput(props) {
     /** Props */
-    const { onIconClick, type, label, name, defaultValue, position, removeIcon } = props;
+    const { onIconClick, type, label, name, defaultValue, position, removeIcon, onTextChangeHandler } = props;
     // console.log("Default value: ");
     // console.log(defaultValue)
     /** Ref */
@@ -41,10 +43,14 @@ function DocInput(props) {
     function onMouseOutHandler() {
         $(iconContainer.current).addClass('hide');
     }
+    function onChangeHandler(e) {
+        if (onTextChangeHandler)
+            onTextChangeHandler(type, position, e.target.value);
+    }
     /** Render */
     const inputType = (type === 'textarea') ?
-        (<textarea name={name} className="CUinput__input CUinput__input--textarea" rows="7" type="text" defaultValue={defaultValue} />)
-        : (<input name={name} className="CUinput__input CUinput__input--input" type="text" defaultValue={defaultValue} />);
+        (<textarea name={name} className="CUinput__input CUinput__input--textarea" rows="7" type="text" defaultValue={defaultValue} onChange={onChangeHandler} />)
+        : (<input name={name} className="CUinput__input CUinput__input--input" type="text" defaultValue={defaultValue} onChange={onChangeHandler} />);
 
     return (
         <>
@@ -54,9 +60,12 @@ function DocInput(props) {
                     <label className="CUinput__label">{label}</label>
                     {inputType}
                 </div>
-                <div className="CUinput__toolbar hide" ref={iconContainer}>
-                    <Toolbar onIconClick={clickHandler} removeIcon={removeIcon} />
-                </div>
+                {removeIcon.length === 3 ? "" :
+                    <div className="CUinput__toolbar hide" ref={iconContainer}>
+                        <Toolbar onIconClick={clickHandler} removeIcon={removeIcon} />
+                    </div>
+                }
+
             </div>
         </>
     );

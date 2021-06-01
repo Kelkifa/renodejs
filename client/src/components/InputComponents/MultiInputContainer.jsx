@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import InputContainer from './InputContainer';
+import DocInput from './DocInput';
 
 MultiInputContainer.propTypes = {
     data: PropTypes.object,
@@ -32,12 +33,6 @@ MultiInputContainer.defaultProps = {
     updateFlag: false,
 }
 
-/*defaultValue: PropTypes.object, //children part
-    position: PropTypes.number,
-    onIconParentClick: PropTypes.func,
-    updateFlag: PropTypes.bool,
-    */
-
 function MultiInputContainer(props) {
     /** Props */
     const { data, updateFlag } = props;
@@ -45,6 +40,11 @@ function MultiInputContainer(props) {
     /** State */
     const [containers, setContainers] = useState([1]);
     const [addedContainers, setAddedContainers] = useState([]);
+
+    const [formData, setFormData] = useState({
+        parentPartTitle: null,
+        childrenPartContent: [],
+    });
 
     /** Effect */
     useEffect(() => {
@@ -74,23 +74,55 @@ function MultiInputContainer(props) {
         setContainers(copyContainers);
         setAddedContainers(copyAddedContainers);
     }
+    // Process input parent part title
+    function onParentTitleInputChange(type, ps, text) {
+        containerValueHandler(text, ps);
+    }
+    // Process data from form (InputContainers)
+    function containerValueHandler(obj, ps) {
+        const copyFormData = { ...formData };
+        if (ps === -1) {
+            copyFormData.parentPartTitle = obj;
+            setFormData(copyFormData);
+            return;
+        }
+        copyFormData.childrenPartContent[ps] = obj;
+        setFormData(copyFormData);
+    }
+    // Process submit
+    function onClickSubmitButtonHandler() {
+        console.log(formData);
+    }
 
     /** Render */
     return (
         <div>
+            <div className="doc__right__ParentTitle">
+                <DocInput label="Parent Part Title"
+                    type="text"
+                    removeIcon={[1, 2, 3]}
+                    defaultValue={updateFlag && data.parent_part ? data.parent_part.title : null}
+                    position={-1}
+                    onTextChangeHandler={onParentTitleInputChange} />
+            </div>
+
             {containers.map((value, i) => {
                 return (
                     <InputContainer key={value}
                         position={i}
                         updateFlag={data.children_parts && !addedContainers.includes(i) ? updateFlag : false}
                         onIconParentClick={onContainerIconClickHandler}
-                        defaultValue={updateFlag && data.children_parts ? data.children_parts[i] : {}} />
+                        defaultValue={updateFlag && data.children_parts ? data.children_parts[i] : {}}
+                        containerValue={containerValueHandler} />
                 )
             })
             }
 
             <div className="doc__right__BtnContainer">
-                <button className="btn btn--secondary">Submit</button>
+                <button className="btn btn--secondary"
+                    onClick={onClickSubmitButtonHandler} >
+                    Submit
+                    </button>
             </div>
         </div>
     );

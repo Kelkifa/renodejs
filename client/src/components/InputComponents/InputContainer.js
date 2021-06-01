@@ -8,6 +8,7 @@ InputContainer.propTypes = {
     position: PropTypes.number,
     onIconParentClick: PropTypes.func,
     updateFlag: PropTypes.bool,
+    containerValue: PropTypes.func,     //function for send to MultiInputContainer
 };
 
 InputContainer.defaultProps = {
@@ -15,16 +16,22 @@ InputContainer.defaultProps = {
     position: 0,            // Input Container thứ mấy 
     onIconParentClick: null,
     updateFlag: false,
+    containerValue: null,
 }
 
 function InputContainer(props) {
     /** Props */
-    const { defaultValue, position, onIconParentClick, updateFlag } = props;
+    const { defaultValue, position, onIconParentClick, updateFlag, containerValue } = props;
 
     /** State */
     const [inputs, setInputs] = useState([1, 0]); //[input, textarea]
     const [keys, setKeys] = useState([1, 2]);
     const [addedInputs, setAddedInputs] = useState([]);
+
+    const [inputValues, setInputValues] = useState({
+        content: [],
+        sort: [1, 0],
+    });
 
     /** Effect */
     useEffect(() => {
@@ -45,6 +52,8 @@ function InputContainer(props) {
         const copyKeys = [...keys];
         const copyAddedInputs = [...addedInputs];
 
+        const copyInputValue = { ...inputValues };
+
         if (clickInfo === 'addT') {
             copyInputs.splice(ps + 1, 0, 0);
             copyKeys.splice(ps + 1, 0, Math.max(...copyKeys) + 1);
@@ -60,13 +69,25 @@ function InputContainer(props) {
             copyKeys.splice(ps, 1);
             copyAddedInputs.splice(ps, 1)
         }
+
         setInputs([...copyInputs]);
         setKeys([...copyKeys]);
         setAddedInputs(copyAddedInputs);
+
+        copyInputValue.sort = [...copyInputs];
+        setInputValues(copyInputValue);
+    }
+    function onTextChangeHandler(type, ps, text) {
+        const copyInputValues = { ...inputValues };
+        copyInputValues.content[ps] = text;
+        //send to multiInputContainer ...
+        if (containerValue);
+        containerValue(copyInputValues, position);
+
+        setInputValues(copyInputValues);
     }
 
     /** Render */
-    console.log(updateFlag, position);
     return (
         <div className="iContainer" >
             <div className="iContainer__input">
@@ -78,7 +99,8 @@ function InputContainer(props) {
                                     onIconClick={onChildrenIconClickHandler}
                                     position={i}
                                     removeIcon={[3]}
-                                    defaultValue={updateFlag && !addedInputs.includes(i) && defaultValue ? defaultValue.title : ""} />
+                                    defaultValue={updateFlag && !addedInputs.includes(i) && defaultValue ? defaultValue.title : ""}
+                                    onTextChangeHandler={onTextChangeHandler} />
                             )
                         }
                         if (value === 0) {
@@ -87,7 +109,8 @@ function InputContainer(props) {
                                     onIconClick={onChildrenIconClickHandler}
                                     position={i}
                                     type="textarea"
-                                    defaultValue={updateFlag && !addedInputs.includes(i) && defaultValue.content ? defaultValue.content[i - 1] : ""} />
+                                    defaultValue={updateFlag && !addedInputs.includes(i) && defaultValue.content ? defaultValue.content[i - 1] : ""}
+                                    onTextChangeHandler={onTextChangeHandler} />
                             )
                         }
                         if (value === 1) {
@@ -96,7 +119,8 @@ function InputContainer(props) {
                                     onIconClick={onChildrenIconClickHandler}
                                     position={i}
                                     type="input"
-                                    defaultValue={updateFlag && !addedInputs.includes(i) && defaultValue.content ? defaultValue.content[i - 1] : ""} />
+                                    defaultValue={updateFlag && !addedInputs.includes(i) && defaultValue.content ? defaultValue.content[i - 1] : ""}
+                                    onTextChangeHandler={onTextChangeHandler} />
                             )
                         }
                         return ("")

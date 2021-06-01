@@ -24,9 +24,10 @@ function Toolbar(props) {
             onIconClick(clickInfo);
     }
     /** Render */
-    console.log(removeIcon.length);
+
+    const writeClass = removeIcon.includes(0) ? 'toolbar' : 'toolbar toolbar--two';
     return (
-        <div className={removeIcon.length < 3 ? 'toolbar toolbar--two' : 'toolbar'}>
+        <div className={writeClass}>
             <div className={removeIcon.includes(1) ? "toolbar__item toolbar__item--btn hide" : "toolbar__item--btn"}
                 onClick={() => { clickHandler('addT') }} >
                 <FaRegPlusSquare size="20px" color="rgb(32, 121, 218)" />
