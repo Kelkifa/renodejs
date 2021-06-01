@@ -1,30 +1,40 @@
 const documentModel = require('../models/document');
 const storeDocument = require('../cores/storeDocument');
+const typesParseArr = require('../cores/typesParseArr');
 
 class DocumentController {
     //[GET] /api/document
-    index(req, res, next) {
+    async index(req, res, next) {
         const { id, type, update } = req.query;
-        if (id || update) {
-            var cache = id ? id : update;
-            documentModel.find({ type })
-                .then(documents => {
-                    documentModel.findOne({ _id: cache })
-                        .then(document => {
-                            res.json({ document, documents });
-                        })
-                })
-        }
-        else if (type) {
-            documentModel.find({ type })
-                .then(documents => {
-                    res.json(documents);
-                })
-        }
-        else {
-            res.json("not thing");
+
+        try {
+            //Get types
+            const data = await documentModel.find().select('type -_id');
+            const types = typesParseArr(data);
+
+            if (type) {
+                try {
+                    const titles = await documentModel.find({ type: type }).select('parent_part');
+                    if (id || update) {
+                        const doc = await documentModel.findOne({ _id: id || update });
+                        return res.json({ success: true, types, doc, titles });
+                    }
+                    return res.json({ success: true, types, titles })
+                } catch (error) {
+                    console.log(error);
+                    return res.status(500).json({ success: false, message: "Internal Server Error" })
+                }
+            }
+            return res.json({ success: true, types });
+
+        } catch (error) {
+            console.log(error);
+            return res.status(500).json({ success: false, message: "Internal Server Error" });
         }
     }
+
+
+
     //[POST] /api/document/create
     create(req, res, next) {
         var obj = storeDocument(req.body);

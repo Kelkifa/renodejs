@@ -4,9 +4,82 @@ $c-low-blue: #e7e9eb;
 $c-high-blue: rgb(32, 121, 218);
 $c-dark-blue: rgba(96, 130, 226, 0.5);
 
-
-.inputs{
-    width:600px;
-    height: 500px;
-    border: 1px solid #000;
+// Document
+.doc__body{
+    display: flex;
+    flex-direction: row;
 }
+
+// .inputs{
+//     width:600px;
+//     height: 500px;
+//     border: 1px solid #000;
+// }
+
+//Leftbar
+.doc__leftbar{
+    box-sizing: border-box;
+    width: 200px;
+    background-color: $c-low-blue;
+}
+
+.doc__leftbar__item{
+    box-sizing: border-box;
+    padding: 7px 10px;
+    position: relative;
+    color:black;
+}
+.doc__leftbar__item--title{
+    box-sizing: border-box;
+    font-size:22px;
+    padding:8px 10px;
+    border-bottom: 1px solid #cbcdcf;
+}
+.doc__leftbar__item + .doc__leftbar__item{
+    border-top: 1px solid #cbcdcf;
+}
+.doc__Leftbar__item__toolbar{
+    position: absolute;
+    box-sizing: border-box;
+    top:0px;
+    right:-25px;
+    padding:2px;
+    z-index:1;
+}
+// Right Content
+.doc__right{
+    width: calc(100% - 200px);
+    box-sizing: border-box;
+    padding: 30px;
+}
+.doc__right__BtnContainer{
+    margin-top: 20px;
+    display: flex;
+    justify-content:flex-end;
+}
+.doc__right__ParentTitle{
+    margin-bottom: 20px;
+}
+
+.docForm{
+    width: 100%;
+}
+.docForm__title{
+    margin-bottom: 20px;
+}
+// Navbar Doc
+.docNavbar{
+    margin-top: 5px;
+    background-color: $c-black;
+    color:white;
+    display: flex;
+    align-items: center;
+}
+.docNavbar__item{
+    color:white;
+    text-decoration: none;
+    padding:6px 10px;
+    font-weight: bold;
+    margin-left: 10px;
+}
+

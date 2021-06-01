@@ -1,17 +1,20 @@
 import '../components/customScss/tests.scss';
 import '../components/Doc/doc.scss';
-import '../components/InputComponents/input.scss';
-import InputContainer from '../components/InputComponents/InputContainer';
+import MultiInputContainer from '../components/InputComponents/MultiInputContainer.jsx';
 import React from 'react';
 
+const NumberContext = React.createContext();
 function Test() {
-
 
     /** Render */
     return (
-        <div className="test">
-            <InputContainer />
-        </div>
+        <NumberContext.Provider value={1293}>
+            <div className="test">
+                <NumberContext.Consumer>
+                    {(context) => <h2>{context}</h2>}
+                </NumberContext.Consumer>
+            </div>
+        </NumberContext.Provider>
     )
 }
 

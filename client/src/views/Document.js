@@ -1,44 +1,67 @@
+import '../components/Doc/doc.scss';
+import DocNavbar from '../components/Doc/DocNavbar';
+import Leftbar from '../components/Doc/Leftbar';
+import DocRightContent from '../components/Doc/DocRightContent';
+// import Leftbar from '../components/Doc/Leftbar';
 import React, { useState, useEffect } from 'react';
+import { useLocation } from "react-router-dom";
+import queryString from 'query-string';
 
 function Document(props) {
+    /** Query */
+    const getQuery = new URLSearchParams(useLocation().search);
+    const query = { type: getQuery.get("type"), id: getQuery.get("id"), update: getQuery.get("update") };
     /** State */
-    const [data, setData] = useState([]);
-    /** Effect */
+    const [success, setSuccess] = useState(false);
+    const [message, setMessage] = useState("");
+    const [types, setTypes] = useState([]);
+    const [doc, setDoc] = useState({});
+    const [titles, setTitles] = useState([]);
+
+    /** Effect Fetch */
     useEffect(() => {
-        async function fetchGetData() {
+        async function fetchDocument() {
             try {
-                const response = await fetch('/api/document');
+                const queryStringified = queryString.stringify(query);
+                const response = await fetch(`/api/document?${queryStringified}`);
                 const responseJSON = await response.json();
-                const { doc } = responseJSON;
-                setData(doc);
+
+                // Write to states
+                setSuccess(responseJSON.success);
+                setTypes(responseJSON.types);
+                setDoc(responseJSON.doc);
+                setTitles(responseJSON.titles);
+                setMessage(responseJSON.message)
+
             } catch (error) {
-                console.log(`there are some error ${error}`);
+                console.log(error);
             }
         }
-        fetchGetData();
-    }, [])
+        fetchDocument();
+    }, [query.id, query.type, query.update]);
+    function createRightContentFlag(id, type, update) {     //0: create, 1: update, 2: show, 3: null
+        if (type && update) return 1;
+        if (type && id) return 2
+        if (type) return 0;
+        return 3;
+    }
     /** Render */
+    if (!success) return (<div>{message}</div>);
+    const flagRightContent = createRightContentFlag(query.id, query.type, query.update);
+
+
     return (
         <div>
-            <ul>
-                {data.map(value => (<li key={value._id}>{value.parent_part.title}</li>))}
-            </ul>
+            <DocNavbar baseLink="/document"
+                data={types} />
+            <div className="doc__body">
+                <Leftbar data={titles}
+                    type={query.type}
+                    baseLink={"/document"} />
+                <DocRightContent doc={doc} type={query.type} flagRightContent={flagRightContent} />
+            </div>
         </div>
     );
 }
-
 export default Document;
 
-
-
-
-
-
-
-// import '../components/Documents/Document.scss';
-// import DocumentNavbar from '../components/Documents/DocumentNavbar.js';
-// import DocumentContent from '../components/Documents/DocumentContent.js';
-// import { useLocation } from "react-router-dom";
-
-// const getQuery = new URLSearchParams(useLocation().search);
-// const query = { type: getQuery.get("type"), id: getQuery.get("id"), update: getQuery.get("update") };
