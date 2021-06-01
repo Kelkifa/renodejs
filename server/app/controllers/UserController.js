@@ -46,7 +46,6 @@ class UserController {
     */
     async login(req, res, next) {
         const { username, password } = req.body;
-
         /** Varidator */
         if (!username || !password) {
             return res

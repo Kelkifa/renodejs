@@ -1,10 +1,10 @@
 import './Form.scss';
-import React from 'react';
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
 
 function LoginForm(props) {
     return (
-        <form method="POST" action="/api/user/login" name="form-login" className="form">
+        <div className="form">
             <div className="form__left">
                 <img className="form__left__img form__left__img--login" src="/anime.png" alt="can't load" />
             </div>
@@ -26,7 +26,7 @@ function LoginForm(props) {
                     </Link>
                 </div>
             </div>
-        </form>
+        </div>
     );
 }
 

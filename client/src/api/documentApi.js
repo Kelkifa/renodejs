@@ -1,8 +1,8 @@
 import axiosClient from './axiousClient';
 
+const url = '/document';
 const DocumentApi = {
     getAll: (params) => {
-        const url = '/document';
         return axiosClient.get(url, { params });
     }
 }
