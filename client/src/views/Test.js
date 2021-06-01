@@ -3,22 +3,18 @@ import '../components/Doc/doc.scss';
 import MultiInputContainer from '../components/InputComponents/MultiInputContainer.jsx';
 import React from 'react';
 
+const NumberContext = React.createContext();
 function Test() {
 
     /** Render */
     return (
-        <div className="test">
-            <div className="item">item 1</div>
-            <div className="item">item 2</div>
-            <div className="item">item 3</div>
-            <div className="item">item 4</div>
-            <div className="item">item 5</div>
-            <div className="item">item 6</div>
-            <div className="item">item 7</div>
-            <div className="item">item 8</div>
-            <div className="item">item 9</div>
-            <div className="item">item 10</div>
-        </div>
+        <NumberContext.Provider value={1293}>
+            <div className="test">
+                <NumberContext.Consumer>
+                    {(context) => <h2>{context}</h2>}
+                </NumberContext.Consumer>
+            </div>
+        </NumberContext.Provider>
     )
 }
 
