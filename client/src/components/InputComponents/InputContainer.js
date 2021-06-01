@@ -9,6 +9,9 @@ InputContainer.propTypes = {
     onIconParentClick: PropTypes.func,
     updateFlag: PropTypes.bool,
     containerValue: PropTypes.func,     //function for send to MultiInputContainer
+
+    submitSignal: PropTypes.bool,
+    sendBackValue: PropTypes.func,
 };
 
 InputContainer.defaultProps = {
@@ -17,14 +20,17 @@ InputContainer.defaultProps = {
     onIconParentClick: null,
     updateFlag: false,
     containerValue: null,
+
+    submitSignal: false,
+    sendBackValue: null,
 }
 
 function InputContainer(props) {
     /** Props */
-    const { defaultValue, position, onIconParentClick, updateFlag, containerValue } = props;
+    const { defaultValue, position, onIconParentClick, updateFlag, containerValue, submitSignal, sendBackValue } = props;
 
     /** State */
-    const [inputs, setInputs] = useState([1, 0]); //[input, textarea]
+    const [inputs, setInputs] = useState([1, 0]); //[input, textarea]       //sort
     const [keys, setKeys] = useState([1, 2]);
     const [addedInputs, setAddedInputs] = useState([]);
 
@@ -78,12 +84,21 @@ function InputContainer(props) {
         setInputValues(copyInputValue);
     }
     function onTextChangeHandler(type, ps, text) {
+        // const copyInputValues = { ...inputValues };
+        // copyInputValues.content[ps] = text;
+        // //send to multiInputContainer ...
+        // if (containerValue);
+        // containerValue(copyInputValues, position);
+
+        // setInputValues(copyInputValues);
+    }
+    function onSubmitedHandler(ps, text) {
         const copyInputValues = { ...inputValues };
         copyInputValues.content[ps] = text;
         //send to multiInputContainer ...
-        if (containerValue);
-        containerValue(copyInputValues, position);
-
+        if (sendBackValue) {
+            sendBackValue(position, copyInputValues)
+        }
         setInputValues(copyInputValues);
     }
 
@@ -100,27 +115,21 @@ function InputContainer(props) {
                                     position={i}
                                     removeIcon={[3]}
                                     defaultValue={updateFlag && !addedInputs.includes(i) && defaultValue ? defaultValue.title : ""}
-                                    onTextChangeHandler={onTextChangeHandler} />
+                                    onTextChangeHandler={onTextChangeHandler}
+                                    submitSignal={submitSignal}
+                                    onSubmitHandler={onSubmitedHandler} />
                             )
                         }
-                        if (value === 0) {
+                        if (value === 0 || value === 1) {
                             return (
-                                <DocInput key={keys[i]} label="Content"
+                                <DocInput key={keys[i]} label={value === 0 ? 'Content' : 'Image Link'}
                                     onIconClick={onChildrenIconClickHandler}
                                     position={i}
-                                    type="textarea"
+                                    type={value === 0 ? "textarea" : 'input'}
                                     defaultValue={updateFlag && !addedInputs.includes(i) && defaultValue.content ? defaultValue.content[i - 1] : ""}
-                                    onTextChangeHandler={onTextChangeHandler} />
-                            )
-                        }
-                        if (value === 1) {
-                            return (
-                                <DocInput key={keys[i]} label="Image Link"
-                                    onIconClick={onChildrenIconClickHandler}
-                                    position={i}
-                                    type="input"
-                                    defaultValue={updateFlag && !addedInputs.includes(i) && defaultValue.content ? defaultValue.content[i - 1] : ""}
-                                    onTextChangeHandler={onTextChangeHandler} />
+                                    onTextChangeHandler={onTextChangeHandler}
+                                    submitSignal={submitSignal}
+                                    onSubmitHandler={onSubmitedHandler} />
                             )
                         }
                         return ("")

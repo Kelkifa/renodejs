@@ -42,9 +42,10 @@ function MultiInputContainer(props) {
     const [addedContainers, setAddedContainers] = useState([]);
 
     const [formData, setFormData] = useState({
-        parentPartTitle: null,
+        parentPartTitle: { title: "" },
         childrenPartContent: [],
     });
+    const [submitSignal, setSubmitSignal] = useState(false);
 
     /** Effect */
     useEffect(() => {
@@ -76,24 +77,40 @@ function MultiInputContainer(props) {
     }
     // Process input parent part title
     function onParentTitleInputChange(type, ps, text) {
-        containerValueHandler(text, ps);
+        // containerValueHandler(text, ps);
     }
     // Process data from form (InputContainers)
     function containerValueHandler(obj, ps) {
-        const copyFormData = { ...formData };
-        if (ps === -1) {
-            copyFormData.parentPartTitle = obj;
-            setFormData(copyFormData);
-            return;
-        }
-        copyFormData.childrenPartContent[ps] = obj;
-        setFormData(copyFormData);
+        // const copyFormData = { ...formData };
+        // if (ps === -1) {
+        //     copyFormData.parentPartTitle = obj;
+        //     setFormData(copyFormData);
+        //     return;
+        // }
+        // copyFormData.childrenPartContent[ps] = obj;
+        // setFormData(copyFormData);
     }
     // Process submit
     function onClickSubmitButtonHandler() {
+        setSubmitSignal(true);
         console.log(formData);
     }
+    function submitedHandler(ps, obj) {
+        const copyFormData = { ...formData };
+        if (ps === -1) {
+            copyFormData.parentPartTitle.title = obj;
+        }
+        else {
+            copyFormData.childrenPartContent[ps] = obj;
+            // console.log(copyFormData);
+        }
+        setFormData({ ...copyFormData });
 
+        setTimeout(() => {
+            setSubmitSignal(false);
+        }, 3000)
+
+    }
     /** Render */
     return (
         <div>
@@ -103,7 +120,9 @@ function MultiInputContainer(props) {
                     removeIcon={[1, 2, 3]}
                     defaultValue={updateFlag && data.parent_part ? data.parent_part.title : null}
                     position={-1}
-                    onTextChangeHandler={onParentTitleInputChange} />
+                    onTextChangeHandler={onParentTitleInputChange}
+                    submitSignal={submitSignal}
+                    onSubmitHandler={submitedHandler} />
             </div>
 
             {containers.map((value, i) => {
@@ -113,7 +132,9 @@ function MultiInputContainer(props) {
                         updateFlag={data.children_parts && !addedContainers.includes(i) ? updateFlag : false}
                         onIconParentClick={onContainerIconClickHandler}
                         defaultValue={updateFlag && data.children_parts ? data.children_parts[i] : {}}
-                        containerValue={containerValueHandler} />
+                        containerValue={containerValueHandler}
+                        submitSignal={submitSignal}
+                        sendBackValue={submitedHandler} />
                 )
             })
             }
