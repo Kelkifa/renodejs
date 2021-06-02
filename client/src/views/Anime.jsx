@@ -32,12 +32,11 @@ function Anime(props) {
                 errorResponse.success === false
                     ? <div style={{ width: "100%" }}>
                         <ErrorAlert errorTitle="Can't Access"
-                            content='You have to login first. If you need any help just place the mouse pointer above info icon next to the form field'
-                            actionContent={
-                                <>
-                                    Go to <Link to='/login'>login</Link>
-                                </>
-                            } />
+                            content='You have to login first. If you need any help just place the mouse pointer above info icon next to the form field'>
+                            <>
+                                Go to <Link to='/login'>login</Link>
+                            </>
+                        </ErrorAlert>
                     </div>
                     : data.map(item => (
                         <Card key={item._id} imgLink={item.img}

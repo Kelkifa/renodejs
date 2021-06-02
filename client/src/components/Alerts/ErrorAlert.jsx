@@ -11,11 +11,11 @@ ErrorAlert.propTypes = {
 ErrorAlert.defaultProps = {
     errorTitle: 'Error!',
     content: 'Please enter a valid value in all the required fields before proceeding. If you need any help just place the mouse pointer above info icon next to the form field.',
-    actionContent: "Once you have all the details, click on the 'Next' button to continue",
+    actionContent: "Once you have all the details, click on the 'Next' button to continue.",
 }
 
 function ErrorAlert(props) {
-    const { content, actionContent, errorTitle } = props
+    const { content, actionContent, errorTitle, children } = props
 
     return (
         <div className='alert__background'>
@@ -26,7 +26,7 @@ function ErrorAlert(props) {
                         <span className="alert__container__title__content alert__container__title__content--error">{errorTitle}</span>
                     </h1>
                     <p className="alert__container__content">{content}</p>
-                    <div className="alert__container__content alert__container__content--action">{actionContent}</div>
+                    <div className="alert__container__content alert__container__content--action">{children ? children : actionContent}</div>
                 </div>
             </div>
         </div>

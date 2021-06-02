@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import MultiInputContainer from '../InputComponents/MultiInputContainer';
+import DocShow from './DocShow';
 
 DocRightContent.propTypes = {
     doc: PropTypes.object,
@@ -17,15 +18,14 @@ DocRightContent.defaultProps = {
 function DocRightContent(props) {
     /** Props */
     const { doc, flagRightContent } = props;
-    // if (Object.keys(doc).length === 0) return (<div>null</div>)
-    /** Render */
 
+    /** Render */
     if (flagRightContent === 3) return (<div>null</div>);
 
     return (
         <div className="doc__right">
             {flagRightContent === 2 ?
-                "show" :
+                <DocShow doc={doc} /> :
                 <MultiInputContainer data={doc}
                     updateFlag={flagRightContent === 1 ? true : false} />}
         </div>
