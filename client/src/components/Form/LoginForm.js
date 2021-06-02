@@ -19,7 +19,7 @@ function LoginForm(props) {
         try {
             const response = await userContext.loginUser({ username, password });
         } catch (error) {
-            console.log(error);
+            // console.log(error);
         }
     }
 

@@ -24,8 +24,12 @@ Content-Type: application/json
 ###
 
 GET http://localhost:8080/api/anime
-# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGFmNmI1ZDc2MzYwYjNkYjRjZjM2YjUiLCJpYXQiOjE2MjI1NTMxMjl9.F6fc8IaGwmVpuH7sy-RRkCFxl-o0LnhcZwnJIpeT_9g
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGFmNmI1ZDc2MzYwYjNkYjRjZjM2YjUiLCJpYXQiOjE2MjI1NTMxMjl9.F6fc8IaGwmVpuH7sy-RRkCFxl-o0LnhcZwnJIpeT_9g
 
 ###
 GET http://localhost:8080/api/document?type=IOT&update=60a1dadead1dc710148b7834
 
+###
+
+GET http://localhost:8080/api/user/auth
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGFmNmI1ZDc2MzYwYjNkYjRjZjM2YjUiLCJpYXQiOjE2MjI2MTQ2MTN9.mRfUtNjFmFYFxy6Ly2o54XTIN0klbCES7G6U00F09K0

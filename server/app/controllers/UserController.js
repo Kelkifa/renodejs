@@ -2,7 +2,23 @@ const userModel = require('../models/users');
 const argon2 = require('argon2');
 const jwt = require('jsonwebtoken');
 const secrectKey = 'asidsaudiuwe9qe#@&#*^#!iqoeuqpwo2132';
+
 class UserController {
+    /** [GET] /api/user/auth 
+    * desc: Get fullname by token when the web is loaded
+    * asscess: token
+    */
+    async auth(req, res, next) {
+        try {
+            const fullname = await userModel.findOne({ _id: req.userId }).select('fullname');
+            console.log(fullname);
+            return res.json({ success: true, fullname });
+        } catch (error) {
+            console.log(error)
+            return res.status(500).json({ success: false, message: "Internal server error" });
+        }
+    }
+
     /** [POST]//api/user/register  
      * desc: Register
      * access: public 

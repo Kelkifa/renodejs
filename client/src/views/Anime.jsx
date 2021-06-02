@@ -15,7 +15,6 @@ function Anime(props) {
             try {
                 const response = await animeApi.getAll({});
                 setData(response);
-                console.log(response);
             } catch (error) {
                 if (error.response.data) {
                     console.log(error.response.data);
