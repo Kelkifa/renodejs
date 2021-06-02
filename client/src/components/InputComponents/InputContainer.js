@@ -8,7 +8,6 @@ InputContainer.propTypes = {
     position: PropTypes.number,
     onIconParentClick: PropTypes.func,
     updateFlag: PropTypes.bool,
-    containerValue: PropTypes.func,     //function for send to MultiInputContainer
 
     submitSignal: PropTypes.bool,
     sendBackValue: PropTypes.func,
@@ -19,7 +18,6 @@ InputContainer.defaultProps = {
     position: 0,            // Input Container thứ mấy 
     onIconParentClick: null,
     updateFlag: false,
-    containerValue: null,
 
     submitSignal: false,
     sendBackValue: null,
@@ -27,7 +25,7 @@ InputContainer.defaultProps = {
 
 function InputContainer(props) {
     /** Props */
-    const { defaultValue, position, onIconParentClick, updateFlag, containerValue, submitSignal, sendBackValue } = props;
+    const { defaultValue, position, onIconParentClick, updateFlag, submitSignal, sendBackValue } = props;
 
     /** State */
     const [inputs, setInputs] = useState([1, 0]); //[input, textarea]       //sort
@@ -47,7 +45,7 @@ function InputContainer(props) {
             setInputs(copyInputs);
             setKeys([1, ...copyKeys]);
         }
-    }, [updateFlag]);
+    }, [updateFlag, defaultValue.sort]);
     /** Event Handler */
     function onParentIconClickHandler(clickInfo) {
         if (onIconParentClick)

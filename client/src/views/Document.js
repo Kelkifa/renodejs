@@ -38,7 +38,7 @@ function Document(props) {
             }
         }
         fetchDocument();
-    }, [query.id, query.type, query.update]);
+    }, [query.id, query.type, query.update], query);
     function createRightContentFlag(id, type, update) {     //0: create, 1: update, 2: show, 3: null
         if (type && update) return 1;
         if (type && id) return 2

@@ -1,31 +1,74 @@
 import '../components/customScss/tests.scss';
 import '../components/Doc/doc.scss';
-// import MultiInputContainer from '../components/InputComponents/MultiInputContainer.jsx';
-import React from 'react';
+import React, { useState, useContext, createContext } from 'react';
 import Login from '../views/Login';
 import AuthContextProvider from '../contexts/AuthContextProvider';
-
+import { set } from 'mongoose';
+// import TestContextProvider from '../contexts/TestContextProvider';
+// import { TestContext } from '../contexts/TestContextProvider';
 const ACTION = {
     INCREASE: 'increase',
     DECREASE: 'decrease'
 }
 
 
-function Test() {
 
+const TestContext = createContext();
+
+function TestContextProvider(props) {
+    const { children } = props
+    const [myState, setState] = useState(2);
+
+    function login() {
+        setState(myState + 1);
+    }
+    const data = { login, myState };
+    return (
+        <TestContext.Provider value={data}>
+            {children}
+        </TestContext.Provider>
+    );
+}
+
+
+function Test() {
+    // const [testState, setTestState] = useState(1);
+    function handlerClick(cState) {
+        console.log(cState);
+    }
     /** Render */
     return (
-        <div>
-            <AuthContextProvider>
-                <Login />
-            </AuthContextProvider>
-        </div>
+        <TestContextProvider>
+            <p>Result:</p>
+            <CusBtn btnClick={handlerClick}></CusBtn>
+
+        </TestContextProvider>
     )
 }
 
 export default Test;
 
+function CusBtn(props) {
+    const { btnClick } = props;
+    const ct = useContext(TestContext);
+    console.log(ct);
+
+    function handlerClick() {
+        ct.login();
+        btnClick(ct.myState);
+    }
+    return (
+        <button onClick={handlerClick}>
+            Test btn
+        </button>
+    )
+}
+
 // const NumberContext = React.createContext();
+
+{/* <AuthContextProvider>
+                <Login />
+            </AuthContextProvider> */}
 
 {/* <NumberContext.Provider value={1293}>
 <div className="test">

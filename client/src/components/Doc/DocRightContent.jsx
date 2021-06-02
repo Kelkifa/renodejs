@@ -16,7 +16,7 @@ DocRightContent.defaultProps = {
 
 function DocRightContent(props) {
     /** Props */
-    const { doc, type, flagRightContent } = props;
+    const { doc, flagRightContent } = props;
     // if (Object.keys(doc).length === 0) return (<div>null</div>)
     /** Render */
 

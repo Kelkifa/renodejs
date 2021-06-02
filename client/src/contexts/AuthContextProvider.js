@@ -1,30 +1,47 @@
-import { data } from 'jquery';
 import React, { createContext, useState } from 'react';
 import userApi from '../api/userApi';
+// import axios from 'axios';
 
 export const AuthContext = createContext();
 
+const LOCAL_STORAGE_TOKEN_NAME = 'token';
+
+// const setAuthToken = (token) => {
+//     if (token) {
+//         // axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+//     }
+//     else {
+//         // delete axios.defaults.headers.common['Authorization']
+//     }
+// }
+
 function AuthContextProvider(props) {
     const { children } = props;
-    const [authState, setAuthState] = useState({
+    const [authState, setMyAuthState] = useState({
         isAuthenticated: false,
-        user: null,
+        user: { userToken: null },
     })
 
     const loginUser = async userForm => {
         try {
             const response = await userApi.login(userForm);
             if (response.success) {
-                setAuthState({
-                    isAuthenticated: true,
-                    user: response.accessToken,
-                })
+                localStorage.setItem(LOCAL_STORAGE_TOKEN_NAME, response.accessToken);
+
+                const copyAuthState = { ...authState };
+                copyAuthState.isAuthenticated = true;
+                copyAuthState.user.userToken = response.accessToken;
+                setMyAuthState({ ...copyAuthState });
+                // setAuthState({
+                //     isAuthenticated: true,
+                //     user: { userToken: response.accessToken },
+                // })
             }
-            console.log(response);
             return response;
 
         } catch (error) {
-            console.log(error);
+            if (error.response.data) return error.response.data;
+            else return { success: false, message: error.message }
         }
     }
 

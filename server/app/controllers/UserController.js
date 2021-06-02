@@ -56,13 +56,13 @@ class UserController {
             //Checking for existing username
             const user = await userModel.findOne({ username });
             if (!user) {
-                return res.status(400).json({ success: false, message: "Incorrect username or password" });
+                return res.status(404).json({ success: false, message: "Incorrect username or password" });
             }
 
             //Username is found
             const passwordValid = await argon2.verify(user.password, password);
             if (!passwordValid) {
-                return res.status(400).json({ success: false, message: "Incorrect username or password" });
+                return res.status(404).json({ success: false, message: "Incorrect username or password" });
             }
 
             /** Can Login  */
