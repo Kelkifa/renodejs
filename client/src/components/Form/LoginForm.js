@@ -1,10 +1,32 @@
 import './Form.scss';
-import React from 'react';
 import { Link } from 'react-router-dom';
+import { useContext, useRef } from 'react';
+import { AuthContext } from '../../contexts/AuthContextProvider';
 
 function LoginForm(props) {
+    /** Ref */
+    const usernameRef = useRef();
+    const passwordRef = useRef();
+
+    /** Context */
+    const userContext = useContext(AuthContext);
+
+    // console.log(userContext.authState);
+
+    /** Event Handler */
+    async function handlerSubmit() {
+        const [username, password] = [usernameRef.current.value, passwordRef.current.value]
+        try {
+            const response = await userContext.loginUser({ username, password });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    /** Render */
+
     return (
-        <form method="POST" action="/api/user/login" name="form-login" className="form">
+        <div className="form">
             <div className="form__left">
                 <img className="form__left__img form__left__img--login" src="/anime.png" alt="can't load" />
             </div>
@@ -12,11 +34,15 @@ function LoginForm(props) {
                 <h2 className="form__right__title">WELCOME BACK</h2>
                 <div className="form__right__inputs form__right__inputs--login">
                     <label className="w-full d-b">USERNAME</label>
-                    <input name="username" className="w-full d-b input input-form" type="text" />
+                    <input name="username" className="w-full d-b input input-form"
+                        type="text" ref={usernameRef} />
                     <label className="w-full d-b">PASSWORD</label>
-                    <input name="password" className="w-full d-b input input-form" type="password" />
+                    <input name="password" className="w-full d-b input input-form"
+                        type="password" ref={passwordRef} />
                 </div>
-                <button name="submit" value="submited" type="submit" className="btn btn--submit btn--purple mr-t-20 pd-tb-15 w-full">
+                <button className="btn btn--submit btn--purple mr-t-20 pd-tb-15 w-full"
+                    name="submit" value="submited"
+                    onClick={handlerSubmit} >
                     Login
                 </button>
                 <div className="form__right__notify w-full">
@@ -26,7 +52,7 @@ function LoginForm(props) {
                     </Link>
                 </div>
             </div>
-        </form>
+        </div>
     );
 }
 

@@ -3,6 +3,7 @@ const secretKey = "asidsaudiuwe9qe#@&#*^#!iqoeuqpwo2132";
 // Authorization: Bearer asadiasodiuwdklasjdaiwdad
 const verifyToken = (req, res, next) => {
     const authHeader = req.header('Authorization');
+    console.log(authHeader);
     const token = authHeader && authHeader.split(' ')[1]; //nếu có authHeader thì trả về cái đằng sau &&
 
     if (!token)

@@ -83,3 +83,15 @@ $c-dark-blue: rgba(96, 130, 226, 0.5);
     margin-left: 10px;
 }
 
+// Doc show
+.DocShow{
+    
+}
+
+.content__line + .content__line{
+    margin-top: 5px;
+}
+.DocShow__childrenPart__content__img{
+    max-width: 100%;
+    max-height: 520px;
+}

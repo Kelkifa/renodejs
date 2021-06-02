@@ -1,12 +1,15 @@
 import React from 'react';
-import Navbar from './components/Navbars/Navbar';
+import AuthContextProvider from './contexts/AuthContextProvider';
+
 // Views
+import Navbar from './components/Navbars/Navbar';
 import Home from './views/Home.js';
-import Anime from './views/Anime.js';
+import Anime from './views/Anime';
 import Document from './views/Document.js';
 import Login from './views/Login.js';
 import Register from './views/Register.js';
 import Test from './views/Test.js';
+
 
 
 import {
@@ -18,21 +21,23 @@ import {
 function App(props) {
     return (
         <div className="body">
-            <Router>
-                <Navbar></Navbar>
-                <Switch>
-                    <Route path="/document" component={Document} />
-                    <Route path="/anime" component={Anime} />
-                    <Route path="/test" component={Test} />
-                    <Route path="/home" component={Home} />
-                    <Route path="/login" component={Login} />
-                    <Route path="/Register" component={Register} />
-                    <Route exact path="/" component={Home} />
-                    <Route>
-                        <h1>Not match</h1>
-                    </Route>
-                </Switch>
-            </Router>
+            <AuthContextProvider>
+                <Router>
+                    <Navbar></Navbar>
+                    <Switch>
+                        <Route path="/document" component={Document} />
+                        <Route path="/anime" component={Anime} />
+                        <Route path="/test" component={Test} />
+                        <Route path="/home" component={Home} />
+                        <Route path="/login" component={Login} />
+                        <Route path="/Register" component={Register} />
+                        <Route exact path="/" component={Home} />
+                        <Route>
+                            <h1>Not match</h1>
+                        </Route>
+                    </Switch>
+                </Router>
+            </AuthContextProvider>
         </div>
     );
 }
