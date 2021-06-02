@@ -32,14 +32,11 @@ function AuthContextProvider(props) {
                 copyAuthState.isAuthenticated = true;
                 copyAuthState.user.userToken = response.accessToken;
                 setMyAuthState({ ...copyAuthState });
-                // setAuthState({
-                //     isAuthenticated: true,
-                //     user: { userToken: response.accessToken },
-                // })
             }
             return response;
 
         } catch (error) {
+            localStorage.removeItem(LOCAL_STORAGE_TOKEN_NAME);
             if (error.response.data) return error.response.data;
             else return { success: false, message: error.message }
         }

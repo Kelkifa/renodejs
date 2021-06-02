@@ -11,14 +11,13 @@ function LoginForm(props) {
     /** Context */
     const userContext = useContext(AuthContext);
 
-    console.log(userContext.authState);
+    // console.log(userContext.authState);
 
     /** Event Handler */
     async function handlerSubmit() {
         const [username, password] = [usernameRef.current.value, passwordRef.current.value]
         try {
             const response = await userContext.loginUser({ username, password });
-            console.log(response);
         } catch (error) {
             console.log(error);
         }
