@@ -11,7 +11,6 @@ function LoginForm(props) {
     /** Context */
     const userContext = useContext(AuthContext);
 
-    // console.log(userContext.authState);
 
     /** Event Handler */
     async function handlerSubmit() {
@@ -19,7 +18,7 @@ function LoginForm(props) {
         try {
             const response = await userContext.loginUser({ username, password });
         } catch (error) {
-            // console.log(error);
+            console.log(error);
         }
     }
 

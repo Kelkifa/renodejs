@@ -7,14 +7,6 @@ export const AuthContext = createContext();
 
 const LOCAL_STORAGE_TOKEN_NAME = 'token';
 
-// const setAuthToken = (token) => {
-//     if (token) {
-//         // axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-//     }
-//     else {
-//         // delete axios.defaults.headers.common['Authorization']
-//     }
-// }
 
 function AuthContextProvider(props) {
     /** Props */
@@ -42,7 +34,11 @@ function AuthContextProvider(props) {
                 setMyAuthState({ ...copyAuthState });
             }
         } catch (error) {
-            console.log(error);
+            localStorage.removeItem(LOCAL_STORAGE_TOKEN_NAME);
+            const copyAuthState = { ...authState };
+            copyAuthState.user = null;
+            copyAuthState.isAuthenticated = false;
+            setMyAuthState({ ...copyAuthState });
         }
     }
     const loginUser = async userForm => {
@@ -59,7 +55,6 @@ function AuthContextProvider(props) {
             return response.data;
 
         } catch (error) {
-            // localStorage.removeItem(LOCAL_STORAGE_TOKEN_NAME);
             if (error.response.data) return error.response.data;
             else return { success: false, message: error.message }
         }
