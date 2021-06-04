@@ -12,8 +12,7 @@ const DocumentApi = {
     submitUpdateDocForm: (data, id) => {
         const url = `/document/${id}/update`;
         const token = localStorage['token'];
-        return axiosClient.post(url, {
-            data,
+        return axiosClient.put(url, data, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -28,6 +27,11 @@ const DocumentApi = {
                 'Authorization': `Bearer ${token}`
             }
         })
+    },
+    sortDelete: (id) => {
+        const url = `/document/${id}/delete`;
+        const token = localStorage['token'];
+        return axiosClient.delete(url);
     }
 }
 

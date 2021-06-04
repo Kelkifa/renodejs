@@ -12,7 +12,7 @@ LeftbarTitle.defaultProps = {
 }
 function LeftbarTitle(props) {
     /** Props */
-    const { data, baseLink } = props;
+    const { data, baseLink, type } = props;
     /** Render */
     return (
         <>

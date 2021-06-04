@@ -13,29 +13,39 @@ import { FaWindowClose } from "react-icons/fa";
 
 function Navbar(props) {
     const [showBtn, setShowBtn] = useState(window.innerWidth <= 420 ? true : false);      //false: show right content + hide icon button 
-    const [showRight, setShowRight] = useState(false);
-    const [toggleBtn, setToggleBtn] = useState(false);      //false: 3 lines and hide right content, true: [x] and show right content
+    const [toggleBtnDisplay, setToggleBtnDisplay] = useState(false);      //false: 3 lines, true: [x]
+    const [showRight, setShowRight] = useState(window.innerWidth <= 420 ? false : true)   //true: show, false: hide
 
     useEffect(() => {
         if (window.innerWidth <= 540) {
             setShowBtn(true);
-            setShowRight(true);
+            setShowRight(false);
+            // setToggleBtnDisplay(false);
         }
-        else setShowBtn(false);
+        else {
+            setShowRight(true)
+            setShowBtn(false);
+            // setToggleBtnDisplay(true);
+        }
     }, [])
 
     const handlerShowBtnARight = () => {
         if (window.innerWidth <= 540) {
             setShowBtn(true);
-            setToggleBtn(false);
+            // setToggleBtnDisplay(false);
+            setShowRight(false);
         }
         else {
             setShowBtn(false);
-            setToggleBtn(true);
+            // setToggleBtnDisplay(true);
+            setShowRight(true);
         };
     }
     const handlerClickMenuIcon = () => {
-        setToggleBtn(!toggleBtn);
+        if (window.innerWidth <= 540) {
+            setShowRight(!showRight);
+        }
+        setToggleBtnDisplay(!toggleBtnDisplay);
     }
 
     window.addEventListener('resize', handlerShowBtnARight);
@@ -48,7 +58,7 @@ function Navbar(props) {
                 </Link>
                 {showBtn ?
                     <div className="navbar__item__MenuIcon">
-                        {toggleBtn ?
+                        {toggleBtnDisplay ?
                             <FaWindowClose className="navbar__item__icon" onClick={handlerClickMenuIcon} color="white" size="27px"></FaWindowClose> :
                             <FiMenu className="navbar__item__icon" onClick={handlerClickMenuIcon} color="white" size="30px"></FiMenu>
                         }
@@ -56,83 +66,38 @@ function Navbar(props) {
 
                     </div> : ""}
             </div>
-
-            {toggleBtn ?
+            {showRight ?
                 <div className="navbar__right">
                     <Link to='/Test' style={{ textDecoration: "none" }} onClick={handlerClickMenuIcon} className="navbar__link">
                         <h3 className="navbar__item">
                             Test
-                            </h3>
+                                     </h3>
                     </Link >
                     <Link to='/Anime' style={{ textDecoration: "none" }} onClick={handlerClickMenuIcon} className="navbar__link">
                         <h3 className="navbar__item">
                             Anime
-                            </h3>
+                                     </h3>
                     </Link>
                     <Link to='/document' style={{ textDecoration: "none" }} onClick={handlerClickMenuIcon} className="navbar__link" >
                         <h3 className="navbar__item">
                             Document
-                            </h3>
+                                     </h3>
                     </Link>
                     <Link to='/word' style={{ textDecoration: "none" }} onClick={handlerClickMenuIcon} className="navbar__link" >
                         <h3 className="navbar__item">
                             Word
-                            </h3>
+                                     </h3>
                     </Link>
                     <Link to='/login' style={{ textDecoration: "none" }} onClick={handlerClickMenuIcon} className="navbar__link" >
                         <h3 className="navbar__item navbar__item--login">
                             Sign In
-                            </h3>
+                                     </h3>
                     </Link>
-                </div> :
-                ""
+                </div> : ""
             }
+
         </div >
     );
 }
 
 export default Navbar;
-
-
-
-
-
-
-
-
-
-// function Navbar(props) {
-//     const { authState } = useContext(AuthContext);
-
-//     var useLogined = 'Sign In';
-//     if (authState.user) {
-//         if (authState.user.fullname) useLogined = authState.user.fullname;
-//     }
-//     return (
-//         <div id="Navbar" className="Navbar">
-//             <div className="Navbar__list">
-//                 <Link to="/home" style={{ textDecoration: "none" }}>
-//                     <h1 className="Navbar__list__h1"><i class="fa-solid fa-kiwi-bird"></i>Home</h1>
-//                 </Link>
-//             </div>
-//             <div className="Navbar__list">
-//                 <Link to="/Test" style={{ textDecoration: "none" }}>
-//                     <h2 className="Navbar__list__h2">Test</h2>
-//                 </Link>
-//                 <Link to="/anime" style={{ textDecoration: "none" }}>
-//                     <h2 className="Navbar__list__h2">Animes</h2>
-//                 </Link>
-//                 <Link to="/document" style={{ textDecoration: "none" }}>
-//                     <h2 className="Navbar__list__h2">Documents</h2>
-//                 </Link>
-//                 <Link to="/word" style={{ textDecoration: "none" }}><h2 className="Navbar__list__h2">Words</h2>
-//                 </Link>
-//                 <Link to="/login" style={{ textDecoration: "none" }}>
-//                     <h2 className="Navbar__list__h2 Navbar__list__h2--outline">{useLogined}</h2>
-//                 </Link>
-//             </div>
-//         </div>
-//     );
-// }
-
-// export default Navbar;

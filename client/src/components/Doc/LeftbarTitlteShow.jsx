@@ -16,7 +16,7 @@ LeftbarTitlteShow.defaultProps = {
 
 function LeftbarTitlteShow(props) {
     /** Props */
-    const { data, baseLink, id } = props;
+    const { data, baseLink, id, type } = props;
     /** Ref */
     const iconContainer = useRef();
     /** Event Handler */
@@ -36,7 +36,8 @@ function LeftbarTitlteShow(props) {
                 </div>
             </Link>
             <div className="doc__Leftbar__item__toolbar hide" ref={iconContainer}>
-                <ToolbarDU updateLink={baseLink + `&update=${id}`} />
+                <ToolbarDU updateLink={baseLink + `&update=${id}`}
+                    id={id} />
             </div>
         </div>
     );

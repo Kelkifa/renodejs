@@ -41,27 +41,13 @@ class DocumentController {
         // var data = new documentModel(obj);
         // data.save();
         // res.redirect('back');
-        console.log(req.body);
-        const { parentPartTitle, childrenPartContent, type } = req.body;
         if (req.body) {
-            const obj = {
-                type,
-                parent_part: { title: parentPartTitle.title },
-                children_parts: childrenPartContent.map((value, index) => {
-                    const ChildrenPartTitle = value.content.shift();
-                    value.sort.shift();
-                    return {
-                        content: value.content,
-                        sort: value.sort,
-                        index,
-                        title: ChildrenPartTitle,
-                    }
-                })
-            }
+            const obj = storeDocument(req.body);
             var storeData = new documentModel(obj);
             try {
                 await storeData.save();
-                return res.json({ success: true, message: "Finish storing" });
+                const response = await documentModel.findOne({ parent_part: { title: obj.parent_part.title } }).select('_id')
+                return res.json({ success: true, message: "Finish storing", id: response._id });
             } catch (error) {
                 console.log(error);
                 return res.status(500).json({ success: false, message: "Internal Server Error" });
@@ -70,24 +56,33 @@ class DocumentController {
         return res.status(400).json({ notifi: 'bad request' });
     }
     //[PUT] /api/document/:id/update
-    update(req, res, next) {
-        const { id } = req.params;
-        var obj = storeDocument(req.body);
-        documentModel.updateOne({ _id: id }, obj)
-            .then(() => {
-                res.redirect('back');
-            })
+    async update(req, res, next) {
+        console.log(req.body);
+        if (req.body) {
+            const { id } = req.params;
+            const obj = storeDocument(req.body);
+            console.log(obj);
+            try {
+                await documentModel.updateOne({ _id: id }, obj);
+                return res.json({ success: true, message: "Update Successfully", id });
+            } catch (error) {
+                console.log(error);
+                return res.state(500).json({ success: false, massage: "Internal Server" })
+            }
+        }
+        return res.state(400).json({ success: false, massage: "Bad request" });
     }
     //[DELETE] /api/document/:id/delete
-    delete(req, res, next) {
+    async delete(req, res, next) {
         const { id } = req.params;
-        documentModel.delete({ _id: id })
-            .then(() => {
-                res.redirect('/document');
-            })
-            .catch(err => {
-                res.status(404).json({ success: fasle, message: err.message });
-            })
+        console.log(id);
+        try {
+            await documentModel.delete({ _id: id });
+            res.json({ success: true, message: "Delete Successfully" });
+        } catch (error) {
+            console.log(error);
+            return res.status(500).json({ success: false, message: "Internal Server" });
+        }
     }
 
 }

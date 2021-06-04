@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import InputContainer from './InputContainer';
 import DocInput from './DocInput';
-import documentApi from '../../api/documentApi'
+import documentApi from '../../api/documentApi';
+import { Redirect } from 'react-router-dom';
 
 MultiInputContainer.propTypes = {
     data: PropTypes.object,
@@ -50,6 +51,7 @@ function MultiInputContainer(props) {
         type,
     });
     const [submitSignal, setSubmitSignal] = useState(false);
+    const [redirectSignal, setRedirectSignal] = useState({ flag: false, id: null });
 
     /** Effect */
     useEffect(() => {
@@ -91,15 +93,17 @@ function MultiInputContainer(props) {
                 if (updateFlag) {
                     const response = await documentApi.submitUpdateDocForm(formData, data._id);
                     console.log(response);
+                    setRedirectSignal({ flag: true, id: response.id });
                 }
                 else {
                     const response = await documentApi.submitCreateDocForm(formData);
+                    setRedirectSignal({ flag: true, id: response.id });
                     console.log(response);
                 }
             } catch (error) {
                 console.log(error)
             }
-        }, 2000)
+        }, 1500);
     }
     function submitedHandler(ps, obj) {
         const copyFormData = { ...formData };
@@ -149,6 +153,7 @@ function MultiInputContainer(props) {
                     Submit
                     </button>
             </div>
+            {redirectSignal.flag ? <Redirect to={`/document?type=${type}&id=${redirectSignal.id}`} /> : ""}
         </div>
     );
 }
