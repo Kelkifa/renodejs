@@ -1,6 +1,5 @@
 import './Navbar.scss';
 import React, { useState, useContext, useEffect } from 'react';
-import { AuthContext } from '../../contexts/AuthContextProvider';
 import { Link } from 'react-router-dom';
 import { FiMenu } from 'react-icons/fi';
 import { FaWindowClose } from "react-icons/fa";

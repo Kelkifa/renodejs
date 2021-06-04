@@ -1,0 +1,91 @@
+$card_height: 200px;
+$card_width: 170px;
+
+.WCards{
+    display: flex;
+}
+
+.WCard{
+    width: $card_width;
+    height: $card_height;
+    background-color: transparent;
+    box-shadow: 0.3rem 0.3rem 0.4rem 0.1rem rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+.WCard + .WCard{
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+/** FRONT CARD **/
+.WCard__FrontCard{
+    position: absolute;
+    z-index: 2;
+    top:0px;
+    left: 0px;
+    height:$card_height;
+    transition: 0.3s linear;
+    border-radius: 0.3rem;
+}
+.flip{
+    transform: rotateY(180deg);
+}
+.WCard__img{
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+    height: 50%;
+    display: block;
+    border-radius: 0.3rem;
+}
+.WCard__text{
+    background-color: white;
+    padding: 0;
+    margin: 0;
+    font-size:14px;
+    width: 100%;
+    height: 38%;
+    overflow: auto;
+    box-sizing: border-box;
+    padding: 0px 5px;
+}
+.WCard__text--back{
+    border-radius: 0.3rem 0.3rem 0 0;
+}
+.WCard__text--back{
+    height: 88%;
+}
+//Button
+.WCard__btnContainer{
+    background-color: white;
+    box-sizing: border-box;
+    padding: 5px;
+    width: 100%;
+    height: 12%;
+    display: flex;
+    justify-content: flex-end;
+    border-radius:0 0 0.3rem 0.3rem;
+}
+.WCard__btn{
+    display: block;
+    padding:0 10px;
+    width: auto;
+    font-size: 10px;
+    height: 100%;
+}
+
+/** BACK CARD **/
+.WCard__BackCard{
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+    top:0px;
+    left: 0px;
+    height:$card_height;
+    transition: 0.3s ease-in-out;
+}
+.WCard--hide{
+    display: none;
+}
