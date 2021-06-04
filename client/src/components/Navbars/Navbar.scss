@@ -1,61 +1,3 @@
-// .navbar{
-//     background:#181718;
-//     color:white;
-//     display:flex;
-//     align-items:center;
-//     // font-family:arial;
-//     justify-content: space-between;
-//     height:70px;
-// }
-
-// .navbar__list{
-//     display:flex;
-//     align-items:center;
-//     margin:0px 30px;
-//     cursor: pointer;
-// }
-// // .navbar__list:hover{
-// //     cursor:pointer;
-// // }
-// .navbar__list__h1{
-//     font-size:27px;
-//     color:white;
-//     text-decoration:none;
-//     padding: 0;
-//     margin: 0;
-// }
-// .navbar__list__h2{
-//     margin: 0px 14px;
-//     font-size:20px;
-//     color:white;
-//     text-decoration:none;
-// }
-// .navbar__list__h2--outline{
-//     border: 2px solid white; 
-//     padding :5px 15px;
-// }
-// .navbar__list__h2--outline:hover{
-//     color:black;
-//     background-color: white;
-// }
-
-// /**********/
-
-// .navbar__left{
-//     width: 100%;
-// }
-// .navbar__link{
-//     margin: 0;
-//     padding: 0;
-//     height: 100%;
-//     background-color: yellow;
-// }
-// .navbar__item{
-//     color:white;
-//     height: 100%;
-// }
-
-
 .navbar{
     height: 65px;
     background-color:#181718;
@@ -76,6 +18,11 @@
     border: 1px solid white;
     padding: 5px 20px;
 }
+.navbar__item--login:hover{
+    color:black;
+    background-color: white;
+}
+
 .navbar__link{
     color:white;
 }

@@ -4,6 +4,7 @@
     display: flex;
     overflow: hidden;
     border-radius: 0.5rem;
+    justify-content:center;
 }
 
 .form__left{
@@ -89,4 +90,31 @@
 .form__right__notify__item--a{
     color: white;
     opacity: 0.8;
+}
+
+@media only screen and (max-width: 647px){
+    .form{
+        width: 344px;
+    }
+    .form__left{
+        display: none;
+    }
+    .form__right{
+        width: 100%;
+    }
+    .form__right__title{
+        font-size: 18px;
+        margin: 10px 0px;
+    }
+    .form__right__inputs{
+        label{
+            font-size:12px;
+        }
+    }
+    .form__right--login{
+        padding:20px;
+    }
+    .form__right__inputs + .btn{
+        margin-top:50px;
+    }
 }

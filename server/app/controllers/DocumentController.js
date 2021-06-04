@@ -78,7 +78,7 @@ class DocumentController {
         console.log(id);
         try {
             await documentModel.delete({ _id: id });
-            res.json({ success: true, message: "Delete Successfully" });
+            res.redirect()
         } catch (error) {
             console.log(error);
             return res.status(500).json({ success: false, message: "Internal Server" });
