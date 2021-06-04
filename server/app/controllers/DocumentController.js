@@ -36,11 +36,38 @@ class DocumentController {
 
 
     //[POST] /api/document/create
-    create(req, res, next) {
-        var obj = storeDocument(req.body);
-        var data = new documentModel(obj);
-        data.save();
-        res.redirect('back');
+    async create(req, res, next) {
+        // var obj = storeDocument(req.body);
+        // var data = new documentModel(obj);
+        // data.save();
+        // res.redirect('back');
+        console.log(req.body);
+        const { parentPartTitle, childrenPartContent, type } = req.body;
+        if (req.body) {
+            const obj = {
+                type,
+                parent_part: { title: parentPartTitle.title },
+                children_parts: childrenPartContent.map((value, index) => {
+                    const ChildrenPartTitle = value.content.shift();
+                    value.sort.shift();
+                    return {
+                        content: value.content,
+                        sort: value.sort,
+                        index,
+                        title: ChildrenPartTitle,
+                    }
+                })
+            }
+            var storeData = new documentModel(obj);
+            try {
+                await storeData.save();
+                return res.json({ success: true, message: "Finish storing" });
+            } catch (error) {
+                console.log(error);
+                return res.status(500).json({ success: false, message: "Internal Server Error" });
+            }
+        }
+        return res.status(400).json({ notifi: 'bad request' });
     }
     //[PUT] /api/document/:id/update
     update(req, res, next) {

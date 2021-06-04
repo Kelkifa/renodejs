@@ -72,6 +72,7 @@ function InputContainer(props) {
             copyInputs.splice(ps, 1);
             copyKeys.splice(ps, 1);
             copyAddedInputs.splice(ps, 1)
+
         }
 
         setInputs([...copyInputs]);
@@ -80,15 +81,6 @@ function InputContainer(props) {
 
         copyInputValue.sort = [...copyInputs];
         setInputValues(copyInputValue);
-    }
-    function onTextChangeHandler(type, ps, text) {
-        // const copyInputValues = { ...inputValues };
-        // copyInputValues.content[ps] = text;
-        // //send to multiInputContainer ...
-        // if (containerValue);
-        // containerValue(copyInputValues, position);
-
-        // setInputValues(copyInputValues);
     }
     function onSubmitedHandler(ps, text) {
         const copyInputValues = { ...inputValues };
@@ -113,7 +105,6 @@ function InputContainer(props) {
                                     position={i}
                                     removeIcon={[3]}
                                     defaultValue={updateFlag && !addedInputs.includes(i) && defaultValue ? defaultValue.title : ""}
-                                    onTextChangeHandler={onTextChangeHandler}
                                     submitSignal={submitSignal}
                                     onSubmitHandler={onSubmitedHandler} />
                             )
@@ -125,7 +116,6 @@ function InputContainer(props) {
                                     position={i}
                                     type={value === 0 ? "textarea" : 'input'}
                                     defaultValue={updateFlag && !addedInputs.includes(i) && defaultValue.content ? defaultValue.content[i - 1] : ""}
-                                    onTextChangeHandler={onTextChangeHandler}
                                     submitSignal={submitSignal}
                                     onSubmitHandler={onSubmitedHandler} />
                             )

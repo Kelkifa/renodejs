@@ -17,7 +17,7 @@ DocRightContent.defaultProps = {
 
 function DocRightContent(props) {
     /** Props */
-    const { doc, flagRightContent } = props;
+    const { doc, flagRightContent, type } = props;
 
     /** Render */
     if (flagRightContent === 3) return (<div>null</div>);
@@ -27,7 +27,8 @@ function DocRightContent(props) {
             {flagRightContent === 2 ?
                 <DocShow doc={doc} /> :
                 <MultiInputContainer data={doc}
-                    updateFlag={flagRightContent === 1 ? true : false} />}
+                    updateFlag={flagRightContent === 1 ? true : false}
+                    type={type} />}
         </div>
     );
 }

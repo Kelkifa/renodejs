@@ -8,13 +8,12 @@ DocShow.propTypes = {
 function DocShow(props) {
     /** Props */
     const { doc } = props;
-    console.log(doc);
 
     /** Render */
     function processTextLine(content) {
         if (content) {
             var arrContent = content.split("\n");
-            return arrContent.map(value => (<div className="content__line" key={value}>{value}</div>))
+            return arrContent.map((value, index) => (<div className="content__line" key={value + index}>{value}</div>));
         }
         return '';
     }
@@ -22,12 +21,12 @@ function DocShow(props) {
         if (childrenPart) {
             return childrenPart.content.map((value, index) => {
                 if (childrenPart.sort[index] === 0) {
-                    return (<div key={value} className="DocShow__childrenPart__content__part">
+                    return (<div key={value + index} className="DocShow__childrenPart__content__part">
                         {processTextLine(value)}
                     </div>)
                 }
                 return (
-                    <img className="DocShow__childrenPart__content__img" src={value} alt="Can't load" />
+                    <img key={value + index} className="DocShow__childrenPart__content__img" src={value} alt="Can't load" />
                 )
             })
         }
@@ -47,12 +46,12 @@ function DocShow(props) {
             <div className="DocShow__childrenPart">
                 {doc.children_parts
                     ? doc.children_parts.map((value, i) => (
-                        <>
+                        <div key={value.title}>
                             <h3 className="DocShow__childrenPart__title">{i + 1}. {value.title}</h3>
                             <div className="DocShow__childrenPart__content">
                                 {processChildrenPartContent(value)}
                             </div>
-                        </>
+                        </div>
                     ))
                     : ''}
             </div>
