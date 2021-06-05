@@ -16,7 +16,7 @@ LeftbarTitlteShow.defaultProps = {
 
 function LeftbarTitlteShow(props) {
     /** Props */
-    const { data, baseLink, id, type } = props;
+    const { data, baseLink, id } = props;
     /** Ref */
     const iconContainer = useRef();
     /** Event Handler */

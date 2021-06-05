@@ -1,10 +1,9 @@
 import React, { useRef } from 'react';
 import { FaTrashAlt } from 'react-icons/fa'
 import { MdSystemUpdateAlt } from 'react-icons/md'
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './Toolbar.scss';
 import PropTypes from 'prop-types';
-import documentApi from '../../api/documentApi';
 
 ToolbarDU.propTypes = {
     updateLink: PropTypes.string,

@@ -4,5 +4,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGFmN
 Content-Type: application/json
 
 ###
-
 GET http://localhost:8080/api/word
+###
+GET http://localhost:8080/api/word/store
+Content-Type: application/json
+
+{
+    "name": "huan",
+    "wifi":"huong"
+}

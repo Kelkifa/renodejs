@@ -31,7 +31,11 @@ const DocumentApi = {
     sortDelete: (id) => {
         const url = `/document/${id}/delete`;
         const token = localStorage['token'];
-        return axiosClient.delete(url);
+        return axiosClient.delete(url, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
     }
 }
 

@@ -10,8 +10,8 @@ $card_width: 170px;
 .SUWCard--move{
     width:$card_width;
 }
-.WCards{
-    display: flex;
+.SUWCard + .SUWCard{
+    margin-left: 20px;
 }
 
 .WCard{
@@ -27,6 +27,8 @@ $card_width: 170px;
 
 /** FRONT CARD **/
 .WCard__FrontCard{
+    width: 100%;
+    background-color:white;
     position: absolute;
     z-index: 2;
     top:0px;

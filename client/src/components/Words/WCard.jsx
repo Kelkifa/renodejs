@@ -4,18 +4,21 @@ import PropTypes from 'prop-types';
 import { FaWrench } from 'react-icons/fa';
 
 WCard.propTypes = {
-    imgLink: PropTypes.string,
-    frontContent: PropTypes.string,
-    backContent: PropTypes.string,
+    word: PropTypes.object,
 }
 WCard.defaultProps = {
-    imgLink: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSILssnCAJXtpBhS2Re9WrUy0s4s3gucoi8g&usqp=CAU",
-    frontContent: "Đây là nội ung mặt trước.",
-    backContent: "Đây là nội dung mặt sau.",
+    word: {
+        _id: "",
+        topic: "",
+        image: "",
+        mean: "",
+        description: "",
+        word: "",
+    },
 }
 
 function WCard(props) {
-    const { imgLink, frontContent, backContent } = props;
+    const { word } = props;
 
     const [flipDisplay, setFlipDisplay] = useState(true);     //Xoay    true: default, false: xoay.
     const [faceDisplay, setFaceDisplay] = useState(true);   // true: front, false: back
@@ -40,8 +43,8 @@ function WCard(props) {
             <div className="WCard scroll--custom scroll--blue">
                 {faceDisplay ?
                     <div className={flipDisplay ? "WCard__FrontCard" : "WCard__FrontCard flip"}>
-                        <img className="WCard__img" src={imgLink} alt="Can't load" />
-                        <p className="WCard__text scroll--custom scroll--custom--blue">{frontContent}</p>
+                        <img className="WCard__img" src={word.image} alt="Can't load" />
+                        <p className="WCard__text scroll--custom scroll--custom--blue">{word.description}</p>
                         <div className="WCard__btnContainer">
                             <FaWrench className="WCard__UpdateIcon" onClick={updateClickHandler} />
                             <button className="btn btn--secondary WCard__btn" onClick={flipClickHandler}>Flip</button>
@@ -49,7 +52,7 @@ function WCard(props) {
                     </div> :
                     <div className={flipDisplay ? "WCard__BackCard flip " : "WCard__BackCard"}>
                         <p className="WCard__text WCard__text--back">
-                            {backContent}
+                            {word.mean}
                         </p>
                         <div className="WCard__btnContainer">
                             <button className="btn btn--secondary WCard__btn" onClick={flipClickHandler} >Flip</button>
@@ -64,20 +67,20 @@ function WCard(props) {
                 <div className="WCard__FormHeader">
                     <div className="WCard__FormHeader__left">
                         <label >Word</label>
-                        <input className="WCard__input" type="text" />
+                        <input className="WCard__input" type="text" defaultValue={word.word} />
                     </div>
                     <div className="WCard__FormHeader__right">
                         <label>Topic</label>
-                        <input className="WCard__input" type="text" />
+                        <input className="WCard__input" type="text" defaultValue={word.topic} />
                     </div>
                 </div>
 
                 <label >Mean</label>
-                <input className="WCard__input" type="text" />
+                <input className="WCard__input" type="text" defaultValue={word.mean} />
                 <label >Image</label>
-                <input className="WCard__input" type="text" />
+                <input className="WCard__input" type="text" defaultValue={word.image} />
                 <label >Description</label>
-                <textarea className="WCard__input WCard__input--textarea" type="text" />
+                <textarea className="WCard__input WCard__input--textarea" type="text" defaultValue={word.description} />
                 <div className="WCard__btnContainer WCard__btnContainer--update">
                     <button className="btn btn--secondary btn--WCardUpdate">Submit</button>
                 </div>

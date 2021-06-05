@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import WordContextProvider from '../contexts/WordContextProvider';
 import WCardContainer from '../components/Words/WCardContainer';
-function Word(props) {
-    const [data, setData] = useState([]);
+import WordHeader from '../components/Words/WordHeader';
 
+function Word(props) {
     return (
         <div className="Word">
+            <WordHeader />
             <WordContextProvider>
                 <WCardContainer />
             </WordContextProvider>

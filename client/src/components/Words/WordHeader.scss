@@ -1,0 +1,47 @@
+
+@use "WCard";
+@import 'WCard';
+
+.WHeader{
+    background-color:#dce8f5;
+    padding: 5px 10px;
+}
+
+/** HEADER CREATE **/
+.WHeader__create{
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+.WHeader__create__icon{
+    color: #157DEC;
+    font-size: 16px;
+    cursor: pointer;
+}
+.WHeader__create__CreateTitle{
+    cursor: pointer;
+    margin: 0px;
+    padding: 0;
+    color: #157DEC;
+    position: relative;
+    top:0px;
+    font-size: 18px;
+}
+.WHeader__create__icon + .WHeader__create__CreateTitle{
+    margin-left: 7px;
+}
+.WHeader__create__card{
+    position: absolute;
+    top:100%;
+    left:0;
+    background-color: #C2DFFF;
+    height: WCard.$card_height;  
+    width: #{WCard.$card_width * 1.5};   
+    z-index: 3;
+    box-shadow: 0.3rem 0.3rem 0.4rem 0.5rem rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    font-size:12px;
+    padding:5px;
+    box-sizing: border-box;
+}
+

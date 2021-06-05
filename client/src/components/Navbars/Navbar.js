@@ -1,5 +1,5 @@
 import './Navbar.scss';
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FiMenu } from 'react-icons/fi';
 import { FaWindowClose } from "react-icons/fa";
