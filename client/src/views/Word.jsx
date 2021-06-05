@@ -1,22 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import wordApi from '../api/wordApi';
-
+import WordContextProvider from '../contexts/WordContextProvider';
+import WCardContainer from '../components/Words/WCardContainer';
 function Word(props) {
+    const [data, setData] = useState([]);
 
-    useEffect(() => {
-        const fetchWords = async () => {
-            try {
-                const response = await wordApi.getAll({});
-                console.log(response);
-            } catch (error) {
-                console.log(error)
-            }
-        }
-        fetchWords();
-    }, [])
     return (
         <div className="Word">
-            word hello
+            <WordContextProvider>
+                <WCardContainer />
+            </WordContextProvider>
         </div>
     );
 }
