@@ -6,8 +6,8 @@ import WordHeader from '../components/Words/WordHeader';
 function Word(props) {
     return (
         <div className="Word">
-            <WordHeader />
             <WordContextProvider>
+                <WordHeader />
                 <WCardContainer />
             </WordContextProvider>
         </div>

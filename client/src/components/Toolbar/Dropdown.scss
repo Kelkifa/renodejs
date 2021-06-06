@@ -1,0 +1,18 @@
+@use 'Searchbar';
+
+
+// $searchbar-h: 40px;
+// $searchbar-w: 200px;
+
+.dropdown{
+    outline:none;
+    box-sizing: border-box;
+    height: Searchbar.$searchbar-h;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    padding: 0px 10px;
+    border-radius: 6px;
+    border: 1px solid #157dec;
+    color:#157DEC;
+}

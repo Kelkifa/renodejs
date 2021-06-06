@@ -1,29 +1,29 @@
 import './WordHeader.scss';
 import { FaRegFileWord } from 'react-icons/fa';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import Searchbar from '../Toolbar/Searchbar';
+import Dropdown from '../Toolbar/Dropdown';
 import wordApi from '../../api/wordApi';
-// import PropTypes from 'prop-types';
-
-// WordHeader.propTypes = {
-
-// };
+import { WordContext } from '../../contexts/WordContextProvider';
 
 function WordHeader(props) {
+    const { updateWords } = useContext(WordContext);
+
     const [toggleCreateCard, setToggleCreateCard] = useState(false); //false: hide, true: show
 
-    const [createCardData, setCreateCardData] = useState({
+    const [createCardData, setCreateCardData] = useState({      //variable store data form the create card
         word: "",
         topic: "",
         mean: "",
-        description: "",
         image: "",
         description: "",
-    })
+    });
+    const [dropdownValue, setDropdownValue] = useState('all');
 
     const ClickCreateBtnHandler = () => {           //toggle hide and show create card
         setToggleCreateCard(!toggleCreateCard);
     }
-    const createCardInputChangeHandler = (e) => {   // store date from input when change
+    const createCardInputChangeHandler = (e) => {   // store date from input to state when change
         const copyCreateCardData = { ...createCardData };
         copyCreateCardData[e.target.name] = e.target.value;
 
@@ -37,7 +37,26 @@ function WordHeader(props) {
             console.log(error);
         }
     }
-
+    const getDropdownValueHandler = async (value) => {        //save data from dropdown to state, if value = 'all' call api to WordController index
+        setDropdownValue(value);
+        if (value === 'all') {
+            try {
+                const response = await wordApi.getAll({});
+                updateWords(response.words);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    }
+    const getSearchInputValueHandler = async (value) => {     //save data from search input to state
+        try {
+            const response = await wordApi.findWord({ type: dropdownValue, value })         //{success: String, words: Array }
+            console.log(response);
+            updateWords(response.words);
+        } catch (error) {
+            console.log(error);
+        }
+    }
     return (
         <div className="WHeader">
             <div className="WHeader__create">
@@ -70,6 +89,22 @@ function WordHeader(props) {
                     ""
                 }
 
+            </div>
+
+            <div className="WHeader__search">
+                <div className="WHeader__search__dropdown">
+                    <Dropdown getValueHandler={getDropdownValueHandler}
+                        selectData={[
+                            { value: 'all', text: 'all' },
+                            { value: 'word', text: 'word' },
+                            { value: 'mean', text: 'mean' },
+                            { value: 'topic', text: 'topic' },
+                            { value: 'description', text: 'description' }
+                        ]} />
+                </div>
+                <div className="WHeader__search__searchbar">
+                    <Searchbar getValueHandler={getSearchInputValueHandler} />
+                </div>
             </div>
 
         </div>

@@ -5,6 +5,8 @@
 .WHeader{
     background-color:#dce8f5;
     padding: 5px 10px;
+    display: flex;
+    justify-content: space-between;
 }
 
 /** HEADER CREATE **/
@@ -45,3 +47,11 @@
     box-sizing: border-box;
 }
 
+/** Search and dropdown **/
+.WHeader__search{
+    display: flex;
+    align-items: center;
+}
+.WHeader__search__dropdown + .WHeader__search__searchbar{
+    margin-left: 10px;
+}
