@@ -1,12 +1,13 @@
 import './WCard.scss';
-import { useState, useContext } from 'react';
-import { WordContext } from '../../contexts/WordContextProvider';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
-import { FaWrench } from 'react-icons/fa';
+import { FaWrench, FaTrash } from 'react-icons/fa';
 import wordApi from '../../api/wordApi';
 
 WCard.propTypes = {
     word: PropTypes.object,
+    DUshow: PropTypes.bool,
+    reloadSignal: PropTypes.func,
 }
 WCard.defaultProps = {
     word: {
@@ -17,12 +18,14 @@ WCard.defaultProps = {
         description: "",
         word: "",
     },
+    DUshow: false,
+    reloadSignal: null,
 }
 
 function WCard(props) {
-    const { word } = props;
+    const { word, DUshow, reloadSignal } = props;
 
-    const { reloadSignal } = useContext(WordContext);
+    // const { reloadSignal } = useContext(WordContext);
 
     const [flipDisplay, setFlipDisplay] = useState(true);     //Xoay    true: default, false: xoay.
     const [faceDisplay, setFaceDisplay] = useState(true);   // true: front, false: back
@@ -50,13 +53,23 @@ function WCard(props) {
         try {
             const response = await wordApi.updateWord(updateData, word._id);
             if (response.success) {
+                if (reloadSignal)
+                    reloadSignal();
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    const deleteClickHandler = async () => {       //delete a word
+        try {
+            const response = await wordApi.deleteWord(word._id);
+            if (response.success) {
                 reloadSignal();
             }
         } catch (error) {
             console.log(error);
         }
     }
-
 
     return (
         <div className={showUpdate ? "SUWCard" : "SUWCard SUWCard--move"}>
@@ -67,7 +80,14 @@ function WCard(props) {
                         <h3 className="WCard__title">{word.word}</h3>
                         <p className="WCard__text scroll--custom scroll--custom--blue">{word.description}</p>
                         <div className="WCard__btnContainer">
-                            <FaWrench className="WCard__UpdateIcon" onClick={updateClickHandler} />
+                            {DUshow === true ?
+                                <>
+                                    <FaWrench className="WCard__icon" onClick={updateClickHandler} />
+                                    <FaTrash className="WCard__icon" onClick={deleteClickHandler} />
+                                </> :
+                                ""
+                            }
+
                             <button className="btn btn--secondary WCard__btn" onClick={flipClickHandler}>Flip</button>
                         </div>
                     </div> :

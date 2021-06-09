@@ -10,16 +10,15 @@ class UserController {
     */
     async auth(req, res, next) {
         try {
-            const fullname = await userModel.findOne({ _id: req.userId }).select('fullname');
-            console.log(fullname);
-            return res.json({ success: true, fullname });
+            const user = await userModel.findOne({ _id: req.userId }).select('fullname admin');
+            return res.json({ success: true, user });
         } catch (error) {
             console.log(error)
             return res.status(500).json({ success: false, message: "Internal server error" });
         }
     }
 
-    /** [POST]//api/user/register  
+    /** [POST] /api/user/register  
      * desc: Register
      * access: public 
      */
@@ -42,11 +41,11 @@ class UserController {
 
             /** Good */
             const hashedPassword = await argon2.hash(password)
-            const newUser = new userModel({ username, password: hashedPassword, fullname, admin: admin ? admin : false })
+            const newUser = new userModel({ username, password: hashedPassword, fullname })
             await newUser.save();
 
             /** Return token */
-            const accessToken = jwt.sign({ userId: newUser._id }, secrectKey)
+            const accessToken = jwt.sign({ userId: newUser._id, admin: newUser.admin }, secrectKey)
             res.json({ success: true, message: "User is created successfully", accessToken });
         }
         catch (error) {
@@ -83,7 +82,7 @@ class UserController {
 
             /** Can Login  */
             // Return token
-            const accessToken = jwt.sign({ userId: user._id }, secrectKey)
+            const accessToken = jwt.sign({ userId: user._id, admin: user.admin }, secrectKey)
             res.json({ success: true, message: "Login successfully", accessToken });
 
         } catch (error) {

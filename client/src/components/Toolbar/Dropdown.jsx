@@ -27,7 +27,7 @@ function Dropdown(props) {
             {
                 selectData.length ?
                     <select defaultValue={selectData[0].value} className="dropdown" onChange={clickHandler}>
-                        {selectData.map(value => (<option key={value.value} value={value.value}>{value.text}</option>))}
+                        {selectData.map(value => (<option key={value.value} className="dropdown__item" value={value.value}>{value.text}</option>))}
                     </select>
                     :
                     ""

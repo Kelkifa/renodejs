@@ -4,10 +4,11 @@ import { useState, useContext } from 'react';
 import Searchbar from '../Toolbar/Searchbar';
 import Dropdown from '../Toolbar/Dropdown';
 import wordApi from '../../api/wordApi';
-import { WordContext } from '../../contexts/WordContextProvider';
+import { wordContext } from '../../views/Word';
 
 function WordHeader(props) {
-    const { updateWords } = useContext(WordContext);
+    /** Context */
+    const { updateWords, reloadSignal } = useContext(wordContext);
 
     const [toggleCreateCard, setToggleCreateCard] = useState(false); //false: hide, true: show
 
@@ -32,7 +33,8 @@ function WordHeader(props) {
     const submitCreateCardHandler = async () => {       // when submit button is clicked, send data to server
         try {
             const response = await wordApi.store(createCardData);
-            console.log(response);
+            reloadSignal();
+            setToggleCreateCard(!toggleCreateCard);
         } catch (error) {
             console.log(error);
         }

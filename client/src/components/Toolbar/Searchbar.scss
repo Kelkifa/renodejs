@@ -11,7 +11,7 @@ $searchbar-w: 200px;
     border-radius:0.3rem;
     background-color:$search-bg-color;
     display: flex;
-    width: 200px;
+    width: $searchbar-w;
     height: $searchbar-h;
     padding:5px;
     transition: 1s linear;
@@ -93,5 +93,14 @@ $searchbar-w: 200px;
         top:calc(72%);
         transform-origin: 0% 50%;
         transform: rotate(45deg);
+    }
+}
+
+@media screen and (max-width:488px){
+    .searchbar{
+        width: 150px;
+    }
+    .open{
+        width: #{$searchbar-h + 5px};
     }
 }

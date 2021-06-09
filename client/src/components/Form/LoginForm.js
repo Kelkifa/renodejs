@@ -1,5 +1,5 @@
 import './Form.scss';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useContext, useRef } from 'react';
 import { AuthContext } from '../../contexts/AuthContextProvider';
 
@@ -11,15 +11,23 @@ function LoginForm(props) {
     /** Context */
     const userContext = useContext(AuthContext);
 
+    /** Router */
+    const historyRoute = useHistory();
+
 
     /** Event Handler */
     async function handlerSubmit() {
         const [username, password] = [usernameRef.current.value, passwordRef.current.value]
         try {
-            const response = await userContext.loginUser({ username, password });
-            console.log(response);
+            await userContext.loginUser({ username, password });
+            historyRoute.push('/home');
         } catch (error) {
             console.log(error);
+        }
+    }
+    document.querySelector('html').onkeypress = (e) => {
+        if (e.key === 'Enter') {
+            handlerSubmit();
         }
     }
 

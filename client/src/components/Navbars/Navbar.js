@@ -1,9 +1,10 @@
 import './Navbar.scss';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { FiMenu } from 'react-icons/fi';
 import { FaWindowClose } from "react-icons/fa";
-
+import { AuthContext } from '../../contexts/AuthContextProvider';
+import UserButton from '../Toolbar/UserButton';
 // import PropTypes from 'prop-types';
 
 // Navbar.propTypes = {
@@ -14,6 +15,8 @@ function Navbar(props) {
     const [showBtn, setShowBtn] = useState(window.innerWidth <= 420 ? true : false);      //false: show right content + hide icon button 
     const [toggleBtnDisplay, setToggleBtnDisplay] = useState(false);      //false: 3 lines, true: [x]
     const [showRight, setShowRight] = useState(window.innerWidth <= 420 ? false : true)   //true: show, false: hide
+
+    const { authState } = useContext(AuthContext);
 
     useEffect(() => {
         if (window.innerWidth <= 540) {
@@ -87,11 +90,18 @@ function Navbar(props) {
                             Word
                                      </h3>
                     </Link>
-                    <Link to='/login' style={{ textDecoration: "none" }} onClick={handlerClickMenuIcon} className="navbar__link" >
-                        <h3 className="navbar__item navbar__item--login">
-                            Sign In
-                                     </h3>
-                    </Link>
+
+                    {authState.isAuthenticated ?
+                        <div className="navbar__item">
+                            <UserButton authData={authState} />
+                        </div> :
+                        <Link to='/login' style={{ textDecoration: "none" }} onClick={handlerClickMenuIcon} className="navbar__link" >
+                            <h3 className="navbar__item navbar__item--login">
+                                Sign In
+                                  </h3>
+                        </Link>
+                    }
+
                 </div> : ""
             }
 

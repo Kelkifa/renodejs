@@ -10,9 +10,6 @@ $card_width: 170px;
 .SUWCard--move{
     width:$card_width;
 }
-.SUWCard ~ .SUWCard{
-    margin-left: 20px;
-}
 
 .WCard{
     width: $card_width;
@@ -97,13 +94,20 @@ $card_width: 170px;
     font-size: 10px;
     height: 100%;
 }
-.WCard__UpdateIcon{
+.WCard__btn:hover{
+    background-color:#3BB9FF; 
+}
+
+.WCard__icon{
     margin-right: 5px;
     display: flex;
     align-items: center;
     padding-top: 2px;
     color: rgb(49, 127, 230);
     cursor:pointer;
+}
+.WCard__icon:hover{
+    color: #3BB9FF;
 }
 
 /** BACK CARD **/
@@ -133,7 +137,6 @@ $card_width: 170px;
     transform-origin: 0% 100%;
     position: absolute;
     transform: rotateY(90deg);
-    // left:-$card_width;
 }
 .WCard__FormHeader{
     display: flex;
@@ -163,11 +166,20 @@ $card_width: 170px;
     padding: 0 10px;
     width: auto;
 }
+.btn--WCardUpdate:hover{
+    background-color: #3BB9FF;
+}
 .WCard__update--move{
     // transform: scaleX(0);
     transform: translateX(170px);
     width: #{$card_width * 1.5};
     
+}
+
+@media screen and(max-width:458px){
+    .WCard__update--move{
+        width: $card_width;
+    }
 }
 
 // transform: translateX(-170px) scaleX(0);

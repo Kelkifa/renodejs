@@ -15,4 +15,23 @@
     border-radius: 6px;
     border: 1px solid #157dec;
     color:#157DEC;
+    position: relative;
+}
+.dropdown__item{
+    position: absolute;
+    right: 0px;
+}
+
+
+@media screen and (max-width:488px){
+    .dropdown{
+        padding:0px 5px;
+    }
+    .dropdown__item{
+        padding: 0;
+        margin: 0;
+        font-size: 10px;
+        width: 50px;
+        border: none;
+    }
 }

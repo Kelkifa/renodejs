@@ -15,8 +15,9 @@ function AuthContextProvider(props) {
     /** State */
     const [authState, setMyAuthState] = useState({
         isAuthenticated: false,
-        user: null,
+        user: { fullname: null, admin: false, _id: null },
     })
+    const [refesh, setRefesh] = useState(true) //Tín hiệu refesh khi login hoặc logout
 
     /** Effect */
     useEffect(() => {
@@ -29,7 +30,7 @@ function AuthContextProvider(props) {
             const response = await authApi.get({});
             if (response.success) {
                 const copyAuthState = { ...authState };
-                copyAuthState.user = response.fullname;
+                copyAuthState.user = response.user;
                 copyAuthState.isAuthenticated = response.success;
                 setMyAuthState({ ...copyAuthState });
             }
@@ -41,6 +42,7 @@ function AuthContextProvider(props) {
             setMyAuthState({ ...copyAuthState });
         }
     }
+
     const loginUser = async userForm => {
         try {
             const response = await userApi.login(userForm);
@@ -60,8 +62,20 @@ function AuthContextProvider(props) {
         }
     }
 
+    const logoutUser = () => {
+        setMyAuthState({
+            isAuthenticated: false,
+            user: { fullname: null, admin: false, _id: null }
+        })
+        localStorage.removeItem(LOCAL_STORAGE_TOKEN_NAME);
+    }
+
+    const authRefeshSignal = () => {
+        setRefesh(!refesh);
+    }
+
     /** Context Data */
-    const authContextData = { loginUser, authState }
+    const authContextData = { loginUser, authState, logoutUser, loadUser, authRefeshSignal }
 
     return (
         <AuthContext.Provider value={authContextData}>

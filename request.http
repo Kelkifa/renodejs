@@ -12,3 +12,22 @@ Content-Type: application/json
 {
     "word":"ticfac"
 }
+###
+DELETE http://localhost:8080/api/word/120931280/delete
+
+
+###
+POST http://localhost:8080/api/user/login
+content-type: application/json
+
+{
+    "username":"huan",
+    "password":"Kelkifa123"
+}
+###
+GET http://localhost:8080/api/admin
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGFmNmI1ZDc2MzYwYjNkYjRjZjM2YjUiLCJpYXQiOjE2MjMyMjg2Mjd9.uage42TNon5sD7VkN77_xWSVjnhhrCThHLn78syEcB4
+
+###
+GET http://localhost:8080/api/word
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGFmNmI1ZDc2MzYwYjNkYjRjZjM2YjUiLCJhZG1pbiI6dHJ1ZSwiaWF0IjoxNjIzMjMzMDQyfQ.tSUMDUMoFBK_BS-T1DHGjWom_V7EmDQxO8vP_iSVB-s

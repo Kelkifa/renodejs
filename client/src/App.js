@@ -10,6 +10,7 @@ import Login from './views/Login.js';
 import Register from './views/Register.js';
 import Test from './views/Test.js';
 import Word from './views/Word.jsx';
+import Admin from './views/Admin';
 
 
 
@@ -33,6 +34,7 @@ function App(props) {
                         <Route path="/login" component={Login} />
                         <Route path="/Register" component={Register} />
                         <Route path="/word" component={Word} />
+                        <Route path="/admin" component={Admin} />
                         <Route exact path="/" component={Home} />
                         <Route>
                             <h1>Not match</h1>

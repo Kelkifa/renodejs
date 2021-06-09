@@ -1,4 +1,5 @@
 const wordModel = require('../models/words');
+const userModel = require('../models/users');
 
 class WordController {
     /**[GET] /api/word
@@ -22,9 +23,14 @@ class WordController {
         const obj = req.body;
         if (obj) {
             try {
-                const storeWord = new wordModel(obj);
-                storeWord.save();
-                return res.json({ success: true, message: "Store Successfully" });
+                //Check admin
+                const { admin } = await userModel.findOne({ _id: req.userId }).select('admin -_id');
+                if (admin === true) {
+                    const storeWord = new wordModel(obj);
+                    storeWord.save();
+                    return res.json({ success: true, message: "Store Successfully" });
+                }
+                return res.status(403).json({ success: false, message: "Forbidden" });
             } catch (error) {
                 console.log(error);
                 return res.status(500).json({ success: false, message: "Internal Server" });
@@ -41,7 +47,6 @@ class WordController {
         if (type && value) {
             try {
                 const response = await wordModel.find({ [type]: { $regex: `${value}`, $options: 'i' } }).exec();
-                console.log(response);
                 return res.json({ success: true, words: response });
             } catch (error) {
                 console.log(error);
@@ -62,13 +67,39 @@ class WordController {
             delete req.body.updatedAt;
             delete req.body.__v;
             try {
-                await wordModel.updateOne({ _id: req.params.id }, req.body);
-                return res.json({ success: true, message: "Update Successfully" });
+                const { admin } = await userModel.findOne({ _id: req.userId }).select('admin -_id');
+                if (admin === true) {
+                    await wordModel.updateOne({ _id: req.params.id }, req.body);
+                    return res.json({ success: true, message: "Update Successfully" });
+                }
+                return res.status(403).json({ success: false, message: "Forbidden" });
             } catch (error) {
                 return res.status(500).json({ success: false, message: "Internal Server" });
             }
         }
-        return res.json({ success: true, message: "successfully testing" })
+        return res.status(400).json({ success: false, message: "Bad Request" });
+    }
+    /** [DELETE] /api/word/:id/delete
+     *  sort delete a word
+     *  private
+     */
+    async delete(req, res, next) {
+        const id = req.params.id;
+        if (id) {
+            try {
+                //Check admin
+                const { admin } = await userModel.findOne({ _id: req.userId }).select('admin -_id');
+                if (admin === true) {
+                    await wordModel.delete({ _id: id });
+                    return res.json({ success: true, message: "Delete Successfully" });
+                }
+                return res.status(403).json({ success: false, message: "Forbidden" });
+            } catch (error) {
+                console.log(error);
+                return res.status(500).json({ success: false, message: "Internal Server" });
+            }
+        }
+        return res.status(400).json({ success: false, message: "Bad Request" });
     }
 }
 

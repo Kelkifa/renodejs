@@ -1,6 +1,10 @@
 .WCardContainer {
     margin: 10px 0px 0px 10px;
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap:wrap;
     flex-direction:row;
+}
+.WCardContainer__item{
+    margin-right: 10px;
+    margin-bottom: 10px;
 }
