@@ -3,7 +3,7 @@ const secretKey = "asidsaudiuwe9qe#@&#*^#!iqoeuqpwo2132";
 // Authorization: Bearer asadiasodiuwdklasjdaiwdad
 const verifyToken = (req, res, next) => {
     const authHeader = req.header('Authorization');
-    console.log(authHeader);
+    //console.log(authHeader);
     const token = authHeader && authHeader.split(' ')[1]; //nếu có authHeader thì trả về cái đằng sau &&
 
     if (!token)
@@ -11,7 +11,7 @@ const verifyToken = (req, res, next) => {
             .status(401)
             .json({ success: false, message: "Access token not found" });
     try {
-        console.log(`*********** TOKEN: ${token}  **********`);
+        //console.log(`*********** TOKEN: ${token}  **********`);
         const decoded = jwt.verify(token, secretKey);
         req.userId = decoded.userId;
         req.admin = decoded.admin;

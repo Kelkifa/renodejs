@@ -1,0 +1,30 @@
+
+.TrainContainer__content{
+    width: 700px;
+    padding:20px;
+    border: 1px solid #000;
+    border-bottom: transparent;
+    border-radius: 10px 10px 0 0;
+    line-height: 1.8em;
+    font-size: 20px;
+    font-family: "Times New Roman", Times, serif;
+}
+.TrainContainer__input{
+    width: 700px;
+    padding: 20px;
+    border: 1px solid #000;
+    border-top:transparent;
+    display: flex;
+    border-radius: 0 0 10px 10px;
+    background-color: #f3f7f8;
+    height: 50px;
+    outline:none;
+    font-size: 20px;
+    font-family: "Times New Roman", Times, serif;
+}
+.text--red{
+    color:red;
+}
+.text--green{
+    color: rgb(11, 167, 11);
+}

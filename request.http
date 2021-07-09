@@ -31,3 +31,6 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGFmN
 ###
 GET http://localhost:8080/api/word
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGFmNmI1ZDc2MzYwYjNkYjRjZjM2YjUiLCJhZG1pbiI6dHJ1ZSwiaWF0IjoxNjIzMjMzMDQyfQ.tSUMDUMoFBK_BS-T1DHGjWom_V7EmDQxO8vP_iSVB-s
+
+###
+GET http://localhost:8080/api/keytrain
