@@ -11,23 +11,23 @@ function Test(props) {
     const [content, setContent] = useState({});
     const [success, setSuccess] = useState(false);
 
-    useEffect(() => {
-        async function getContent() {
-            try {
-                const getContent = await keytrainApi.getContent("story");
-                setContent(getContent.content);
-                setSuccess(getContent.success);
-            } catch (error) {
-                console.log(error);
-            }
-        }
-        getContent();
-    }, [])
+    // useEffect(() => {
+    //     async function getContent() {
+    //         try {
+    //             const getContent = await keytrainApi.getContent("story");
+    //             setContent(getContent.content);
+    //             setSuccess(getContent.success);
+    //         } catch (error) {
+    //             console.log(error);
+    //         }
+    //     }
+    //     getContent();
+    // }, [])
 
 
     return (
         <div className="test">
-            <KeyTrain content={content.content} name={content.name}></KeyTrain>
+            <KeyTrain ></KeyTrain>
         </div>
     );
 }
