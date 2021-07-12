@@ -1,0 +1,113 @@
+*{
+    box-sizing: border-box;
+}
+.color--gray{
+    color: #FFFFFFCC;
+}
+.background--clicked{
+    background-color: #ffffff0d;
+}
+.AdminLeftbar{
+    width: 256px;
+    background-color: #3c4b64;
+    color: white;
+    height:calc(100vh - 65px);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    overflow: auto;
+}
+.AdminLeftbar::-webkit-scrollbar {
+    width: 6px;
+    background-color: transparent;
+} 
+.AdminLeftbar::-webkit-scrollbar-thumb {
+    background-color: rgba(161, 156, 156, 0.3);
+    border-radius:12px;
+}
+.AdminLeftbar::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+.AdminLeftbar__header{
+    display: flex;
+    margin: 0;
+    height: 0;
+    background-color: rgba(0,0,21,.2);
+    height: 56px;
+    align-items:center;
+    justify-content: center;
+
+    .AdminLeftbar__header__text{
+        padding: 0 7px;
+    }
+}
+
+.AdminLeftbar__list{
+    padding: 0;
+    margin: 0;
+    list-style:none;
+}
+.AdminLeftbar__list__title{
+    padding: 12px 16px;
+    margin-top: 16px;
+    font-weight: bold;
+    font-size: 11.2px;
+    color: #FFFFFF99;
+    height: 40px;
+    align-items: center;
+}
+.AdminLeftbar__list__item{
+    cursor: pointer;
+    align-items: center;
+}
+.AdminLeftbar__list__item__icon{
+    width: 10%;   
+    font-size: 15px;
+    color: #FFFFFF99;
+    transition-duration: 0.3
+}
+.dropdown--hide{
+    transform:rotate(90deg);
+}
+.AdminLeftbar__list__item__text{
+    width: 80%;
+    padding: 0 10px;
+    font-size: 14px;
+}
+.AdminLeftbar__list__item__text--DropdowText{
+    color: white;
+}
+.AdminLeftbar__list__item__container{
+    cursor: pointer;
+    padding:13.5px 16px;
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+.AdminLeftbar__list__item__container--dashboard{
+    background-color: #ffffff0d;
+}
+.AdminLeftbar__DropdownList{
+    width: 100%;
+    display: none;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    transition: 1s linear;
+}
+.AdminLeftbar__DropdownList__item{
+    width: 100%;
+    padding: 13.5px 48.39px;
+}
+.AdminLeftbar__list__item:hover .AdminLeftbar__DropdownList{
+    display: block;
+}
+.AdminLeftbar__list__item__container:hover{
+    background-color: #321fdb;
+}
+.AdminLeftbar__list__item:hover .dropdown--hide{
+    transform:rotate(0deg);
+}
+.AdminLeftbar__DropdownList__item:hover{
+    background-color: #321fdb;
+}
+

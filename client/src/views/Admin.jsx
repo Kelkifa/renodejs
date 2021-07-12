@@ -1,26 +1,45 @@
 import React, { useState, useEffect, useContext } from 'react';
 // import adminApi from '../api/adminApi';
 import { AuthContext } from '../contexts/AuthContextProvider';
+import adminApi from '../api/adminApi';
+import AdminLeftbar from '../components/admin/AdminLeftbar';
 
 
 function Admin(props) {
-    // const [access, setAccess] = useState(false);
 
     const { authState, loadUser } = useContext(AuthContext);
+    /** State */
+    const [isAlow, setIsAlow] = useState(false);
 
     useEffect(() => {
-        loadUser();
+        async function fetchCheckAdmin() {
+
+            try {
+                var response = await adminApi.accessCheck();
+                if (response.success === true) {
+                    if (response.message === "Allow") setIsAlow(true);
+                    console.log("alow");
+                }
+            } catch (error) {
+                setIsAlow(false);
+                console.log(error);
+                console.log("loi roi");
+            }
+        }
+
+        fetchCheckAdmin();
     }, []);
 
-
-    if (authState.user && authState.user.admin === false) {
-        return "not allow";
+    if (isAlow === true && authState.user) {
+        if (authState.user.admin === true)
+            return (
+                <div>
+                    <AdminLeftbar></AdminLeftbar>
+                </div>
+            );
     }
-    return (
-        <div>
-            admin page hello
-        </div>
-    );
+
+    return "Not Access";
 }
 
 export default Admin;
