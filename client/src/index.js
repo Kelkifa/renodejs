@@ -6,8 +6,6 @@ import './components/customScss/index.scss';
 import App from './App.js';
 
 
-
-
 ReactDOM.render(
   <React.StrictMode>
     <App />

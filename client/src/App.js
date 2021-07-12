@@ -17,7 +17,8 @@ import Admin from './views/Admin';
 import {
     BrowserRouter as Router,
     Switch,
-    Route
+    Route,
+    Redirect
 } from "react-router-dom";
 
 function App(props) {
@@ -34,6 +35,7 @@ function App(props) {
                         <Route path="/login" component={Login} />
                         <Route path="/Register" component={Register} />
                         <Route path="/word" component={Word} />
+
                         <Route path="/admin" component={Admin} />
                         <Route exact path="/" component={Home} />
                         <Route>

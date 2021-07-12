@@ -12,7 +12,8 @@ function Test(props) {
     const [success, setSuccess] = useState(false);
 
     return (
-        <KeyTrain></KeyTrain>
+        <KeyTrain>
+        </KeyTrain>
     );
 }
 

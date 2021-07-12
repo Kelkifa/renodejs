@@ -58,6 +58,7 @@
 .AdminLeftbar__list__item{
     cursor: pointer;
     align-items: center;
+    width: 100%;
 }
 .AdminLeftbar__list__item__icon{
     width: 10%;   
@@ -65,16 +66,10 @@
     color: #FFFFFF99;
     transition-duration: 0.3
 }
-.dropdown--hide{
-    transform:rotate(90deg);
-}
 .AdminLeftbar__list__item__text{
     width: 80%;
     padding: 0 10px;
     font-size: 14px;
-}
-.AdminLeftbar__list__item__text--DropdowText{
-    color: white;
 }
 .AdminLeftbar__list__item__container{
     cursor: pointer;
@@ -88,7 +83,6 @@
 }
 .AdminLeftbar__DropdownList{
     width: 100%;
-    display: none;
     list-style: none;
     padding: 0;
     margin: 0;
@@ -96,16 +90,26 @@
 }
 .AdminLeftbar__DropdownList__item{
     width: 100%;
-    padding: 13.5px 48.39px;
 }
-.AdminLeftbar__list__item:hover .AdminLeftbar__DropdownList{
-    display: block;
+.AdminLeftbar__DropdownList__item__text{
+    font-size:14px;
+    color: white;
+    width: 100%;
+    padding: 13.5px 46px;
 }
+
+// show dropdow
+// .AdminLeftbar__list__item:hover .AdminLeftbar__DropdownList{
+//     display: block;
+// }
 .AdminLeftbar__list__item__container:hover{
     background-color: #321fdb;
 }
-.AdminLeftbar__list__item:hover .dropdown--hide{
-    transform:rotate(0deg);
+.AdminLeftbar__dropdown__show:hover{
+    background-color: #321fdb;
+}
+.dropdown--hide{
+    transform: rotate(90deg);
 }
 .AdminLeftbar__DropdownList__item:hover{
     background-color: #321fdb;

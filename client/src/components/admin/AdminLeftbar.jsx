@@ -1,4 +1,6 @@
 import './AdminLeftbar.scss';
+import Dropdown from './Dropdown';
+import { Link } from "react-router-dom";
 import PropTypes from 'prop-types';
 import { AiOutlineStar } from 'react-icons/ai';
 import { MdExpandMore } from "react-icons/md";
@@ -26,107 +28,181 @@ function AdminLeftbar(props) {
                 <div className="AdminLeftbar__header__text">ADMIN</div>
             </h3>
             <ul className="AdminLeftbar__list">
-                <li className="AdminLeftbar__list__item__container">
-                    <AiOutlineAreaChart className="AdminLeftbar__list__item__icon" />
-                    <div className="AdminLeftbar__list__item__text color--gray">Databoard</div>
+                <li>
+                    <Link to="/admin/databoard" style={{ textDecoration: "none", display: "flex" }} className="AdminLeftbar__list__item__container">
+                        <AiOutlineAreaChart className="AdminLeftbar__list__item__icon" />
+                        <div className="AdminLeftbar__list__item__text color--gray">Databoard</div>
+                    </Link>
                 </li>
-                <li className="AdminLeftbar__list__title">EXTRAS</li>
                 <li className="AdminLeftbar__list__item">
-                    <div className="AdminLeftbar__list__item__container"  >
-                        <AiOutlineStar className="AdminLeftbar__list__item__icon" />
-                        <div className="AdminLeftbar__list__item__text color--gray">Pages</div>
-                        <MdExpandMore className="AdminLeftbar__list__item__icon dropdown--hide" />
-                    </div>
-                    <ul className="AdminLeftbar__DropdownList">
-                        <li className="AdminLeftbar__DropdownList__item AdminLeftbar__list__item__text">
-                            Anime
-                        </li>
-                        <li className="AdminLeftbar__DropdownList__item AdminLeftbar__list__item__text">
-                            Word
-                        </li>
-                        <li className="AdminLeftbar__DropdownList__item AdminLeftbar__list__item__text">
-                            Document
-                        </li>
-                        <li className="AdminLeftbar__DropdownList__item AdminLeftbar__list__item__text">
-                            KeyTrain
-                        </li>
-                    </ul>
+                    <Dropdown showElement={
+                        {
+                            element: (
+                                <div className="AdminLeftbar__list__item__container">
+                                    <AiOutlineStar className="AdminLeftbar__list__item__icon" />
+                                    <div className="AdminLeftbar__list__item__text color--gray">Pages</div>
+                                </div>),
+                            containerClass: "AdminLeftbar__dropdown__show",
+                        }}
+                        dropdownIcon={{
+                            dropdownElement: (<MdExpandMore className="AdminLeftbar__list__item__icon" />),
+                            nonDropdownElement: (<MdExpandMore className="AdminLeftbar__list__item__icon dropdown--hide" />),
+                        }}
+                        hideElement={(
+                            <ul className="AdminLeftbar__DropdownList">
+                                <li className="AdminLeftbar__DropdownList__item">
+                                    <Link to="/home" style={{ textDecoration: "none" }}>
+                                        <div className="AdminLeftbar__DropdownList__item__text">Home</div>
+                                    </Link>
+                                </li>
+                                <li className="AdminLeftbar__DropdownList__item">
+                                    <Link to="/anime" style={{ textDecoration: "none" }}>
+                                        <div className="AdminLeftbar__DropdownList__item__text">Anime</div>
+                                    </Link>
+                                </li>
+                                <li className="AdminLeftbar__DropdownList__item">
+                                    <Link to="/word" style={{ textDecoration: "none", width: "100%" }}>
+                                        <div className="AdminLeftbar__DropdownList__item__text">Word</div>
+                                    </Link>
+                                </li>
+                                <li className="AdminLeftbar__DropdownList__item">
+                                    <Link to="/document" style={{ textDecoration: "none" }} >
+                                        <div className="AdminLeftbar__DropdownList__item__text">Document</div>
+                                    </Link>
+                                </li>
+                                <li className="AdminLeftbar__DropdownList__item">
+                                    <Link to="/keytrain" style={{ textDecoration: "none" }}>
+                                        <div className="AdminLeftbar__DropdownList__item__text">KeyTrain</div>
+                                    </Link>
+                                </li>
+                            </ul>
+                        )}>
+                    </Dropdown>
                 </li>
                 <li className="AdminLeftbar__list__title">MANAGE</li>
                 <li className="AdminLeftbar__list__item">
-                    <div className="AdminLeftbar__list__item__container">
-                        <BiCameraMovie className="AdminLeftbar__list__item__icon" />
-                        <div className="AdminLeftbar__list__item__text color--gray">Animes</div>
-                        <MdExpandMore className="AdminLeftbar__list__item__icon dropdown--hide" />
-                    </div>
-                    <ul className="AdminLeftbar__DropdownList">
-                        <li className="AdminLeftbar__DropdownList__item AdminLeftbar__list__item__text">
-                            Anime list
-                        </li>
-                        <li className="AdminLeftbar__DropdownList__item AdminLeftbar__list__item__text">
-                            Update animes
-                        </li>
-                    </ul>
+                    <Dropdown showElement={
+                        {
+                            element: (
+                                <div className="AdminLeftbar__list__item__container">
+                                    <BiCameraMovie className="AdminLeftbar__list__item__icon" />
+                                    <div className="AdminLeftbar__list__item__text color--gray">Animes</div>
+                                </div>),
+                            containerClass: "AdminLeftbar__dropdown__show",
+                        }}
+                        dropdownIcon={{
+                            dropdownElement: (<MdExpandMore className="AdminLeftbar__list__item__icon" />),
+                            nonDropdownElement: (<MdExpandMore className="AdminLeftbar__list__item__icon dropdown--hide" />),
+                        }}
+                        hideElement={(
+                            <ul className="AdminLeftbar__DropdownList">
+                                <li className="AdminLeftbar__DropdownList__item">
+                                    <Link to="/keytrain" style={{ textDecoration: "none" }}>
+                                        <div className="AdminLeftbar__DropdownList__item__text">Anime list</div>
+                                    </Link>
+                                </li>
+                                <li className="AdminLeftbar__DropdownList__item">
+                                    <Link to="/keytrain" style={{ textDecoration: "none" }}>
+                                        <div className="AdminLeftbar__DropdownList__item__text">Update anime</div>
+                                    </Link>
+                                </li>
+                            </ul>
+                        )}>
+                    </Dropdown>
                 </li>
                 <li className="AdminLeftbar__list__item">
-                    <div className="AdminLeftbar__list__item__container">
-                        <AiOutlineFileText className="AdminLeftbar__list__item__icon" />
-                        <div className="AdminLeftbar__list__item__text color--gray">Documents</div>
-                        <MdExpandMore className="AdminLeftbar__list__item__icon dropdown--hide" />
-                    </div>
-                    <ul className="AdminLeftbar__DropdownList">
-                        <li className="AdminLeftbar__DropdownList__item AdminLeftbar__list__item__text">
-                            Document list
-                        </li>
-                        <li className="AdminLeftbar__DropdownList__item AdminLeftbar__list__item__text">
-                            Update documents
-                        </li>
-                    </ul>
+                    <Dropdown showElement={
+                        {
+                            element: (
+                                <div className="AdminLeftbar__list__item__container">
+                                    <AiOutlineFileText className="AdminLeftbar__list__item__icon" />
+                                    <div className="AdminLeftbar__list__item__text color--gray">Documents</div>
+                                </div>),
+                            containerClass: "AdminLeftbar__dropdown__show",
+                        }}
+                        dropdownIcon={{
+                            dropdownElement: (<MdExpandMore className="AdminLeftbar__list__item__icon" />),
+                            nonDropdownElement: (<MdExpandMore className="AdminLeftbar__list__item__icon dropdown--hide" />),
+                        }}
+                        hideElement={(
+                            <ul className="AdminLeftbar__DropdownList">
+                                <li className="AdminLeftbar__DropdownList__item">
+                                    <Link to="/keytrain" style={{ textDecoration: "none" }}>
+                                        <div className="AdminLeftbar__DropdownList__item__text">Document list</div>
+                                    </Link>
+                                </li>
+                                <li className="AdminLeftbar__DropdownList__item">
+                                    <Link to="/keytrain" style={{ textDecoration: "none" }}>
+                                        <div className="AdminLeftbar__DropdownList__item__text">Update documents</div>
+                                    </Link>
+                                </li>
+                            </ul>
+                        )}>
+                    </Dropdown>
                 </li>
                 <li className="AdminLeftbar__list__item">
-                    <div className="AdminLeftbar__list__item__container">
-                        <FaRegFileWord className="AdminLeftbar__list__item__icon" />
-                        <div className="AdminLeftbar__list__item__text color--gray">Words</div>
-                        <MdExpandMore className="AdminLeftbar__list__item__icon dropdown--hide" />
-                    </div>
-                    <ul className="AdminLeftbar__DropdownList">
-                        <li className="AdminLeftbar__DropdownList__item AdminLeftbar__list__item__text">
-                            Word list
-                        </li>
-                        <li className="AdminLeftbar__DropdownList__item AdminLeftbar__list__item__text">
-                            Update words
-                        </li>
-                    </ul>
+                    <Dropdown showElement={
+                        {
+                            element: (
+                                <div className="AdminLeftbar__list__item__container">
+                                    <FaRegFileWord className="AdminLeftbar__list__item__icon" />
+                                    <div className="AdminLeftbar__list__item__text color--gray">Words</div>
+                                </div>),
+                            containerClass: "AdminLeftbar__dropdown__show",
+                        }}
+                        dropdownIcon={{
+                            dropdownElement: (<MdExpandMore className="AdminLeftbar__list__item__icon" />),
+                            nonDropdownElement: (<MdExpandMore className="AdminLeftbar__list__item__icon dropdown--hide" />),
+                        }}
+                        hideElement={(
+                            <ul className="AdminLeftbar__DropdownList">
+                                <li className="AdminLeftbar__DropdownList__item">
+                                    <Link to="/keytrain" style={{ textDecoration: "none" }}>
+                                        <div className="AdminLeftbar__DropdownList__item__text">Word list</div>
+                                    </Link>
+                                </li>
+                                <li className="AdminLeftbar__DropdownList__item">
+                                    <Link to="/keytrain" style={{ textDecoration: "none" }}>
+                                        <div className="AdminLeftbar__DropdownList__item__text">Update words</div>
+                                    </Link>
+                                </li>
+                            </ul>
+                        )}>
+                    </Dropdown>
                 </li>
                 <li className="AdminLeftbar__list__item">
-                    <div className="AdminLeftbar__list__item__container">
-                        <FiUsers className="AdminLeftbar__list__item__icon" />
-                        <div className="AdminLeftbar__list__item__text color--gray">Users</div>
-                        <MdExpandMore className="AdminLeftbar__list__item__icon dropdown--hide" />
-                    </div>
-                    <ul className="AdminLeftbar__DropdownList">
-                        <li className="AdminLeftbar__DropdownList__item AdminLeftbar__list__item__text">
-                            User list
-                        </li>
-                        <li className="AdminLeftbar__DropdownList__item AdminLeftbar__list__item__text">
-                            Update users
-                        </li>
-                    </ul>
+                    <Dropdown showElement={
+                        {
+                            element: (
+                                <div className="AdminLeftbar__list__item__container">
+                                    <FiUsers className="AdminLeftbar__list__item__icon" />
+                                    <div className="AdminLeftbar__list__item__text color--gray">Users</div>
+                                </div>),
+                            containerClass: "AdminLeftbar__dropdown__show",
+                        }}
+                        dropdownIcon={{
+                            dropdownElement: (<MdExpandMore className="AdminLeftbar__list__item__icon" />),
+                            nonDropdownElement: (<MdExpandMore className="AdminLeftbar__list__item__icon dropdown--hide" />),
+                        }}
+                        hideElement={(
+                            <ul className="AdminLeftbar__DropdownList">
+                                <li className="AdminLeftbar__DropdownList__item">
+                                    <Link to="/admin/users" style={{ textDecoration: "none" }}>
+                                        <div className="AdminLeftbar__DropdownList__item__text">User list</div>
+                                    </Link>
+                                </li>
+                                <li className="AdminLeftbar__DropdownList__item">
+                                    <Link to="/admin/users" style={{ textDecoration: "none" }}>
+                                        <div className="AdminLeftbar__DropdownList__item__text">Update user</div>
+                                    </Link>
+                                </li>
+                            </ul>
+                        )}>
+                    </Dropdown>
                 </li>
             </ul>
-        </div>
+        </div >
     );
 }
 
 export default AdminLeftbar;
-
-
-{/* <h3 className="AdminLeftbar__item AdminLeftbar__item--header">ADMIN</h3>
-            <ul className="AdminLeftbar__list">
-                <li className="AdminLeftbar__item--title">EXTRAS</li>
-                <li className="AdminLeftbar__item AdminLeftbar__item--dropdown" onClick={changeIconHandler}>
-                    <AiOutlineStar className="AdminLeftbar__item__icon" />
-                    <div className="AdminLeftbar__item__text">Pages</div>
-                    <MdExpandMore className={changeIcon ? "AdminLeftbar__item__icon clickedIcon" : "AdminLeftbar__item__icon DropdownIcon"} />
-                </li>
-            </ul> */}
